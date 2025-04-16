@@ -1,0 +1,10 @@
+body{
+ background:white;
+ font-family: "Arial", san-serif;
+}
+#top{
+ height:36px;
+ width:100%;
+ background:#34C759;
+ font-size:14px;
+}

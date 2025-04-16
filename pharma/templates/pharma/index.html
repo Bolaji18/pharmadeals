@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+{% load static %}
+{% load heroicons %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+    <script src="{% static 'javascript/index.js' %}"></script>
+  </head>
+  <body>
+    <div class="top">
+      <span>Welcome to Pharmadeals.ng</span>
+      <div class="top-left">
+        <span
+          >Track your Orders {% heroicon_outline "map-pin" size=20 class="mt-10"%}</span
+        >
+        <span class="top-ph">Global phamarcy </span>{% heroicon_outline "globe-alt" size=20 %}
+      </div>
+    </div>
+    <div class="header">
+      <span
+        >{% heroicon_outline "bars-3-bottom-left" size=20 class="mt-10" %}</span
+      >
+      <span class="head-im"
+        ><img
+          src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}"
+          class="head-img"
+      /></span>
+      <span class="head-search">
+        <span class="head-glass"
+          >{% heroicon_outline "magnifying-glass" size=20 class="mt-10" %}</span
+        >
+
+        <input placeholder="Search  for  Pharmaceuticals " class="search-bar" />
+        <span class="head-bar"
+          >{% heroicon_outline "bars-3-center-left" size=20 class="mt-10"%}</span
+        >
+      </span>
+      <span class="head-log">
+        <span
+          >{% heroicon_outline "shopping-cart" size=20 class="mt-10" %}</span
+        >
+        <button class="head-btn">Login</button>
+        <button class="head-btn">Sign up</button>
+      </span>
+    </div>
+
+
+
+
+  <div class="carousel">
+    <div id="slide1" class="carousel-item active">
+       <div class="hero-move">
+        <div class="hero-first">
+          <div class="hero-text">Online Marketplace for<br />Pharmacies to BUY and SELL<br />
+            Pharmaceuticals</div>
+          <div class="hero-mag">
+            <button class="hero-start">Start Selling</button>
+
+            <span class="head-hope">
+              <span class="head-glass"
+                >{% heroicon_outline "magnifying-glass" size=20 class="hero-custom"%}</span>
+
+              <input type="text" class="hero-in" placeholder="Search  for  drugs in our store " />
+              <button class="hero-btn">Find drugs</button>
+            </span>
+          </div>
+        </div>
+
+         <div>
+           <img class="hero-image" src="{% static 'images/cheerful-ethnic-doctor-with-arms-crossed-removebg-preview.png' %}">
+
+         </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="#slide4" class="nav-buttons1">{% heroicon_outline "arrow-left-circle" size=90 class="mt-10"%}</a>
+        <a href="#slide2" class="nav-buttons2">{% heroicon_outline "arrow-right-circle" size=90 class="mt-10" %}</a>
+      </div>
+
+
+    </div>
+    <div id="slide2" class="carousel-item">
+      <div class="hero-move">
+        <div class="hero-first">
+          <div class="hero-text">Purchase Pharmaceuticals from <br />Pharmacies<br />
+            </div>
+          <div class="hero-mag">
+            <button class="hero-start">Start Buying</button>
+
+            <span class="head-hope">
+              <span class="head-glass"
+                >{% heroicon_outline "magnifying-glass" size=20 class="hero-custom"%}</span>
+
+              <input type="text" class="hero-in" placeholder="Search  for  drugs in our store " />
+              <button class="hero-btn">Find drugs</button>
+            </span>
+          </div>
+        </div>
+
+         <div>
+           <img class="hero-image" src="{% static 'images/3966262-removebg-preview.png' %}">
+
+         </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="#slide1" class="nav-buttons1">{% heroicon_outline "arrow-left-circle" size=90 class="mt-10"%}</a>
+        <a href="#slide3" class="nav-buttons2">{% heroicon_outline "arrow-right-circle" size=90 class="mt-10" %}</a>
+      </div>
+    </div>
+    <div id="slide3" class="carousel-item">
+       <div class="hero-move">
+        <div class="hero-first">
+          <div class="hero-text">Free Marketplace for<br />Purchase of Original<br />
+            Pharmaceuticals</div>
+          <div class="hero-mag">
+            <button class="hero-start">Start Selling</button>
+
+            <span class="head-hope">
+              <span class="head-glass"
+                >{% heroicon_outline "magnifying-glass" size=20 class="hero-custom"%}</span>
+
+              <input type="text" class="hero-in" placeholder="Search  for  drugs in our store " />
+              <button class="hero-btn">Find drugs</button>
+            </span>
+          </div>
+        </div>
+
+         <div>
+           <img class="hero-image" src="{% static 'images/66161-removebg-preview.png' %}">
+
+         </div>
+      </div>
+           <div class="nav-buttons">
+        <a href="#slide2" class="nav-buttons1">{% heroicon_outline "arrow-left-circle" size=90 class="mt-10"%}</a>
+        <a href="#slide4" class="nav-buttons2">{% heroicon_outline "arrow-right-circle" size=90 class="mt-10" %}</a>
+      </div>
+    </div>
+    <div id="slide4" class="carousel-item">
+       <div class="hero-move">
+        <div class="hero-first">
+          <div class="hero-text">Online store for the<br />Purchase of Original<br />
+            Pharmaceuticals</div>
+          <div class="hero-mag">
+            <button class="hero-start">Start Selling</button>
+
+            <span class="head-hope">
+              <span class="head-glass"
+                >{% heroicon_outline "magnifying-glass" size=20 class="hero-custom"%}</span>
+
+              <input type="text" class="hero-in" placeholder="Search  for  drugs in our store " />
+              <button class="hero-btn">Find drugs</button>
+            </span>
+          </div>
+        </div>
+
+         <div>
+           <img class="hero-image" src="{% static 'images/3644225-removebg-preview.png' %}">
+
+         </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="#slide3"  class="nav-buttons1">{% heroicon_outline "arrow-left-circle" size=90 class="mt-10"%}</a>
+        <a href="#slide1"  class="nav-buttons2">{% heroicon_outline "arrow-right-circle" size=90 class="mt-10" %}</a>
+      </div>
+    </div>
+  </div>
+
+    <section class="category">
+      <div class="category1">
+        <span class="category-text">Categories</span>
+        <span  class="category-text2">View all {% heroicon_outline "arrow-right-circle" size=20 class="mt-10" %}</span>
+      </div>
+
+
+      <div class="category-pharma">
+
+
+        <div class="category-pharma1">
+          <img class="hero-image2" src="{% static 'images/10802284-removebg-preview.png' %}">
+          <h6 class="category-pharma-text">Vitamins and Supplements  </h6> <span> {% heroicon_outline "arrow-right-circle" size=40 class="category-ico" %} </span>
+        </div>
+
+        <div class="category-pharma1">
+          <img class="hero-image2" src="{% static 'images/e01a6ff2-3a78-4a34-8d64-82cf884ff9a7-removebg-preview.png' %}">
+          <h6 class="category-pharma-text">Antimalaria  </h6> <span> {% heroicon_outline "arrow-right-circle" size=40 class="category-ico" %} </span>
+        </div>
+
+        <div class="category-pharma1">
+          <img class="hero-image2" src="{% static 'images/2010.i121.044_isometric_gastroenterology_set-01-03-removebg-preview.png' %}">
+          <h6 class="category-pharma-text">Antibiotics</h6> <span> {% heroicon_outline "arrow-right-circle" size=40 class="category-ico" %} </span>
+        </div>
+
+        <div class="category-pharma1">
+          <img class="hero-image2" src="{% static 'images/3644225-removebg-preview.png' %}">
+          <h6 class="category-pharma-text">Painkillers </h6> <span> {% heroicon_outline "arrow-right-circle" size=40 class="category-ico" %} </span>
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <section>
+       <div class="category1">
+        <span class="category-text">Most Popular</span>
+        <span  class="category-text2">View all {% heroicon_outline "arrow-right-circle" size=20 class="mt-10" %}</span>
+      </div>
+
+
+
+    </section>
+
+
+
+
+  <script>
+    // Simple hash-based navigation and active slide toggle
+    const slides = document.querySelectorAll('.carousel-item');
+    window.addEventListener('hashchange', () => {
+      const target = window.location.hash.substring(1);
+      slides.forEach(slide => slide.classList.remove('active'));
+      const targetSlide = document.getElementById(target);
+      if (targetSlide) targetSlide.classList.add('active');
+    });
+  </script>
+
+  <script>
+    /*
+// Define an array of slide hashes
+const slideHashes = ['#slide1', '#slide2', '#slide3', '#slide4'];
+let currentIndex = 0;
+
+// Function to change the hash
+function changeHash() {
+  // Set the window location hash to the current slide
+  window.location.hash = slideHashes[currentIndex];
+
+  // Move to the next slide index
+  currentIndex = (currentIndex + 1) % slideHashes.length;
+}
+
+// Automatically trigger the hash change every 3 seconds
+setInterval(changeHash, 5000);
+
+// Optional: Trigger the changeHash function right on page load
+changeHash();
+
+    */
+
+  </script>
+  </body>
+</html>
