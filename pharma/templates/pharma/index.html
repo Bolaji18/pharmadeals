@@ -5,7 +5,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{% block title %} {% endblock %}</title>
+    <title>Pharmadeals : Buy pharmaceuticals from trusted pharmacies and companies</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
     <script src="{% static 'javascript/index.js' %}"></script>
   </head>
@@ -33,7 +33,7 @@
           >{% heroicon_outline "magnifying-glass" size=20 class="mt-10" %}</span
         >
 
-        <input placeholder="Search  for  Pharmaceuticals " class="search-bar" />
+        <input placeholder="Search for Pharmaceuticals " class="search-bar" />
         <span class="head-bar"
           >{% heroicon_outline "bars-3-center-left" size=20 class="mt-10"%}</span
         >
@@ -42,8 +42,8 @@
         <span
           >{% heroicon_outline "shopping-cart" size=20 class="mt-10" %}</span
         >
-        <button class="head-btn">Login</button>
-        <button class="head-btn">Sign up</button>
+         <a href="{% url 'login' %}"><button class="head-btn">Login</button></a>
+        <a href="{% url 'login' %}"> <button class="head-btn">Sign up</button></a>
       </span>
     </div>
 
@@ -257,6 +257,57 @@
 
 
     <section class="footer">
+
+      <div class="footer-id">
+      <div>
+        <h2>Sign up for our Newsletter</h2>
+        <p>Get to know updates in the field of medicine and know<br> how often our stores are stocked</p>
+      </div>
+
+      <div>
+        <h4>Your Email</h4>
+        <span class="head-foot">
+              <input type="email" class="hero-foot" placeholder="Example@email.com " />
+              <button class="hero-btn-foot">Subscribe {% heroicon_outline "paper-airplane" size=20 class="hero-custom"%}</button>
+        </span>
+      </div>
+
+      <div>
+        <h2>Pharmabids</h2>
+        <p style="font-size: 16px;">
+          Your favourite online <br> pharmacy store. We offer <br> onsite delivery and your <br> health is our priority
+        </p>
+      </div>
+
+      <div>
+        <table class="foot-table">
+          <tr>
+            <td  class="foot-a"  > <a class="foot-a" href="#">Quick Links </a></td>
+            <td class="foot-a"  ><a class="foot-a" href="#">Services</a></td>
+            <td class="foot-a"  ><a class="foot-a" href="#">Social Media </a></td>
+          </tr>
+
+          <tr>
+            <td class="foot-a"  ><a class="foot-a" href="#"> Contact us </a></td>
+             <td class="foot-a"  ><a class="foot-a"  href="#"> Delivery </a></td>
+             <td class="foot-a"  ><a class="foot-a"  href="#"> Facebook </a></td>
+          </tr>
+
+           <tr>
+            <td class="foot-a"  ><a class="foot-a"  href="#"> About us </a></td>
+             <td class="foot-a"  ><a class="foot-a"  href="#"> Purchase </a></td>
+             <td class="foot-a"  ><a class="foot-a"  href="#"> Twitter</a></td>
+          </tr>
+
+           <tr>
+            <td class="foot-a"  ><a class="foot-a"  href="#"> Careers </a></td>
+             <td class="foot-a"  ><a class="foot-a"  href="#">Consult Specialist </a></td>
+             <td class="foot-a"  ><a class="foot-a"  href="#"> Linkedin </a></td>
+          </tr>
+        </table>
+      </div>
+   </div>
+
 
     </section>
 

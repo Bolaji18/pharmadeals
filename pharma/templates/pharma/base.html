@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+{% load heroicons %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+    <script src="{% static 'javascript/index.js' %}"></script>
+  </head>
+  <body>
+    <div class="top">
+      <span>Welcome to Pharmadeals.ng</span>
+      <div class="top-left">
+        <span
+          >Track your Orders {% heroicon_outline "map-pin" size=20 class="mt-10"%}</span
+        >
+        <span class="top-ph">Global phamarcy </span>{% heroicon_outline "globe-alt" size=20 %}
+      </div>
+    </div>
+    <div class="header">
+      <span
+        >{% heroicon_outline "bars-3-bottom-left" size=20 class="mt-10" %}</span
+      >
+      <span class="head-im"
+        > <a href="{% url 'index' %}"><img
+          src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}"
+          class="head-img"
+      /> </a></span>
+      <span class="head-search">
+        <span class="head-glass"
+          >{% heroicon_outline "magnifying-glass" size=20 class="mt-10" %}</span
+        >
+
+        <input placeholder="Search for Pharmaceuticals " class="search-bar" />
+        <span class="head-bar"
+          >{% heroicon_outline "bars-3-center-left" size=20 class="mt-10"%}</span
+        >
+      </span>
+      <span class="head-log">
+        <span
+          >{% heroicon_outline "shopping-cart" size=20 class="mt-10" %}</span
+        >
+        <a href="{% url 'login' %}"><button class="head-btn">Login</button></a>
+
+        <a href="{% url 'login' %}"> <button class="head-btn">Sign up</button></a>
+      </span>
+    </div>
+
+<div>
+
+     {% block content %} {% endblock %}
+
+</div>
+
+
+</body>
+</html>

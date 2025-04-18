@@ -29,9 +29,10 @@ body {
 .head-search {
   min-width: 442px;
   height: 48px;
+  color:#000000;
   border: 1px #0f1010 solid;
   background: #d8ebf0;
-  opacity: 40%;
+  opacity: 100%;
   margin-left: 200px;
   padding: 20px;
   border-radius: 20px;
@@ -45,7 +46,7 @@ body {
 .search-bar {
   border: none;
   background: transparent;
-  color: #333333;
+  color: #000000;
 }
 .search-bar:focus {
   border: none;
@@ -187,8 +188,7 @@ body {
      font-size:16px;
      color:#ffffff;
      border-top-right-radius:50px;
-          border-bottom-right-radius:50px;
-
+     border-bottom-right-radius:50px
     }
     .hero-image{
      height:367px;
@@ -229,7 +229,6 @@ body {
      margin-top:-50px;
      font-weight:regular;
       font-family: "Courier New", Courier, monospace;
-
     }
     .category-ico{
          margin-left: 80%;
@@ -258,3 +257,352 @@ body {
      font-size:20px;
      font-weight:bold;
     }
+    .footer{
+     height:448px;
+     background:#000000;
+     color:#ffffff;
+
+
+
+    }
+
+    .footer-id{
+     height:348px;
+     background:#000000;
+     color:#ffffff;
+      display:grid;
+    grid-template-columns:1fr 1fr ;
+    gap:10px;
+    margin-top:100px;
+    padding-top:50px;
+    padding-left:178.49px;
+
+    }
+    .head-active{
+     margin-left:-100px;
+    }
+    .hero-foot{
+    width:415.83px;
+    height:50px;
+    background:#DEE9FF;
+    color:white;
+    padding-top:25px;
+    padding-bottom:15px;
+    border-top-left-radius:50px;
+     border-bottom-left-radius:50px;
+     border:none;
+     font-size:25px;
+     display:inline;
+
+    }
+    .hero-btn-foot{
+
+     background:#1BC768;
+     height:50px;
+     width:120px;
+     border:none;
+     border-top-right-radius:50px;
+     border-bottom-right-radius:50px;
+     font-size:15px;
+     color:#fff;
+     display:inline;
+
+
+    }
+    .head-foot{
+
+    display:inline;
+
+    }
+    .foot-a{
+    color:#ffffff;
+    text-decoration:none;
+    margin-top:50px;
+    gap:10px;
+
+    }
+    .foot-table{
+     margin-top:30px;
+    }
+    .login-section{
+     display:grid;
+     grid-template-columns:1fr 1fr;
+     margin-bottom:100px;
+    }
+    .login-pharmabids{
+     font-size:30px;
+     font-weight:bold;
+     color:#3751FE;
+     margin-bottom:50px;
+
+
+    }
+    .log-bin{
+     margin-left:96px;
+     margin-top:100px;
+    }
+    .login-we{
+     color:#043CAA;
+     font-size:48px;
+
+    }
+    .login-welcome{
+     font-size:18px;
+     margin-top:-20px;
+    }
+    .login-p{
+      width:554px;
+      height:74px;
+      border:1px #777 solid;
+      border-left:5px #043CAA solid;
+    }
+    .login-name2{
+     font-size:18px;
+
+    }
+    #id_username, #id_password{
+     border:none;
+      width:540px;
+      height:45px;
+      font-size:18px;
+    }
+    #id_username:focus, #id_password:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+.error-list{
+color:red;
+
+}
+
+
+    .login-submit{
+     width:129px;
+     height:54px;
+     border:none;
+     background:#34C759;
+     font:18px;
+     color:#ffffff;
+    }
+    .login-sign{
+    width:129px;
+     height:54px;
+     border:1px #3751FE solid;
+     background:transparent
+     font:18px;
+     color:#3751FE;
+
+    }
+    .hero-image9{
+     width:739px;
+     height:428px;
+     margin-top:200px;
+    }
+
+
+
+
+
+    @media (max-width: 1020px) {
+  .head-search{
+  display:none;
+  }
+  .top-left {
+  margin-left: 40%;
+}
+.head-log {
+  margin-left: 30%;
+}
+ .category-pharma{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    margin-left:5%;
+    margin-top:3%;
+    gap:10px;
+
+    }
+
+     .nav-buttons a {
+      background-color: transparent;
+      color: #333333;
+      border: none;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 50px;
+      padding:30px;
+      border-radius: 9999px;
+      cursor: pointer;
+    }
+
+      .hero-text{
+     color:#043CAA;
+     font-size:38px;
+     margin-left:70px;
+     padding-top:50px;
+    }
+    .hero-mag{
+     display:inline-flex;
+
+    }
+    .hero-start{
+      margin-left:70px;
+     margin-top:50px;
+     width:178px;
+     height:44px;
+     border-radius:50px;
+     border:1px #000000 solid;
+     font-size:20px;
+
+    }
+
+    .hero-start{
+      margin-left:110px;
+     margin-top:50px;
+     width:178px;
+     height:44px;
+     border-radius:50px;
+     border:1px #000000 solid;
+     font-size:20px;
+     display:none;
+    }
+      .head-hope{
+      margin-left:50px;
+    margin-top:50px;
+     width:514px;
+     height:48px;
+     background:#ffffff;
+     border-radius:50px;
+     border:none;
+    }
+    .category-text2{
+    margin-left:40%;
+    font-size:24px;
+    }
+        .buying-btn{
+     width:179px;
+     height:44px;
+     background:#9DDADB;
+     border-radius:50px;
+     border:1px #000000 solid;
+     margin-left:40%;
+     font-size:20px;
+     font-weight:bold;
+    }
+
+        .footer-id{
+     height:748px;
+     background:#000000;
+     color:#ffffff;
+      display:block;
+
+    gap:10px;
+    font-size:20px;
+    margin-top:100px;
+    padding-top:50px;
+    margin-left: -100px;
+
+    }
+     .hero-btn-foot{
+
+     background:#1BC768;
+     height:50px;
+     width:160px;
+     border:none;
+     border-top-right-radius:50px;
+     border-bottom-right-radius:50px;
+     font-size:25px;
+     color:#fff;
+     display:inline;
+
+
+    }
+
+        .hero-foot{
+    width:415.83px;
+    height:50px;
+    background:#DEE9FF;
+    color:white;
+    padding-top:25px;
+    padding-bottom:15px;
+    border-top-left-radius:50px;
+     border-bottom-left-radius:50px;
+     border:none;
+     font-size:35px;
+     display:inline;
+
+    }
+       .head-foot{
+
+    display:inline;
+    font-size:25px;
+    }
+        .foot-a{
+    color:#ffffff;
+    text-decoration:none;
+    margin-top:50px;
+    gap:20px;
+     font-size:24px;
+     margin-left:30px;
+
+    }
+    .foot-table{
+     font-size:15px;
+    }
+       .login-section{
+     display:block;
+
+     margin-bottom:100px;
+    }
+
+    .login-p{
+      width:654px;
+      height:84px;
+      border:1px #777 solid;
+      border-left:5px #043CAA solid;
+    }
+    .login-name2{
+     font-size:18px;
+
+    }
+    .login-name2{
+     font-size:24px;
+
+    }
+        #id_username, #id_password{
+     border:none;
+      width:640px;
+      height:50px;
+      font-size:24px;
+    }
+
+        .login-submit{
+     width:169px;
+     height:74px;
+     border:none;
+     background:#34C759;
+     font-size:24px;
+     color:#ffffff;
+    }
+    .login-sign{
+    width:169px;
+     height:74px;
+     border:1px #3751FE solid;
+     background:transparent;
+     font-size:24px;
+     color:#3751FE;
+
+    }
+        .hero-image9{
+     width:90%;
+     height:auto;
+     margin-top:200px;
+    }
+    .head-img {
+  margin-top: 10px;
+  width:250px;
+}
+
+}
+
+
