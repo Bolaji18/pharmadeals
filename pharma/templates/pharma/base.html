@@ -5,54 +5,85 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{% block title %} {% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
-    <script src="{% static 'javascript/index.js' %}"></script>
+    <title>Pharmadeals: Buy pharmaceuticals from trusted pharmacies and companies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
   </head>
-  <body>
-    <div class="top">
+  <body class=" bg-white font-sans text-gray-800 overflow-x-hidden">
+
+  <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+    <!-- Top Bar -->
+    <div class="h-9 w-full bg-green-500 text-sm text-gray-700 flex items-center px-4">
       <span>Welcome to Pharmadeals.ng</span>
-      <div class="top-left">
-        <span
-          >Track your Orders {% heroicon_outline "map-pin" size=20 class="mt-10"%}</span
-        >
-        <span class="top-ph">Global phamarcy </span>{% heroicon_outline "globe-alt" size=20 %}
+      <div class="ml-auto flex items-center space-x-4 text-xs sm:text-sm">
+        <span class="flex items-center gap-1">
+          Track your Orders {% heroicon_outline "map-pin" size=20 %}
+        </span>
+        <span class="flex items-center gap-1">
+          Global pharmacy {% heroicon_outline "globe-alt" size=20 %}
+        </span>
       </div>
     </div>
-    <div class="header">
-      <span
-        >{% heroicon_outline "bars-3-bottom-left" size=20 class="mt-10" %}</span
-      >
-      <span class="head-im"
-        > <a href="{% url 'index' %}"><img
-          src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}"
-          class="head-img"
-      /> </a></span>
-      <span class="head-search">
-        <span class="head-glass"
-          >{% heroicon_outline "magnifying-glass" size=20 class="mt-10" %}</span
-        >
 
-        <input placeholder="Search for Pharmaceuticals " class="search-bar" />
-        <span class="head-bar"
-          >{% heroicon_outline "bars-3-center-left" size=20 class="mt-10"%}</span
-        >
-      </span>
-      <span class="head-log">
-        <span
-          >{% heroicon_outline "shopping-cart" size=20 class="mt-10" %}</span
-        >
-        <a href="{% url 'login' %}"><button class="head-btn">Login</button></a>
+    <!-- Header Section -->
+    <header class="flex flex-wrap items-center justify-between p-4 md:px-8">
+      <!-- Left Section -->
+      <div class="flex items-center space-x-3">
+        <span onclick="openNav()">{% heroicon_outline "bars-3-bottom-left" size=24 %}</span>
+       <a href="{% url 'index' %}"><img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12" alt="Pharmadeals Logo">
+      </a>
+      </div>
 
-        <a href="{% url 'login' %}"> <button class="head-btn">Sign up</button></a>
-      </span>
-    </div>
+      <!-- Search Bar -->
+      <div class="flex items-center bg-blue-100 border border-gray-800 rounded-full px-4 py-2 mt-4 md:mt-0 w-full md:w-[442px] max-w-full md:ml-10">
+        <span class="text-gray-600">{% heroicon_outline "magnifying-glass" size=20 %}</span>
+        <input type="text" placeholder="Search for Pharmaceuticals"
+          class="ml-2 flex-grow bg-transparent focus:outline-none text-sm md:text-base text-black" />
+        <span class="ml-2 text-gray-600">{% heroicon_outline "bars-3-center-left" size=20 %}</span>
+      </div>
 
-<div>
+      <!-- Cart & Auth Buttons -->
+      <div class="flex items-center mt-4 md:mt-0 space-x-3 md:ml-auto">
+        <span>{% heroicon_outline "shopping-cart" size=20 %}</span>
+        <a href="{% url 'login' %}">
+          <button class="bg-green-500 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+            Login
+          </button>
+        </a>
+        <a href="{% url 'login' %}">
+          <button class="bg-green-500 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+            Sign up
+          </button>
+        </a>
+      </div>
+    </header>
+
+<div >
+
 
      {% block content %} {% endblock %}
 
 </div>
+
+  <script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
 
 
 </body>

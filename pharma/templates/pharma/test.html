@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+{% load static %}
+{% load heroicons %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pharmadeals: Buy pharmaceuticals from trusted pharmacies and companies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+  </head>
+  <body class="bg-white font-sans text-gray-800">
+
+  <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+    <!-- Top Bar -->
+    <div class="h-9 w-full bg-green-500 text-sm text-gray-700 flex items-center px-4">
+      <span>Welcome to Pharmadeals.ng</span>
+      <div class="ml-auto flex items-center space-x-4 text-xs sm:text-sm">
+        <span class="flex items-center gap-1">
+          Track your Orders {% heroicon_outline "map-pin" size=20 %}
+        </span>
+        <span class="flex items-center gap-1">
+          Global pharmacy {% heroicon_outline "globe-alt" size=20 %}
+        </span>
+      </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="flex flex-wrap items-center justify-between p-4 md:px-8">
+      <!-- Left Section -->
+      <div class="flex items-center space-x-3">
+        <span onclick="openNav()">{% heroicon_outline "bars-3-bottom-left" size=24 %}</span>
+        <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12" alt="Pharmadeals Logo">
+      </div>
+
+      <!-- Search Bar -->
+      <div class="flex items-center bg-blue-100 border border-gray-800 rounded-full px-4 py-2 mt-4 md:mt-0 w-full md:w-[442px] max-w-full md:ml-10">
+        <span class="text-gray-600">{% heroicon_outline "magnifying-glass" size=20 %}</span>
+        <input type="text" placeholder="Search for Pharmaceuticals"
+          class="ml-2 flex-grow bg-transparent focus:outline-none text-sm md:text-base text-black" />
+        <span class="ml-2 text-gray-600">{% heroicon_outline "bars-3-center-left" size=20 %}</span>
+      </div>
+
+      <!-- Cart & Auth Buttons -->
+      <div class="flex items-center mt-4 md:mt-0 space-x-3 md:ml-auto">
+        <span>{% heroicon_outline "shopping-cart" size=20 %}</span>
+        <a href="{% url 'login' %}">
+          <button class="bg-green-500 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+            Login
+          </button>
+        </a>
+        <a href="{% url 'login' %}">
+          <button class="bg-green-500 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+            Sign up
+          </button>
+        </a>
+      </div>
+    </header>
+
+
+
+
+
+  <!-- Categories Section -->
+<section class="px-6 md:px-16 mt-10">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-semibold text-blue-900 border-b-4 border-green-400">Categories</h2>
+    <span class="text-blue-900 flex items-center space-x-2">
+      <span>View all</span> {% heroicon_outline "arrow-right-circle" size=20 %}
+    </span>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {% for category in categories %}
+    <div class="relative bg-green-500 rounded-2xl overflow-hidden p-4 h-[316px]">
+      <img src="{% static category.image %}" class="w-full h-[284px] object-contain mx-auto" alt="{{ category.title }}">
+      <h6 class="absolute bottom-3 left-4 text-xl text-blue-900">{{ category.title }}</h6>
+      <span class="absolute top-3 right-3 text-red-500">{% heroicon_outline "arrow-right-circle" size=40 %}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Most Popular Section -->
+<section class="px-6 md:px-16 mt-14">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-semibold text-blue-900 border-b-4 border-green-400">Most Popular</h2>
+    <span class="text-blue-900 flex items-center space-x-2">
+      <span>View all</span> {% heroicon_outline "arrow-right-circle" size=20 %}
+    </span>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {% for item in popular_items %}
+    <div>
+      <a href="#" class="block space-y-2">
+        <img src="{% static item.image %}" class="w-full h-[284px] object-contain" alt="Popular Product">
+        <h6 class="text-blue-900 text-lg">{{ item.title }}</h6>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="mt-8 text-center">
+    <button class="bg-cyan-200 border border-black rounded-full px-6 py-2 text-lg font-bold">Start Buying</button>
+  </div>
+</section>
+
+
+  <section class="bg-black text-white mt-16 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 px-6 md:px-16">
+
+    <!-- Newsletter -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Sign up for our Newsletter</h2>
+      <p>Get to know updates in the field of medicine and know how often our stores are stocked</p>
+    </div>
+
+    <!-- Email Subscription -->
+    <div>
+      <h4 class="mb-2">Your Email</h4>
+      <div class="flex items-center bg-blue-100 rounded-l-full overflow-hidden w-full max-w-[416px] h-12">
+        <input type="email" placeholder="Example@email.com" class="bg-blue-100 text-black text-base px-4 w-full focus:outline-none" />
+        <button class="bg-green-500 text-white px-4 rounded-r-full h-full">{% heroicon_outline "paper-airplane" size=20 %}</button>
+      </div>
+    </div>
+
+    <!-- About Pharmabids -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Pharmabids</h2>
+      <p class="text-sm leading-relaxed">
+        Your favourite online pharmacy store. We offer onsite delivery and your health is our priority.
+      </p>
+    </div>
+
+    <!-- Footer Links -->
+    <div>
+      <table class="text-sm">
+        <tbody>
+          <tr class="space-x-2">
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Quick Links</a></td>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Services</a></td>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Social Media</a></td>
+          </tr>
+          <tr>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Contact us</a></td>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Delivery</a></td>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Facebook</a></td>
+          </tr>
+          <tr>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">About us</a></td>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Purchase</a></td>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Twitter</a></td>
+          </tr>
+          <tr>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Careers</a></td>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">Consult Specialist</a></td>
+            <td><a href="#" class="text-white hover:text-green-400 block py-1">LinkedIn</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+
+    <script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
+  </body>
+</html>
