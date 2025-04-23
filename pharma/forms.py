@@ -1,8 +1,23 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Pharma
 
 
+class pharma_form(forms.ModelForm):
+    class Meta:
+        model = Pharma
+        exclude = ['user']
+
+
+        widgets = {
+
+            'price': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the price of your product'}),
+            'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter a description of your product'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the name of the product'}),
+            'stock': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'How many items do you have in stock?'}),
+            'category': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the category of your product'}),
+        }
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(

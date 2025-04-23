@@ -18,6 +18,14 @@
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
+      {% if request.user.username %}
+    <form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+ <button style=" color:white;  border:none; margin-right:20px; padding:5px;   margin-top: 0rem;  padding: 0rem;   background-color: inherit;  font-weight: 0; border-radius: 0rem;  box-shadow: 0; transition:0; background-color:0, box-shadow :0; font-size:24px; text-align:center; margin-left:20%; " type="submit">logout</button>
+
+
+      {% endif %}
+</form>
 </div>
 
     <!-- Top Bar -->
@@ -53,6 +61,16 @@
       <!-- Cart & Auth Buttons -->
       <div class="flex items-center mt-4 md:mt-0 space-x-3 md:ml-auto">
         <span>{% heroicon_outline "shopping-cart" size=20 %}</span>
+         {% if request.user.username %}
+
+        <a href="{% url 'login' %}">
+          <button class="bg-green-500 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+            profile
+          </button>
+        </a>
+        {% else %}
+
+
         <a href="{% url 'login' %}">
           <button class="bg-green-500 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
             Login
@@ -63,6 +81,7 @@
             Sign up
           </button>
         </a>
+        {% endif %}
       </div>
     </header>
 
