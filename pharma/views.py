@@ -14,36 +14,6 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 
 
-
-create_message= """
-  Hi,
-
-Welcome to Pharmadeals.ng – we're thrilled to have you on board!
-
-You've just joined Nigeria’s leading online marketplace for pharmaceutical products, where quality meets affordability. Whether you’re a pharmacy owner, a healthcare professional, or just someone looking for trusted medical supplies, you’re in the right place.
-
-Here’s what you can expect: ✅ Access to top-quality pharmaceutical products
-✅ Verified and trusted suppliers
-✅ Competitive prices and amazing deals
-✅ Seamless ordering and delivery experience
-
-Your account is now active, and you're just a click away from exploring everything Pharmadeals has to offer.
-
-👉 Start Shopping Now
-
-If you have any questions or need help getting started, our support team is always here for you. Just hit reply or contact us at admin@pharmadeals.ng.
-
-Thank you for joining the Pharmadeals family – let’s make healthcare more accessible, together.
-
-Warm regards,
-The Pharmadeals.ng Team
-www.pharmadeals.ng
-Your trusted partner in healthcare.
-
-
-
-"""
-
 # Create your views here.
 def index(request):
     return render(request, 'pharma/test.html', context = {
@@ -84,7 +54,7 @@ def register(request):
            #     return redirect('login')
 
            email = request.POST.get("email")
-           message = send_email(request, messages=create_message, subjects="Welcome to PharmaDeals", emails=email)
+           message = send_email(request, messages='', subjects="Welcome to PharmaDeals", emails=email, html='email/welcome.html')
            user = form.save()
            return redirect('login')
        else:
@@ -105,39 +75,8 @@ def pharma_upload(request):
             product = form.save(commit=False)
             product.user = request.user
             product.save()
-            new_product = f"""
-             Hi {request.user.username},
-
-            Great news — your product has been successfully uploaded and is now live on Pharmadeals.ng! 🎉
-
-            We're excited to have your product listed and available to thousands of potential buyers across Nigeria who trust Pharmadeals for their pharmaceutical needs.
-
-            Here’s what happens next:
-
-            Your product will be reviewed for quality and compliance (if needed).
-
-            Customers can now view, search, and purchase your product.
-
-            You’ll receive notifications on any orders or customer inquiries.
-
-            Want to increase visibility? Here are a few tips: 🔹 Make sure your product description is clear and complete
-            🔹 Use high-quality images
-            🔹 Set competitive pricing
-            🔹 Respond quickly to inquiries
-
-            👉 View Your Product
-            👉 Add More Products
-
-            If you need assistance or have any questions, we’re just an email away at admin@pharmadeals.ng.
-
-            Thanks for choosing Pharmadeals.ng — we’re excited to grow with you!
-
-            Warm regards,
-            The Pharmadeals.ng Team
-            Empowering pharmacies, one deal at a time.
-            """
             email = request.user.email
-            message = send_email(request, messages=new_product, subjects="product added successfully", emails=email)
+            message = send_email(request, messages="", subjects="product added successfully", emails=email, html='email/upload.html')
             success= "Your product has been uploaded"
             return render(request, 'pharma/register.html', {'success': success, 'none':'none'})
     else:
@@ -145,12 +84,12 @@ def pharma_upload(request):
     return render(request, 'pharma/register.html', {'form': form, 'text':text})
 
 
-def send_email(request, messages,subjects, emails ):
+def send_email(request, messages,subjects, emails, html ):
     email = emails
     subject = subjects
     message = messages
     from_email = 'admin@pharmadeals.ng'
-    html_message = render(request, 'pharma/email.html', {"message": message}).content.decode('utf-8')
+    html_message = render(request, html, {}).content.decode('utf-8')
     send_mail(subject, message, from_email, [email], html_message=html_message)
     f = open('email.txt', 'a')
     f.write(f'email sent to {email} \n')
