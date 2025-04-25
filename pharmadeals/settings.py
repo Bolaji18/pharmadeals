@@ -158,6 +158,9 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 1073741824  # 1GB
 LOGOUT_REDIRECT_URL = '/'  # Redirects to home page after logout
 LOGIN_URL = 'login'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 EMAIL_PORT = 465

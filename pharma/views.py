@@ -12,7 +12,21 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.core.mail import send_mail
+from .models import Categories
+from .models import Pharma
 
+def product(request, categor):
+    options = Categories.objects.filter(category=categor).first()
+    option = Pharma.objects.filter(categor=options)
+    return render(request, 'pharma/product.html', context={"popular_items": option})
+
+def category(request):
+    option = Categories.objects.all()
+    return render(request, 'pharma/category.html', context={'categories':option})
+
+
+def profile(request):
+    return render(request, 'pharma/profile.html', context={})
 
 # Create your views here.
 def index(request):

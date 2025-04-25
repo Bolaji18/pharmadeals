@@ -1,0 +1,27 @@
+{% extends 'pharma/base2.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load heroicons %}
+
+
+
+{% block title %}
+Categories
+{% endblock %}
+
+
+{% block content %}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {% for item in popular_items %}
+    <div>
+      <a href="#" class="block space-y-2">
+        <img src="{{ item.image.url }}" class="w-full h-[284px] object-contain" alt="Popular Product">
+        <h6 class="text-blue-900 text-lg">{{ item.name }}</h6>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+{% endblock %}

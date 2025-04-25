@@ -1,0 +1,85 @@
+{% extends 'pharma/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load heroicons %}
+
+
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+#sidenav2 {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 100px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+#sidenav2 a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #2196F3;
+  display: block;
+}
+
+#sidenav2 a:hover {
+  color: #064579;
+}
+
+.main {
+  margin-left: 140px; /* Same width as the sidebar + left position in px */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  #sidenav2 {padding-top: 15px;}
+  #sidenav2 a {font-size: 18px;}
+}
+</style>
+
+
+
+<div id="sidenav2">
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#clients">Clients</a>
+  <a href="#contact">Contact</a>
+    {% if request.user.username %}
+    <form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+ <button style=" color:#2196F3;  border:none; margin-right:20px; padding:5px;   margin-top: 0rem;  padding: 0rem;   background-color: inherit;  font-weight: 0; border-radius: 0rem;  box-shadow: 0; transition:0; background-color:0, box-shadow :0; font-size:24px; text-align:center; margin-left:15%; " type="submit">Logout</button>
+
+</form>
+      {% endif %}
+</div>
+
+<div class="main">
+  <h2>Auto Sidebar</h2>
+  <p>This sidebar is as tall as its content (the links), and is always shown.</p>
+  <p>Scroll down the page to see the result.</p>
+  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+</div>
+
+<script>
+     document.getElementById("nav-2").style.display = "none";
+</script>
+
+
+
+{% endblock %}

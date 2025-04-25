@@ -16,6 +16,7 @@ class Seller(models.Model):
 
 class Categories(models.Model):
     category = models.CharField(max_length =100)
+    image = models.ImageField(upload_to='pharma/images/', validators=[FileExtensionValidator(['jpg', 'png'])])
     def __str__(self):
         return f"{self.category}"
 
