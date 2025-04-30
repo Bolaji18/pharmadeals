@@ -8,8 +8,12 @@
 
 
   {% block content%}
-  <li class="mt-2 rounded-lg bg-green-100 text-green-700 px-4 py-3 " id="time">{{message}}</li>
-  <div class="grid grid-cols-1 min-h-[284px] sm:grid-cols-2 lg:grid-cols-2 gap-6 ml-10 mt-10">
+  <div >
+    <ul>
+        <li class="mt-2 rounded-lg bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3" style="display: {{display}};" id="time">{{message}}</li>
+    </ul>
+  </div>
+  <div class="grid grid-cols-1 mb-6 min-h-[284px] sm:grid-cols-2 lg:grid-cols-2 gap-6 ml-10 mt-10">
     <script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
  
   <div class="w-[200px] h-[284px] object-contain">
@@ -27,20 +31,28 @@
     <br>
     <span class="text-gray-500 px-8 ml-10 text-xl font-sans ">Description: {{ item.description }}</span>
     <br>
-    <form method="post" id="myForm" enctype="multipart/form-data" class="space-y-6">
-    {% csrf_token %}
-        <a><button type="submit" class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] px-16 md:w-[126px] md:h-[41px]">Add to Cart</button>
-  </a>  
+   
+        
   
-  <a><button class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] px-16 md:h-[41px]">Add to Wishlist</button>
+  <a href="#"><button class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] px-16 md:h-[41px]">Bid</button>
   </a>
     
-    <a><button class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] px-16 md:w-[126px] md:h-[41px]">Buy Now</button>
+    <a href="#"><button class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] px-16 md:w-[126px] md:h-[41px]">Buy Now</button>
   </a>
   {% for name in form %}
+  <form method="post" id="myForm" enctype="multipart/form-data" class="space-y-6">
+    {% csrf_token %}
 
-  <label class="text-base text-gray-700 block mb-1" for="{{ name.id_for_label }}">{{ name.label }}</label>
+  
+  <div class="border border-gray-400 border-l-4 border-l-blue-900 px-4 py-3 w-full max-w-[540px]">
+    
+    <label class="text-base text-gray-700 block mb-1" for="{{ name.id_for_label }}">{{ name.label }}</label>
   {{ name|add_class:"w-8 h-11 text-base focus:bg-green-500" }}
+  <br>
+  <small class="text-sm text-gray-500">{{ name.help_text }}</small>
+  <br>
+  <button type="submit" class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] px-16 md:w-[126px] md:h-[41px]">Add to Cart</button>
+ 
   {% if name.errors %}
   <div class="mt-2 rounded-lg bg-red-100 border border-red-400 text-red-700 px-4 py-3">
     <ul> 

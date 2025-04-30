@@ -42,14 +42,15 @@ def item(request,name, id):
                 name.user = request.user
                 name.name = option
                 name.save()
-                messages= f"{quantity} added to cart successfully "
-                return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages})
+                messages= f"{quantity} items added to cart successfully "
+                return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block'})
         else:
-            messages.error(request, 'You need to be logged in to add items to your cart.')
-            return redirect('login')
+              messages= f"pls login to add item to cart"
+              return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block'})
     else:
         form = cart_form()  
-    return render(request, 'pharma/item.html', context={"item": option, "form": form})
+    message ="you can add item to cart"
+    return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'none', 'message': message,})
 
 def profile(request):
     return render(request, 'pharma/profile.html', context={})
