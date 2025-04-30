@@ -11,15 +11,22 @@ Categories
 
 
 {% block content %}
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {% if popular_items %}
     {% for item in popular_items %}
+
     <div>
       <a href="#" class="block space-y-2">
         <img src="{{ item.image.url }}" class="w-full h-[284px] object-contain" alt="Popular Product">
         <h6 class="text-blue-900 text-lg">{{ item.name }}</h6>
       </a>
     </div>
+
     {% endfor %}
+     {% else %}
+    <h6 class="text-blue-900 text-lg w-full h-[284px] ">No item found</h6>
+
+    {% endif %}
   </div>
 
 

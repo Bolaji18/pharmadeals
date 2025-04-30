@@ -43,26 +43,30 @@ INSTALLED_APPS = [
     "heroicons",
     "widget_tweaks",
     'tailwind',
-    'theme',
+    'themes',
+    'django_browser_reload',
 
 ]
-TAILWIND_APP_NAME = 'theme'
+# TAILWIND_APP_NAME = 'theme'
+TAILWIND_APP_NAME = 'themes'
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = 'eu-north-1'  # e.g., 'us-east-1'
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 # Optional but often required
 import os
 
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
