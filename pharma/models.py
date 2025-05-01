@@ -22,14 +22,31 @@ class Categories(models.Model):
 
 class Pharma(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    categor = models.ForeignKey(Categories, on_delete=models.CASCADE, default=1)
+    categor = models.ForeignKey(Categories, on_delete=models.CASCADE, default=1, verbose_name="Category")
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='pharma/images/', validators=[FileExtensionValidator(['jpg', 'png'])])
     description = models.TextField()
     price = models.IntegerField()
     stock = models.IntegerField()
+    Approval = models.BooleanField(default=False)
+    shipping = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.user}: {self.name} product"
+
+class cart(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    def __str__(self):
+        return f"{self.user}: {self.name} cart"
+    
+class popular(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True),
+    name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
+    views = models.IntegerField(default=0)
+    popular = models.BooleanField(null=True)
+    def __str__(self):
+        return f"{self.name}: {self.popular} {self.views} {self.user}views"
 class Approval(models.Model):
     name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
     approval = models.BooleanField(null=True)

@@ -17,6 +17,6 @@ urlpatterns = [
     path('upload', views.pharma_upload, name='upload'),
     path('categories', views.category, name='category'),
     path('categories/<str:categor>/', views.product, name='product'),
-
+    path('categories/<str:name>/<int:id>/', views.item, name='item'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

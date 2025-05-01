@@ -2,12 +2,13 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Pharma
+from .models import cart
 
 
 class pharma_form(forms.ModelForm):
     class Meta:
         model = Pharma
-        exclude = ['user']
+        exclude = ['user', 'Approval']
 
 
         widgets = {
@@ -17,6 +18,25 @@ class pharma_form(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the name of the product'}),
             'stock': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'How many items do you have in stock?'}),
             'category': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the category of your product'}),
+            'shipping': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the shipping cost of your product'}),
+        }
+        help_texts = {
+            'shipping': 'Leave empty if no shipping cost',
+            'stock': 'Stock must be greater than 0',
+            'price': 'Price must be greater than 0',
+            'description': 'Description must be at least 10 characters long',
+            'name': 'Name must be at least 3 characters long',
+            'category': 'Choose a category for your product',
+        }
+class cart_form(forms.ModelForm):
+    class Meta:
+        model = cart
+        fields = ['quantity']
+        widgets = {
+            'quantity': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the quantity'}),
+        }
+        help_texts = {
+            'quantity': 'Quantity must be greater than 0',
         }
 
 class NewUserForm(UserCreationForm):

@@ -14,16 +14,42 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from .models import Categories
 from .models import Pharma
+from .models import Approval
+from .forms import cart_form
 
 def product(request, categor):
     options = Categories.objects.filter(category=categor).first()
-    option = Pharma.objects.filter(categor=options)
+    option = Pharma.objects.filter(categor=options, Approval=True)
     return render(request, 'pharma/product.html', context={"popular_items": option})
 
 def category(request):
     option = Categories.objects.all()
     return render(request, 'pharma/category.html', context={'categories':option})
 
+def item(request,name, id):
+    option = Pharma.objects.filter(name=name, id=id).first()
+    form = cart_form()
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            cart_item = cart_form(request.POST)
+            if cart_item.is_valid():
+                name = cart_item.save(commit=False)
+                quantity = request.POST.get('quantity')
+                if quantity == '':
+                    messages.error(request, 'Please enter a quantity.')
+                    return redirect('item', name=name, id=id)
+                name.quantity = quantity
+                name.user = request.user
+                name.name = option
+                name.save()
+                messages= f"{quantity} added to cart successfully "
+                return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages})
+        else:
+            messages.error(request, 'You need to be logged in to add items to your cart.')
+            return redirect('login')
+    else:
+        form = cart_form()  
+    return render(request, 'pharma/item.html', context={"item": option, "form": form})
 
 def profile(request):
     return render(request, 'pharma/profile.html', context={})
