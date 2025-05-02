@@ -11,6 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {% tailwind_css %}
+    <style>
+       #notification-badge {
+      display: inline-block;
+      padding: 0.2em 0.4em;
+      font-size: 0.65rem; /* small badge size */
+      font-weight: 600;
+      color: white;
+      background-color: #3b82f6; /* blue color */
+      border-radius: 9999px; /* fully rounded */
+      line-height: 1;
+    }
+    </style>
         <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
   </head>
   <body class=" bg-white font-sans text-gray-800 overflow-x-hidden">
@@ -62,8 +74,41 @@
       </div>
 
       <!-- Cart & Auth Buttons -->
+       <a href="{% url 'see_cart' %}" class="flex items>
       <div class="flex items-center mt-4 md:mt-0 space-x-3 md:ml-auto">
         <span>{% heroicon_outline "shopping-cart" size=20 %}</span>
+        <span id="notification-badge"></span>
+      </a>
+        
+
+        <script>
+           const url = `{% url 'get_pharma'  %}`; // Generate the URL dynamically
+        fetch(url, {
+             method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest' // Indicate that this is an AJAX request
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('notification-badge').innerHTML = data;
+            console.log(data); // Log the data to the console for debugging
+            if (data > 0) {
+                document.getElementById('notification-badge').style.display = 'inline-block'; // Show the badge if count is greater than 0
+            } else {
+                document.getElementById('notification-badge').style.display = 'none'; // Hide the badge if count is 0
+            }
+
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+        </script>
          {% if request.user.username %}
 
         <a href="{% url 'profile' %}">

@@ -2,6 +2,25 @@ body {
   background: white;
   font-family: "Arial", san-serif;
 }
+#notification-badge {
+  display: inline-block;
+  padding: 0.2em 0.4em;
+  font-size: 0.65rem; /* small badge size */
+  font-weight: 600;
+  color: white;
+  background-color: #3b82f6; /* blue color */
+  border-radius: 9999px; /* fully rounded */
+  line-height: 1;
+}
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
 .top {
   height: 36px;
   width: 100%;
@@ -875,5 +894,5 @@ color:red;
 
 
     }
-
+ 
 

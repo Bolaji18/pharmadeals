@@ -1,0 +1,62 @@
+{% extends 'pharma/base2.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load heroicons %}
+
+
+
+{% block title %}
+Categories
+{% endblock %}
+
+
+{% block content %}
+
+  <!-- Categories Section -->
+  <section class="px-6 md:px-16 mt-10">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-3xl font-semibold text-blue-900 border-b-4 border-green-400">Categories</h2>
+      <span class="text-blue-900 flex items-center space-x-2">
+        <span><a href="{% url 'category' %}">View all</a></span> {% heroicon_outline "arrow-right-circle" size=20 %}
+      </span>
+    </div>
+  
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for category in categories %}
+      <div class="relative bg-green-500 rounded-2xl overflow-hidden p-4 h-[316px]">
+        <img src="{% static category.image %}" class="w-full h-[284px] object-contain mx-auto" alt="{{ category.title }}">
+        <h6 class="absolute bottom-3 left-4 text-xl text-blue-900">{{ category.title }}</h6>
+        <span class="absolute top-3 right-3 text-red-500">{% heroicon_outline "arrow-right-circle" size=40 %}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  
+  <!-- Most Popular Section -->
+  <section class="px-6 md:px-16 mt-14">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-3xl font-semibold text-blue-900 border-b-4 border-green-400">Most Popular</h2>
+      <span class="text-blue-900 flex items-center space-x-2">
+        <span>View all</span> {% heroicon_outline "arrow-right-circle" size=20 %}
+      </span>
+    </div>
+  
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for item in popular_items %}
+      <div>
+        <a href="#" class="block space-y-2">
+          <img src="{% static item.image %}" class="w-full h-[284px] object-contain" alt="Popular Product">
+          <h6 class="text-blue-900 text-lg">{{ item.title }}</h6>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  
+    <div class="mt-8 text-center">
+      <a href="{% url 'category'%}">
+      <button class="bg-cyan-200 border border-black rounded-full px-6 py-2 text-lg font-bold">Start Buying</button>
+    </a>
+    </div>
+  </section>
+
+{% endblock %}

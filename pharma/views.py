@@ -16,6 +16,9 @@ from .models import Categories
 from .models import Pharma
 from .models import Approval
 from .forms import cart_form
+from .models import cart
+from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse
 
 def product(request, categor):
     options = Categories.objects.filter(category=categor).first()
@@ -57,7 +60,7 @@ def profile(request):
 
 # Create your views here.
 def index(request):
-    return render(request, 'pharma/test.html', context = {
+    return render(request, 'pharma/home.html', context = {
     "categories": [
         {"image": "images/10802284-removebg-preview.png", "title": "Vitamins and Supplements"},
         {"image": "images/e01a6ff2-3a78-4a34-8d64-82cf884ff9a7-removebg-preview.png", "title": "Antimalaria"},
@@ -136,4 +139,35 @@ def send_email(request, messages,subjects, emails, html ):
     f.write(f'email sent to {email} \n')
     f.close()
     return f'email sent to {email}'
+
+def get_pharma(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            name = request.user
+            pharma = cart.objects.filter(user=name).count()
+            return render(request, 'pharma/cart.html', {'pharma': pharma})
+           
+    else:
+        return JsonResponse({"error": "invalid request"}, status=400)
+
+def see_cart(request):
+    if request.user.is_authenticated:
+        name = request.user
+        cart_items = cart.objects.filter(user=name)
+        total_price = 0
+        item = []
+        for item in cart_items:
+            option = get_object_or_404(Pharma, id=item.name.id)
+            total_price += option.price * item.quantity
+        return render(request, 'pharma/cart_total.html', {'cart_items': cart_items, 'total_price': total_price})
+    else:
+        return redirect('login')
+    
+def remove_from_cart(request, id):
+    if request.user.is_authenticated:
+        cart_item = get_object_or_404(cart, id=id)
+        cart_item.delete()
+        return redirect('see_cart')
+    else:
+        return redirect('login')
+
 

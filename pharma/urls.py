@@ -18,5 +18,8 @@ urlpatterns = [
     path('categories', views.category, name='category'),
     path('categories/<str:categor>/', views.product, name='product'),
     path('categories/<str:name>/<int:id>/', views.item, name='item'),
+    path('get_pharma', views.get_pharma, name='get_pharma'),
+    path('see_cart/', views.see_cart, name='see_cart'), 
+    path('remove_from_cart/<int:id>/', views.remove_from_cart, name='remove_from_cart'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
