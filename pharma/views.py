@@ -23,6 +23,7 @@ from django.contrib.auth import login, authenticate
 from .forms import buyerinfo_form
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+from .models import bought
 
 
 def product(request, categor):
@@ -171,6 +172,11 @@ def see_cart(request):
                 email = request.POST.get('email')
                 name2 = request.POST.get('name')
                 name.save()
+                cart_items = cart.objects.filter(user=name.user)
+                for item in cart_items:
+                    bought_item = bought(user=name.user, name=item)
+                    bought_item.save()
+                    item.delete()
                 if method == "2":
                     message = send_email(request, messages="", subjects="order is being processed", emails=email, html='email/process.html',  context={'name': name2} )
                     text = "Your order is being processed, please wait for a confirmation email. Thank you for your order."

@@ -11,7 +11,9 @@ from .models import buyerinfo
 from .models import Payment
 from .models import Pending_payment
 from .models import paymentmethod
+from .models import bought
 
+admin.site.register(bought)
 admin.site.register(paymentmethod)
 admin.site.register(Payment)
 admin.site.register(Pending_payment)

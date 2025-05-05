@@ -21,3 +21,6 @@ email sent to daropaleb@gmail.com
 email sent to daropaleb@gmail.com 
 Email sent to daropaleb@gmail.com with subject "order is being processed"
 Email sent to daropaleb@gmail.com with subject "Welcome to PharmaDeals"
+Email sent to daropaleb@gmail.com with subject "order is being processed"
+Email sent to daropaleb@gmail.com with subject "order is being processed"
+Email sent to daropaleb@gmail.com with subject "order is being processed"

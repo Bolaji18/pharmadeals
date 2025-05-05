@@ -49,6 +49,11 @@ class cart(models.Model):
     quantity = models.IntegerField(default=1)
     def __str__(self):
         return f"{self.user}: {self.name} cart"
+class bought(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    name = models.ForeignKey(cart, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.user}:  items bought"
     
 class popular(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True),
@@ -87,6 +92,7 @@ class Pending_payment(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.amount} ({self.status})"
+
 
 
 @receiver(post_delete, sender=Pharma)
