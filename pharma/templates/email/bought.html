@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Your Product Has Been Sold!</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f9f9f9; font-family: Arial, sans-serif;">
+  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);">
+
+    <div style="text-align: center; border-bottom: 1px solid #eeeeee; padding-bottom: 20px; margin-bottom: 20px;">
+      <h1 style="color: #1a73e8; margin: 0;">Pharmadeals.ng</h1>
+      <p style="color: #888888; font-size: 14px; margin: 5px 0 0;">Empowering Pharmacies, One Deal at a Time</p>
+    </div>
+
+    <div style="color: #333333; line-height: 1.6;">
+      <h2 style="color: #28a745;">Hi {{ username }},</h2>
+
+      <p style="margin: 0 0 15px;">🎉 Great news! Your product <strong>{{ product_name }}</strong> has just been sold on <strong>Pharmadeals.ng</strong>.</p>
+
+      <p style="margin: 0 0 15px;">Our team will begin processing the order shortly. Please ensure the item is prepared for delivery as per our seller guidelines.</p>
+
+      <h3 style="margin: 20px 0 10px; color: #1a73e8;">Order Details:</h3>
+      <p style="margin: 0 0 5px;"><strong>Product:</strong> {{ product_name }}</p>
+      <p style="margin: 0 0 5px;"><strong>Quantity:</strong> {{ quantity }}</p>
+      <p style="margin: 0 0 5px;"><strong>Total Earned:</strong> ₦{{ total_earned }}</p>
+      <p style="margin: 0 0 15px;"><strong>Order ID:</strong> {{ order_id }}</p>
+
+      <a href="https://pharmadeals.ng/dashboard/sales" style="display: inline-block; margin-top: 20px; padding: 12px 20px; background-color: #1a73e8; color: #ffffff; text-decoration: none; border-radius: 5px;">View Sale</a>
+
+      <p style="margin: 30px 0 10px;">If you have any questions, feel free to contact us at 
+        <a href="mailto:support@pharmadeals.ng" style="color: #1a73e8; text-decoration: none;">support@pharmadeals.ng</a>.
+      </p>
+
+      <p style="margin: 0;">Thank you for being a trusted seller on Pharmadeals.ng!</p>
+      <p style="margin: 0;">– The Pharmadeals.ng Team</p>
+    </div>
+
+    <div style="margin-top: 30px; font-size: 13px; color: #777777; text-align: center;">
+      <p style="margin: 0;">This is an automated notification from Pharmadeals.ng</p>
+    </div>
+
+  </div>
+</body>
+</html>

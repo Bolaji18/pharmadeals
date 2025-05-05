@@ -173,13 +173,23 @@ def see_cart(request):
                 name2 = request.POST.get('name')
                 name.save()
                 cart_items = cart.objects.filter(user=name.user)
-                for item in cart_items:
-                    bought_item = bought(user=name.user, name=item)
-                    bought_item.save()
-                    item.delete()
+                
                 if method == "2":
                     message = send_email(request, messages="", subjects="order is being processed", emails=email, html='email/process.html',  context={'name': name2} )
                     text = "Your order is being processed, please wait for a confirmation email. Thank you for your order."
+                    
+                    cart_items = cart.objects.filter(user=name.user)
+                    for item in cart_items:
+                        bought_item = bought(user=name.user, name=item)
+                        bought_item.save()
+                        email = item.name.user.email
+                        name = item.name.user.first_name
+                        product_name = item.name.name
+                        quantity = item.quantity
+                        total_earned = item.name.price * item.quantity
+                        order_id = item.id
+
+                        message = send_email(request, messages="", subjects="Item bought on Pharmadeals", emails=email, html='email/bought.html',  context={'username': name, 'product_name':product_name,'quantity':quantity, 'total_earned':total_earned,'order_id':order_id } )
                     return render(request, 'pharma/register.html', {'text': text})
                     
                 
