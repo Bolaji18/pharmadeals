@@ -49,6 +49,17 @@ class cart(models.Model):
     quantity = models.IntegerField(default=1)
     def __str__(self):
         return f"{self.user}: {self.name} cart"
+class boughtitem(models.Model):
+    email = models.EmailField()
+    name = models.CharField(max_length=100)
+    users = models.CharField(max_length=100)
+    product_name = models.CharField(max_length=100)
+    quantity = models.IntegerField(default=1)
+    total_earned = models.IntegerField(default=0)
+    order_id = models.CharField(max_length=100, unique=True)
+    def __str__(self):
+        return f"{self.email}: {self.name} bought item"
+
 class bought(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.ForeignKey(cart, on_delete=models.CASCADE)

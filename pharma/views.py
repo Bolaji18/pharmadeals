@@ -24,6 +24,7 @@ from .forms import buyerinfo_form
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from .models import bought
+from .models import boughtitem
 
 
 def product(request, categor):
@@ -179,15 +180,16 @@ def see_cart(request):
                     text = "Your order is being processed, please wait for a confirmation email. Thank you for your order."
                     
                     cart_items = cart.objects.filter(user=name.user)
-                    for item in cart_items:
-                        bought_item = bought(user=name.user, name=item)
-                        bought_item.save()
+                    for item in cart_items:   
                         email = item.name.user.email
+                        users = item.name.user.username
                         name = item.name.user.first_name
                         product_name = item.name.name
                         quantity = item.quantity
                         total_earned = item.name.price * item.quantity
                         order_id = item.id
+                        bought_item = boughtitem.objects.create(email=email, name=name, users=users, product_name=product_name, quantity=quantity, total_earned=total_earned, order_id=order_id)
+                        bought_item.save()
 
                         message = send_email(request, messages="", subjects="Item bought on Pharmadeals", emails=email, html='email/bought.html',  context={'username': name, 'product_name':product_name,'quantity':quantity, 'total_earned':total_earned,'order_id':order_id } )
                     return render(request, 'pharma/register.html', {'text': text})
