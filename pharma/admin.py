@@ -7,7 +7,15 @@ from .models import Approval
 from .models import Categories
 from .models import popular
 from .models import cart
+from .models import buyerinfo
+from .models import Payment
+from .models import Pending_payment
+from .models import paymentmethod
 
+admin.site.register(paymentmethod)
+admin.site.register(Payment)
+admin.site.register(Pending_payment)
+admin.site.register(buyerinfo)
 admin.site.register(cart)
 admin.site.register(popular)
 admin.site.register(Categories)

@@ -3,6 +3,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Pharma
 from .models import cart
+from .models import buyerinfo
+
+class buyerinfo_form(forms.ModelForm):
+    class Meta:
+        model = buyerinfo
+        fields = ['name', 'email', 'phone', 'address', 'method']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your phone number'}),
+            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your address'}),
+        }
 
 
 class pharma_form(forms.ModelForm):

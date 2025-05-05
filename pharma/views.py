@@ -19,6 +19,11 @@ from .forms import cart_form
 from .models import cart
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
+from django.contrib.auth import login, authenticate
+from .forms import buyerinfo_form
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
+
 
 def product(request, categor):
     options = Categories.objects.filter(category=categor).first()
@@ -60,13 +65,11 @@ def profile(request):
 
 # Create your views here.
 def index(request):
+    cate = Categories.objects.all()[:4]
+    #cate = Categories.objects.all().order_by('id')[:4]
+
     return render(request, 'pharma/home.html', context = {
-    "categories": [
-        {"image": "images/10802284-removebg-preview.png", "title": "Vitamins and Supplements"},
-        {"image": "images/e01a6ff2-3a78-4a34-8d64-82cf884ff9a7-removebg-preview.png", "title": "Antimalaria"},
-        {"image": "images/2010.i121.044_isometric_gastroenterology_set-01-03-removebg-preview.png", "title": "Antibiotics"},
-        {"image": "images/3644225-removebg-preview.png", "title": "Painkillers"},
-    ],
+    "categories": cate,
     "popular_items": [
         {"image": "images/2024-08-08-66b4fdf35f7ae.WEBP", "title": "N/factor Vitamin C 1000mg"},
         {"image": "images/2024-08-08-66b51bee6ba9e.WEBP", "title": "N/factor Vitamin C 1000mg"},
@@ -98,7 +101,8 @@ def register(request):
            #     return redirect('login')
 
            email = request.POST.get("email")
-           message = send_email(request, messages='', subjects="Welcome to PharmaDeals", emails=email, html='email/welcome.html')
+           name = request.POST.get("first_name")
+           message = send_email(request, messages='', subjects="Welcome to PharmaDeals", emails=email, html='email/welcome.html',  context={'name': name} )
            user = form.save()
            return redirect('login')
        else:
@@ -120,7 +124,8 @@ def pharma_upload(request):
             product.user = request.user
             product.save()
             email = request.user.email
-            message = send_email(request, messages="", subjects="product added successfully", emails=email, html='email/upload.html')
+            name = request.user.first_name
+            message = send_email(request, messages='', subjects="Product upload", emails=email, html='email/upload.html', context={'name': name})
             success= "Your product has been uploaded"
             return render(request, 'pharma/register.html', {'success': success, 'none':'none'})
     else:
@@ -128,17 +133,23 @@ def pharma_upload(request):
     return render(request, 'pharma/register.html', {'form': form, 'text':text})
 
 
-def send_email(request, messages,subjects, emails, html ):
+
+def send_email(request, messages, subjects, emails, html, context=None):
     email = emails
     subject = subjects
     message = messages
     from_email = 'admin@pharmadeals.ng'
-    html_message = render(request, html, {}).content.decode('utf-8')
+    
+    # Render the HTML template with context
+    html_message = render_to_string(html, context or {})
+    
     send_mail(subject, message, from_email, [email], html_message=html_message)
-    f = open('email.txt', 'a')
-    f.write(f'email sent to {email} \n')
-    f.close()
-    return f'email sent to {email}'
+    
+    # Log the email for debugging
+    with open('email.txt', 'a') as f:
+        f.write(f'Email sent to {email} with subject "{subject}"\n')
+    
+    return f'Email sent to {email}'
 
 def get_pharma(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -151,6 +162,25 @@ def get_pharma(request):
 
 def see_cart(request):
     if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = buyerinfo_form(request.POST)
+            if form.is_valid():
+                name = form.save(commit=False)
+                name.user = request.user
+                method = request.POST.get('method')
+                email = request.POST.get('email')
+                name2 = request.POST.get('name')
+                name.save()
+                if method == "2":
+                    message = send_email(request, messages="", subjects="order is being processed", emails=email, html='email/process.html',  context={'name': name2} )
+                    text = "Your order is being processed, please wait for a confirmation email. Thank you for your order."
+                    return render(request, 'pharma/register.html', {'text': text})
+                    
+                
+                return redirect('index')
+            else:
+               return render(request, 'pharma/cart_total.html', {'cart_items': cart_items, 'total_price': total_price, 'form': form, 'item': item})
+        
         name = request.user
         cart_items = cart.objects.filter(user=name)
         total_price = 0
@@ -158,12 +188,14 @@ def see_cart(request):
         for item in cart_items:
             option = get_object_or_404(Pharma, id=item.name.id)
             total_price += option.price * item.quantity
-        return render(request, 'pharma/cart_total.html', {'cart_items': cart_items, 'total_price': total_price})
+        form = buyerinfo_form()
+        return render(request, 'pharma/cart_total.html', {'cart_items': cart_items, 'total_price': total_price, 'form': form, 'item': item})
     else:
         return redirect('login')
     
 def remove_from_cart(request, id):
-    if request.user.is_authenticated:
+    if request.method == 'POST':
+     if request.user.is_authenticated:
         cart_item = get_object_or_404(cart, id=id)
         cart_item.delete()
         return redirect('see_cart')

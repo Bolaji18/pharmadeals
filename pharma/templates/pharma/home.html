@@ -22,12 +22,14 @@ Categories
     </div>
   
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {% for category in categories %}
+      {% for index in categories %}
+      <a href="categories/{{index.category}}/">
       <div class="relative bg-green-500 rounded-2xl overflow-hidden p-4 h-[316px]">
-        <img src="{% static category.image %}" class="w-full h-[284px] object-contain mx-auto" alt="{{ category.title }}">
-        <h6 class="absolute bottom-3 left-4 text-xl text-blue-900">{{ category.title }}</h6>
+        <img src="{{ index.image.url }}" class="w-full h-[284px] object-contain mx-auto" alt="{{ index.category}}">
+        <h6 class="absolute bottom-3 left-4 text-xl text-blue-900">{{ index.category }}</h6>
         <span class="absolute top-3 right-3 text-red-500">{% heroicon_outline "arrow-right-circle" size=40 %}</span>
       </div>
+    </a>
       {% endfor %}
     </div>
   </section>

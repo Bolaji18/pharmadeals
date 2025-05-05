@@ -33,6 +33,16 @@ class Pharma(models.Model):
     def __str__(self):
         return f"{self.user}: {self.name} product"
 
+class buyerinfo(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    address = models.TextField()
+    method = models.ForeignKey('paymentmethod', on_delete=models.CASCADE, null=True, verbose_name="Payment Method")
+    def __str__(self):
+        return f"{self.user}: {self.name} info"
+
 class cart(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
@@ -52,6 +62,31 @@ class Approval(models.Model):
     approval = models.BooleanField(null=True)
     def __str__(self):
         return f"{self.name}: {self.approval}"
+
+class paymentmethod(models.Model):
+    method = models.CharField(max_length=100)
+    def __str__(self):
+        return f"{self.method}"
+
+class Payment(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    reference = models.CharField(max_length=100, unique=True)
+    status = models.CharField(max_length=20, default='pending')  # e.g., 'pending', 'success', 'failed'
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} - {self.amount} ({self.status})"
+
+class Pending_payment(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    reference = models.CharField(max_length=100, unique=True)
+    status = models.CharField(max_length=20, default='pending')  # e.g., 'pending', 'success', 'failed'
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} - {self.amount} ({self.status})"
 
 
 @receiver(post_delete, sender=Pharma)
