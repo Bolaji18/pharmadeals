@@ -11,23 +11,27 @@ Login
 
 {% block content %}
 
-<div class="flex h-[300px] bg-green-500 border border-white">
+
+
+
+
+<div class="flex h-[300px] ">
   <!-- Tabs (left side) -->
-  <div class="w-[30%] bg-sky-500 border-r min-h-[284px] border-white">
+  <div class="w-[30%] shadow rounded-2xl py-10 bg-sky-500  bg-green-500 min-h-[284px] border-white">
     <button 
-      class="w-full mt-2 text-left px-8 px-8 py-24 border border-white text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-      onclick="openCity(event, 'London')" 
+      class="w-full shadow mt-2 text-left px-8 px-8 py-24  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="openCity()" 
       id="defaultOpen">
       User Profile
     </button>
     <button 
-      class="w-full text-left mt-8 px-4 py-5 border border-white text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-      onclick="openCity(event, 'Paris')">
+      class="w-full shadow text-left mt-8 px-4 py-5  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="openCity()">
       sales
     </button>
     <button 
-      class="w-full text-left mt-8 px-4 py-5 border border-white text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-      onclick="openCity(event, 'Tokyo')">
+      class="w-full shadow text-left mt-8 px-4 py-5  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="openCity()">
       purchase
     </button>
   </div>

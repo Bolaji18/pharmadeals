@@ -54,10 +54,10 @@ Categories
       {% for item in popular_items %}
       
       <div>
-        <a href="#" class="block space-y-2">
+    
           <img src="{{ item.name.image.url }}" class="w-full h-[284px] object-contain" alt="Popular Product">
           <a href="{% url 'item' name=item.name.name  id=item.name.id %}" > <h6 class="text-blue-900 text-lg">{{ item.name.name }}</h6> </a>
-        </a>
+   
       </div> 
       {% endfor %}
     </div>
