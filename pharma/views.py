@@ -25,6 +25,8 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from .models import bought
 from .models import boughtitem
+from .models import buyerinfo
+from .models import popular
 
 
 def product(request, categor):
@@ -38,6 +40,10 @@ def category(request):
 
 def item(request,name, id):
     option = Pharma.objects.filter(name=name, id=id).first()
+    popular_item, created = popular.objects.get_or_create(name=option, defaults={'views': 1})
+    if not created:
+        popular_item.views += 1
+        popular_item.save()
     form = cart_form()
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -69,15 +75,11 @@ def profile(request):
 def index(request):
     cate = Categories.objects.all()[:4]
     #cate = Categories.objects.all().order_by('id')[:4]
+    popular_items = popular.objects.all().order_by('-views')[:4]
 
     return render(request, 'pharma/home.html', context = {
     "categories": cate,
-    "popular_items": [
-        {"image": "images/2024-08-08-66b4fdf35f7ae.WEBP", "title": "N/factor Vitamin C 1000mg"},
-        {"image": "images/2024-08-08-66b51bee6ba9e.WEBP", "title": "N/factor Vitamin C 1000mg"},
-        {"image": "images/2024-08-08-66b51c324e992.WEBP", "title": "N/factor Vitamin C 1000mg"},
-        {"image": "images/2024-08-08-66b5010de8c82.WEBP", "title": "N/factor Vitamin C 1000mg"},
-    ]
+    "popular_items": popular_items,
 }
 )
 
@@ -155,10 +157,12 @@ def send_email(request, messages, subjects, emails, html, context=None):
 
 def get_pharma(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.user.is_authenticated:
             name = request.user
             pharma = cart.objects.filter(user=name).count()
             return render(request, 'pharma/cart.html', {'pharma': pharma})
-           
+        else:
+            return render(request, 'pharma/cart.html', {'pharma': 0})
     else:
         return JsonResponse({"error": "invalid request"}, status=400)
 
@@ -183,12 +187,13 @@ def see_cart(request):
                     for item in cart_items:   
                         email = item.name.user.email
                         users = item.name.user.username
-                        name = item.name.user.first_name
+                        name2 = item.name.user.first_name
                         product_name = item.name.name
                         quantity = item.quantity
                         total_earned = item.name.price * item.quantity
                         order_id = item.id
-                        bought_item = boughtitem.objects.create(email=email, name=name, users=users, product_name=product_name, quantity=quantity, total_earned=total_earned, order_id=order_id)
+                        buyer_info = buyerinfo.objects.filter(user=name.user).order_by('-id').first()
+                        bought_item = boughtitem.objects.create(email=email, name=name2, users=users, product_name=product_name, quantity=quantity, total_earned=total_earned, order_id=order_id, buyer_info=buyer_info)
                         bought_item.save()
 
                         message = send_email(request, messages="", subjects="Item bought on Pharmadeals", emails=email, html='email/bought.html',  context={'username': name, 'product_name':product_name,'quantity':quantity, 'total_earned':total_earned,'order_id':order_id } )

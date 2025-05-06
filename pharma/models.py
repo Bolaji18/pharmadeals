@@ -56,7 +56,8 @@ class boughtitem(models.Model):
     product_name = models.CharField(max_length=100)
     quantity = models.IntegerField(default=1)
     total_earned = models.IntegerField(default=0)
-    order_id = models.CharField(max_length=100, unique=True)
+    order_id = models.CharField(max_length=100)
+    buyer_info = models.ForeignKey(buyerinfo, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return f"{self.email}: {self.name} bought item"
 
@@ -67,12 +68,10 @@ class bought(models.Model):
         return f"{self.user}:  items bought"
     
 class popular(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True),
     name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
     views = models.IntegerField(default=0)
-    popular = models.BooleanField(null=True)
     def __str__(self):
-        return f"{self.name}: {self.popular} {self.views} {self.user}views"
+        return f"{self.name}: {self.views}views"
 class Approval(models.Model):
     name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
     approval = models.BooleanField(null=True)

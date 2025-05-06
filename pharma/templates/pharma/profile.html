@@ -10,57 +10,38 @@ Login
 {% endblock %}
 
 {% block content %}
-<style>
 
-/* Style the tab */
-  .tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-}
+<div class="flex h-[300px] bg-green-500 border border-white">
+  <!-- Tabs (left side) -->
+  <div class="w-[30%] bg-sky-500 border-r min-h-[284px] border-white">
+    <button 
+      class="w-full mt-2 text-left px-8 px-8 py-24 border border-white text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="openCity(event, 'London')" 
+      id="defaultOpen">
+      User Profile
+    </button>
+    <button 
+      class="w-full text-left mt-8 px-4 py-5 border border-white text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="openCity(event, 'Paris')">
+      sales
+    </button>
+    <button 
+      class="w-full text-left mt-8 px-4 py-5 border border-white text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="openCity(event, 'Tokyo')">
+      purchase
+    </button>
+  </div>
 
-/* Style the buttons inside the tab */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-}
-</style>
-
-
-<!-- Tab links -->
-<div class="min-h-[284px] ">
-<div class="tab">
-  <a href="{% url 'upload' %}"><button class="tablinks">Sell Products</button></a>
-  <a href="{% url 'category' %}"><button class="tablinks">Buy Products</button></a>
-  <a href="{% url 'category'%}"><button class="tablinks">Categories</button></a>
+  <!-- Content (right side) -->
+  <div class="w-[70%] ml-[20px] px-3 h-[300px] min-h-[284px]" style="margin-left: 20px;">
+    hello 
+    <!-- Tab content here -->
+  </div>
 </div>
 
+ 
+  
 
-    </div>
 
 
 

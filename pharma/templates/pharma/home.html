@@ -24,7 +24,7 @@ Categories
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {% for index in categories %}
       <a href="categories/{{index.category}}/">
-      <div class="relative bg-green-500 rounded-2xl overflow-hidden p-4 h-[316px]">
+      <div class="relative bg-green-500 rou nded-2xl overflow-hidden p-4 h-[316px]">
         <img src="{{ index.image.url }}" class="w-full h-[284px] object-contain mx-auto" alt="{{ index.category}}">
         <h6 class="absolute bottom-3 left-4 text-xl text-blue-900">{{ index.category }}</h6>
         <span class="absolute top-3 right-3 text-red-500">{% heroicon_outline "arrow-right-circle" size=40 %}</span>
@@ -33,6 +33,13 @@ Categories
       {% endfor %}
     </div>
   </section>
+
+
+
+
+
+
+  
   
   <!-- Most Popular Section -->
   <section class="px-6 md:px-16 mt-14">
@@ -45,12 +52,13 @@ Categories
   
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {% for item in popular_items %}
+      
       <div>
         <a href="#" class="block space-y-2">
-          <img src="{% static item.image %}" class="w-full h-[284px] object-contain" alt="Popular Product">
-          <h6 class="text-blue-900 text-lg">{{ item.title }}</h6>
+          <img src="{{ item.name.image.url }}" class="w-full h-[284px] object-contain" alt="Popular Product">
+          <a href="{% url 'item' name=item.name.name  id=item.name.id %}" > <h6 class="text-blue-900 text-lg">{{ item.name.name }}</h6> </a>
         </a>
-      </div>
+      </div> 
       {% endfor %}
     </div>
   
