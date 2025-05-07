@@ -12,36 +12,207 @@ Login
 {% block content %}
 
 
+<style>
+  body {font-family: Arial, Helvetica, sans-serif;}
+  
+  /* Full-width input fields */
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Set a style for all buttons */
+  .button2 {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  /* Center the image and position the close button */
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+  }
+  
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+  
+  .container {
+    padding: 16px;
+  }
+  
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: red;
+    cursor: pointer;
+  }
+  
+  /* Add Zoom Animation */
+ 
+  
+
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+  }
+  </style>
 
 
 
-<div class="flex h-[300px] ">
+
+<div >
+  <ul>
+      <li class="mt-2 rounded-lg bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3" style="display: {{display}};" id="time">{{message}}</li>
+  </ul>
+</div>
+
+<script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
+
+<div class="flex ">
   <!-- Tabs (left side) -->
-  <div class="w-[30%] shadow rounded-2xl py-10 bg-sky-500  bg-green-500 min-h-[284px] border-white">
+  <div class="w-[300px] shadow  bg-green-500 py-10 overflow   h-[100%] border-white" style="min-height: 100vh; width: 300px;">
+    <a href="{% url 'index' %}"><img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12" alt="Pharmadeals Logo"></a>
     <button 
-      class="w-full shadow mt-2 text-left px-8 px-8 py-24  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-      onclick="openCity()" 
+      class="w-full mb-6 shadow mt-2 text-left px-8 px-8 py-24 button2  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="" 
       id="defaultOpen">
       User Profile
     </button>
     <button 
-      class="w-full shadow text-left mt-8 px-4 py-5  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-      onclick="openCity()">
-      sales
+    class="w-full mb-6 mt-2 text-left button2 px-8 px-8 py-24 text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+    onclick="">
+      Sales
     </button>
     <button 
-      class="w-full shadow text-left mt-8 px-4 py-5  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-      onclick="openCity()">
-      purchase
+    class="w-full mt-2  mb-6 text-left button2 px-8 px-8 py-24   text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+    onclick="">
+      Purchases
+    </button>
+    <button 
+    class="w-full mt-2 mb-6  text-left button2 px-8 px-8 py-24   text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+    onclick="openCity()" id="product">
+      Products
+    </button>
+    <button 
+    class="w-full  mt-2 mb-6 text-left button2 px-8 px-8 py-24   text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+    onclick="">
+      Help
     </button>
   </div>
 
   <!-- Content (right side) -->
-  <div class="w-[70%] ml-[20px] px-3 h-[300px] min-h-[284px]" style="margin-left: 20px;">
-    hello 
+  <div class="w-[70%] ml-[-60px] px-3 h-[300px] min-h-[284px]"  id="note1">
+  
     <!-- Tab content here -->
   </div>
 </div>
+<style>
+  #footer2{
+    display: none;
+  }
+  #header5{
+    display: none;
+  }
+</style>
+
+
+
+<script>
+
+  function openCity() {
+    // Get all elements with class="tabcontent
+  const url = `{% url 'get_table'  %}`; // Generate the URL dynamically
+fetch(url, {
+    method: 'GET',
+   headers: {
+       'X-Requested-With': 'XMLHttpRequest' // Indicate that this is an AJAX request
+   }
+})
+.then(response => {
+   if (!response.ok) {
+       throw new Error('Network response was not ok');
+   }
+   return response.text();
+})
+.then(data => {
+   document.getElementById('note1').innerHTML = data;
+   console.log(data); // Log the data to the console for debugging
+   
+
+})
+.catch(error => {
+   console.error('There was a problem with the fetch operation:', error);
+});
+
+  }
+</script>
 
  
   

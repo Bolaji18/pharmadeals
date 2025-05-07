@@ -37,7 +37,7 @@
   <a href="#"><button class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] px-16 md:h-[41px]">Bid</button>
   </a>
     
-    <a href="#"><button class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] px-16 md:w-[126px] md:h-[41px]">Buy Now</button>
+    <a href="{% url 'buynow' name=item.name  id=item.id %}"><button class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] px-16 md:w-[126px] md:h-[41px]">Buy Now</button>
   </a>
   {% for name in form %}
   <form method="post" id="myForm" enctype="multipart/form-data" class="space-y-6">

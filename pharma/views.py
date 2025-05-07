@@ -27,6 +27,23 @@ from .models import bought
 from .models import boughtitem
 from .models import buyerinfo
 from .models import popular
+from .models import cart
+from .models import Pharma
+
+def pharma_delete(request, id):
+    
+        if request.user.is_authenticated:
+            pharma_item = get_object_or_404(Pharma, id=id)
+            if pharma_item.user != request.user:
+                return HttpResponse("You are not authorized to delete this item.")
+            else:
+                
+                 messages= f"{pharma_item.name} has been deleted successfully"
+                 pharma_item.delete()
+                 return render(request, 'pharma/profile.html', context={'message': messages, 'display': 'block'})
+        else:
+            return redirect('login')
+   
 
 
 def product(request, categor):
@@ -37,6 +54,19 @@ def product(request, categor):
 def category(request):
     option = Categories.objects.all()
     return render(request, 'pharma/category.html', context={'categories':option})
+
+def buynow(request, name , id):
+     
+        if request.user.is_authenticated:
+            cart.objects.create(user=request.user, name=Pharma.objects.get(name=name, id=id), quantity=1)
+            
+            return redirect('see_cart')
+        else:
+              option = Pharma.objects.filter(name=name, id=id).first()
+              form = cart_form() 
+              messages= f"pls login to add item to cart"
+              return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block'})
+
 
 def item(request,name, id):
     option = Pharma.objects.filter(name=name, id=id).first()
@@ -69,7 +99,7 @@ def item(request,name, id):
     return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'none', 'message': message,})
 
 def profile(request):
-    return render(request, 'pharma/profile.html', context={})
+    return render(request, 'pharma/profile.html', context={'display': 'none'})
 
 # Create your views here.
 def index(request):
@@ -154,6 +184,18 @@ def send_email(request, messages, subjects, emails, html, context=None):
         f.write(f'Email sent to {email} with subject "{subject}"\n')
     
     return f'Email sent to {email}'
+
+
+def get_table(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.user.is_authenticated:
+            name = request.user
+            pharma = Pharma.objects.filter(user=name)
+            return render(request, 'tables/table.html', {'categories': pharma})
+        else:
+            return redirect('login')
+    else:
+        return JsonResponse({"error": "invalid request"}, status=400)
 
 def get_pharma(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
