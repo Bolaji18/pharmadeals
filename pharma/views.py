@@ -30,6 +30,8 @@ from .models import popular
 from .models import cart
 from .models import Pharma
 
+
+
 def pharma_delete(request, id):
     
         if request.user.is_authenticated:
@@ -157,6 +159,8 @@ def pharma_upload(request):
             product = form.save(commit=False)
             product.user = request.user
             product.save()
+            popular.objects.create(name=product, views=0)
+            # Send email to the user after successful product upload
             email = request.user.email
             name = request.user.first_name
             message = send_email(request, messages='', subjects="Product upload", emails=email, html='email/upload.html', context={'name': name})
@@ -185,12 +189,24 @@ def send_email(request, messages, subjects, emails, html, context=None):
     
     return f'Email sent to {email}'
 
+def get_sales(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.user.is_authenticated:
+            name = request.user
+            sales = boughtitem.objects.filter(users=name).count()
+            sale = boughtitem.objects.filter(users=name).order_by('-id')
+            views = sum(item.views for item in popular.objects.filter(name__user=name))
+            return render(request, 'tables/sales_table.html', {'total': sales, 'sales': sale, 'views':views})
+        else:
+            return redirect('login')
+    else:
+        return JsonResponse({"error": "invalid request"}, status=400)
 
 def get_table(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         if request.user.is_authenticated:
             name = request.user
-            pharma = Pharma.objects.filter(user=name)
+            pharma = popular.objects.filter(name__user=name)
             return render(request, 'tables/table.html', {'categories': pharma})
         else:
             return redirect('login')

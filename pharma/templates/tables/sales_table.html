@@ -1,0 +1,67 @@
+{% load heroicons %}
+{% load static %}
+
+<div class="bg-gray-100 p-6 rounded-lg shadow-lg w-full max-w-md ml-10 mx-auto" style="margin-left: 10px; width: 100%;">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">Dashboard</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 ml-10 gap-6   gap-4">
+    <!-- Total Sales -->
+    <div class="bg-green-500 text-white px-24  rounded-lg shadow-md">
+      <h3 class="text-lg font-semibold">Total Sales</h3>
+      <p class="text-2xl font-bold mt-2">{{ total }}</p>
+    </div>
+    <!-- Total Views -->
+    <div class="bg-gray-400 text-white  px-24 rounded-lg shadow-md" style="background-color: aquamarine;">
+      <h3 class="text-lg font-semibold">Total Views</h3>
+      <p class="text-2xl font-bold mt-2">{{ views }}</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container overflow-x-auto overflow-y-auto">
+  <table class="table-auto w-full border-collapse border border-gray-300">
+    <caption class="text-lg font-bold text-center mb-4">Sales</caption>
+    <thead class="bg-green-500 text-white">
+      <tr>
+        <th class="border border-gray-300 px-4 py-2">Buyer Name</th>
+        <th class="border border-gray-300 px-4 py-2">Product Name</th>
+        <th class="border border-gray-300 px-4 py-2">Quantity Bought</th>
+        <th class="border border-gray-300 px-4 py-2">Total Earned</th>
+        <th class="border border-gray-300 px-4 py-2">Order ID</th>
+        <th class="border border-gray-300 px-4 py-2">Phone No</th>
+        <th class="border border-gray-300 px-4 py-2">Buyer Address</th>
+        <th class="border border-gray-300 px-4 py-2">Payment Method</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for name in sales %}
+      <tr class="hover:bg-gray-100">
+        <td class="border border-gray-300 px-4 py-2">{{ name.buyer_info.name }}</td>
+        <td class="border border-gray-300 px-4 py-2"> {{ name.product_name }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ name.quantity }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ name.total_earned }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ name.order_id}}</td>
+        
+        <td class="border border-gray-300 px-4 py-2">{{ name.buyer_info.phone }}</td>
+       
+        <td class="border border-gray-300 px-4 py-2"> {{ name.buyer_info.address }}</td>
+        <td class="border border-gray-300 px-4 py-2"> {{ name.buyer_info.method }}</td>
+
+   
+       
+      </tr>
+
+      <!-- Modal -->
+    
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+<style>
+  #sales{
+      background-color: #36cbf4;
+  }
+</style>
