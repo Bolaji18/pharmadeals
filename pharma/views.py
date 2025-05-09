@@ -188,6 +188,18 @@ def send_email(request, messages, subjects, emails, html, context=None):
         f.write(f'Email sent to {email} with subject "{subject}"\n')
     
     return f'Email sent to {email}'
+def get_user(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.user.is_authenticated:
+            name = request.user
+            sales = boughtitem.objects.filter(users=name).count()
+            user = User.objects.filter(username=name).first()
+            views = sum(item.views for item in popular.objects.filter(name__user=name))
+            return render(request, 'tables/user_table.html', {'user': user, 'sales': sales, 'views': views})
+        else:
+            return redirect('login')
+    else:
+        return JsonResponse({"error": "invalid request"}, status=400)
 
 def get_sales(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
