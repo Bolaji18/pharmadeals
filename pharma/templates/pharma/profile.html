@@ -140,7 +140,7 @@ Login
   <div class="w-[300px] shadow  bg-green-100 py-10 overflow   h-[100%] border-white" style="min-height: 100vh; width: 300px;">
     <a href="{% url 'index' %}"><img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12" alt="Pharmadeals Logo"></a>
     <button style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
-      class="w-full mb-6 shadow mt-2 text-left px-8 px-8 py-24 button2  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      class="w-full mb-6 shadow mt-2 text-left px-8 px-8 py-24 button2  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none use"
       onclick="getuser()" 
       id="defaultOpen">
       User Profile
@@ -284,6 +284,13 @@ fetch(url, {
   };
 </script>
  
+<style>
+  
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+</style>
   
 
 

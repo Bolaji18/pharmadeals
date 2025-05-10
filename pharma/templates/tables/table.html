@@ -1,6 +1,6 @@
 {% load heroicons %}
 {% load static %}
-<div class="container overflow-x-auto overflow-y-auto">
+<div class="container overflow-x-auto overflow-y-auto" id="customers">
   <table class="table-auto w-full border-collapse border border-gray-300">
     <caption class="text-lg font-bold text-center mb-4">Pharma Products</caption>
     <thead class="bg-green-500 text-white">
@@ -14,32 +14,32 @@
         <th class="border border-gray-300 px-4 py-2">Stock</th>
         <th class="border border-gray-300 px-4 py-2">Shipping Price</th>
         <th class="border border-gray-300 px-4 py-2">Views</th>
-        <th class="border border-gray-300 px-4 py-2">Update</th>
+        <!-- <th class="border border-gray-300 px-4 py-2">Update</th> -->
         <th class="border border-gray-300 px-4 py-2">Delete</th>
       </tr>
     </thead>
     <tbody>
       {% for name in categories %}
       <tr class="hover:bg-gray-100">
-        <td class="border border-gray-300 px-4 py-2">{{ name.name.name }}</td>
-        <td class="border border-gray-300 px-4 py-2">₦ {{ name.name.price }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.name.Approval }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.name.description }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.name.categor }}</td>
-        <td class="border border-gray-300 px-4 py-2">
+        <td class="border border-[#ccc] px-4 py-2">{{ name.name.name }}</td>
+        <td class="border border-[#ccc] px-4 py-2">₦ {{ name.name.price }}</td>
+        <td class="border border-[#ccc] px-4 py-2">{{ name.name.Approval }}</td>
+        <td class="border border-[#ccc] px-4 py-2">{{ name.name.description }}</td>
+        <td class="border border-[#ccc] px-4 py-2">{{ name.name.categor }}</td>
+        <td class="border border-[#ccc] px-4 py-2">
           <img src="{{ name.name.image.url }}" class="h-12 w-12 object-cover" alt="Product Image">
         </td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.name.stock }}</td>
+        <td class="border border-[#ccc] px-4 py-2">{{ name.name.stock }}</td>
         {% if name.shipping == 0 %}
-        <td class="border border-gray-300 px-4 py-2">Free</td>
+        <td class="border border-[#ccc] px-4 py-2">Free</td>
         {% else %}
-        <td class="border border-gray-300 px-4 py-2">₦ {{ name.name.shipping }}</td>
+        <td class="border border-[#ccc] px-4 py-2">₦ {{ name.name.shipping }}</td>
         {% endif %}
-        <td class="border border-gray-300 px-4 py-2">{{ name.views }}</td>
-        <td class="border border-gray-300 px-4 py-2 text-center">
+        <td class="border border-[#ccc] px-4 py-2">{{ name.views }}</td>
+        <!-- <td class="border border-[#ccc] px-4 py-2 text-center">
           <a href="#" class="text-blue-500 hover:underline">Update</a>
-        </td>
-        <td class="border border-gray-300 px-4 py-2 text-center">
+        </td> -->
+        <td class="border border-[#ccc] px-4 py-2 text-center">
           <a href="javascript:void(0);" onclick="document.getElementById('id01{{ name.name.id }}').style.display='block'" class="text-red-500 hover:underline">
             <span>{% heroicon_outline "trash" size=20 %}</span>
           </a>
@@ -71,6 +71,9 @@
 
 <style>
   #product{
-      background-color: #36cbf4;
+      background-color: #38c500;
   }
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
 </style>
