@@ -134,42 +134,75 @@ Login
 </div>
 
 <script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
-
-<div class="flex ">
+<style>
+  #mySidenav2{
+    min-height: 100vh;
+  }
+  @media screen and (max-width: 768px) {
+    #mySidenav2 {
+      max-height: 100px;
+      width: 50px;
+      position: relative;
+      display: inline;
+      z-index: 1;
+      margin-bottom: 100px;
+      top: 0;
+      left: 0;
+      background-color: #f8f9fa;
+      padding-top: 20px;
+    }
+    #note1 {
+      margin-left: 0;
+      display: inline;
+      margin-top: 100px;
+      overflow-x: scroll;
+      overflow: hidden;
+    }
+    #oppen {
+      flex-direction: column;
+      display: block;
+    }
+    
+  }
+</style>
+  
+   <div class="flex flex-col md:flex-row" id="oppen">
   <!-- Tabs (left side) -->
-  <div class="w-[300px] shadow  bg-green-100 py-10 overflow   h-[100%] border-white" style="min-height: 100vh; width: 300px;">
-    <a href="{% url 'index' %}"><img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12" alt="Pharmadeals Logo"></a>
-    <button style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
-      class="w-full mb-6 shadow mt-2 text-left px-8 px-8 py-24 button2  text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none use"
+  <div class=" w-[300px] shadow bg-green-100 py-10 overflow h-auto md:h-[100%] border-white"  id="mySidenav2">
+    <a href="{% url 'index' %}">
+      <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12 mx-auto md:mx-0" alt="Pharmadeals Logo">
+    </a>
+    <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+      class="w-full mb-6 shadow mt-2 text-left px-8 py-4 button2 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none use"
       onclick="getuser()" 
       id="defaultOpen">
       User Profile
     </button>
-    <button  style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
-    class="w-full mb-6 mt-2 text-left button2 px-8 px-8 py-24 text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-    onclick="opensales() " id="sales">
+    <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+      class="w-full mb-6 mt-2 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="opensales()" id="sales">
       Sales
     </button>
-    <button style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
-    class="w-full mt-2  mb-6 text-left button2 px-8 px-8 py-24   text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-    onclick="">
+    <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+      class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="purchase()" id="purchase">
       Purchases
     </button>
-    <button style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
-    class="w-full mt-2 mb-6  text-left button2 px-8 px-8 py-24   text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-    onclick="openCity()" id="product">
+    <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+      class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      onclick="openCity()" id="product">
       Products
     </button>
-    <button style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
-    class="w-full  mt-2 mb-6 text-left button2 px-8 px-8 py-24   text-black text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
-    onclick="">
-      Help
-    </button>
+    <a href="{% url 'help' %}">
+      <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+        class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none">
+        Help
+      </button>
+    </a>
   </div>
 
   <!-- Content (right side) -->
-  <div class="w-[70%] ml-[-60px] px-3 h-[300px] min-h-[284px]"  id="note1">
-  
+  <div class="w-full md:w-[70%] md:ml-[-60px] px-3 h-auto md:h-[300px] min-h-[284px]" id="note1">
     <!-- Tab content here -->
   </div>
 </div>
@@ -246,6 +279,38 @@ fetch(url, {
   }
 </script>
 
+
+<script>
+
+  function purchase() {
+    // Get all elements with class="tabcontent
+  const url = `{% url 'purchase'  %}`; // Generate the URL dynamically
+fetch(url, {
+    method: 'GET',
+   headers: {
+       'X-Requested-With': 'XMLHttpRequest' // Indicate that this is an AJAX request
+   }
+})
+.then(response => {
+   if (!response.ok) {
+       throw new Error('Network response was not ok');
+   }
+   return response.text();
+})
+.then(data => {
+   document.getElementById('note1').innerHTML = data;
+  // Log the data to the console for debugging
+   
+
+})
+.catch(error => {
+   console.error('There was a problem with the fetch operation:', error);
+});
+
+  }
+
+ 
+</script>
 
 
 

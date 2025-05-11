@@ -7,6 +7,17 @@ from django.core.exceptions import ValidationError
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+
+class help(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    subject = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    message = models.TextField()
+    def __str__(self):
+        return f"{self.name} : {self.email} : {self.phone} : {self.message}"
+
 class Seller(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='seller/images/', validators=[FileExtensionValidator(['jpg', 'png'])])
@@ -59,7 +70,7 @@ class boughtitem(models.Model):
     order_id = models.CharField(max_length=100)
     buyer_info = models.ForeignKey(buyerinfo, on_delete=models.CASCADE, null=True)
     def __str__(self):
-        return f"{self.email}: {self.name} bought item"
+        return f"{self.email}: {self.buyer_info} bought item"
 
 class bought(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)

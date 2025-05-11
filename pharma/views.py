@@ -29,7 +29,49 @@ from .models import buyerinfo
 from .models import popular
 from .models import cart
 from .models import Pharma
+from .forms import help_form
 
+def help(request):
+    if request.method == 'POST':
+        form = help_form(request.POST)
+        if form.is_valid():
+            name = form.save(commit=False)
+            name.user = request.user
+            email = request.POST.get('email')
+            username = request.POST.get('name')
+            subject = "PharmaDeals Help Request"
+            subject2 = f"PharmaDeals Help Request by {name}"
+            message = send_email(request, messages='', subjects=subject, emails=email, html='email/help.html', context={'name': name})
+            owner = send_email(request, messages='', subjects=subject2, emails='daropaleb@gmail.com', html='email/help.html', context={'name': name})
+            name.save()
+            messages= f"Your message has been sent successfully"
+            
+            return render(request, 'pharma/register.html', context={'message': messages, 'display': 'block', 'text':messages})
+    else:
+        form = help_form()
+    return render(request, 'pharma/register.html', context={'form': form, 'display': 'none', 'text': 'How can we help you?'})
+
+def purchase(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.user.is_authenticated:
+            name = request.user
+            items = boughtitem.objects.filter(buyer_info__user=name)
+            cart_data = []
+            for item in items:
+                product= Pharma.objects.filter(name=item.product_name).first()
+                if product:
+                    cart_data.append({
+                        'name': product.name,
+                        'quantity': item.quantity,
+                        'price': item.total_earned,
+                        'image_url': product.image.url,
+                    })
+               
+            return render(request, 'tables/purchase_table.html', {'cart_items': cart_data})
+        else:
+            return redirect('login')
+    else:
+        return JsonResponse({"error": "invalid request"}, status=400)
 
 
 def pharma_delete(request, id):

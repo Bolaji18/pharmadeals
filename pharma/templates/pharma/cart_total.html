@@ -36,7 +36,7 @@ Cart  Total
     <form method="post" action="{% url 'remove_from_cart' item.id %}">
       {% csrf_token %}
       <input type="hidden" name="item_id" value="{{ item.name.id }}">
-      <button type="submit" class="text-red-500 hover:text-red-700 focus:outline-none">
+      <button type="submit" style="cursor: pointer;" class="cursor-pointer text-red-500 hover:text-red-700 focus:outline-none">
         <span>{% heroicon_outline "trash" size=20 %}</span> 
       </button>
     </form>

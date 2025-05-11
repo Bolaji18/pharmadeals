@@ -4,6 +4,19 @@ from django.contrib.auth.models import User
 from .models import Pharma
 from .models import cart
 from .models import buyerinfo
+from .models import help
+
+class help_form(forms.ModelForm):
+    class Meta:
+        model = help
+        fields = ['subject', 'name', 'email', 'phone', 'message']
+        widgets = {
+            'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the subject'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your phone number'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your message'}),
+        }
 
 class buyerinfo_form(forms.ModelForm):
     class Meta:

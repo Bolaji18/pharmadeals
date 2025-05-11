@@ -26,5 +26,7 @@ urlpatterns = [
     path('get_table', views.get_table, name='get_table'),
     path('pharma_delete/<int:id>/', views.pharma_delete, name='pharma_delete'),
     path('get_user', views.get_user, name='get_user'),
+    path('purchase', views.purchase, name='purchase'),
+    path('help', views.help, name='help'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
