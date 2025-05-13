@@ -46,7 +46,7 @@ def help(request):
             name.save()
             messages= f"Your message has been sent successfully"
             
-            return render(request, 'pharma/register.html', context={'message': messages, 'display': 'block', 'text':messages})
+            return render(request, 'pharma/register.html', context={'message': messages, 'display': 'block', 'text':messages, 'success': "Your message has been sent successfully"})
     else:
         form = help_form()
     return render(request, 'pharma/register.html', context={'form': form, 'display': 'none', 'text': 'How can we help you?'})

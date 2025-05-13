@@ -1,7 +1,7 @@
 {% load heroicons %}
 {% load static %}
-<div class="container overflow-x-auto overflow-y-auto" id="customers">
-  <table class="table-auto w-full border-collapse border border-gray-300">
+<div class="container overflow-x-auto overflow-y-auto" id="customers" style="overflow-x: scroll; width: 98%;">
+  <table class="table-auto w-full border-collapse border border-gray-300" style="overflow: scroll;">
     <caption class="text-lg font-bold text-center mb-4">Pharma Products</caption>
     <thead class="bg-green-500 text-white">
       <tr>
@@ -67,6 +67,20 @@
   <button class="bg-gray-300 text-black px-5 py-2.5 text-center rounded-full hover:bg-gray-400">
     <a href="{% url 'upload' %}" class="mr-6">Upload Product</a>
   </button>
+</div>
+
+<div class="justify-between grid grid-cols-2 lg:grid-cols-2  items-center mb-2 border-b-2 border-gray-300 py-4 px-6">
+  {% for name in categories %}
+  <div class=" items-center space-x-4 mb-4">
+    <img src="{{ name.name.image.url }}" alt="Product Image" class="w-10 h-[200px] rounded-lg" style="height: 200px;">
+    <div>
+      <h3 class="text-lg font-semibold text-blue-900">{{ name.name.name }}</h3>
+      <p class="text-gray-600">Price: ₦ {{ name.name.price }}</p>
+      <p class="text-gray-600">Quantity: {{ name.name.stock }}</p>
+    </div>
+    
+  </div>
+  {% endfor %}
 </div>
 
 <style>

@@ -21,7 +21,7 @@ Login
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    
     box-sizing: border-box;
   }
   
@@ -137,19 +137,32 @@ Login
 <style>
   #mySidenav2{
     min-height: 100vh;
+    max-width: 200px;
+    position: absolute;
+    margin-right: 20%;
+    
+  }
+  #note1{
+    margin-left:20%;
+    
   }
   @media screen and (max-width: 768px) {
     #mySidenav2 {
+      min-height: auto;
       max-height: 100px;
-      width: 50px;
+     
       position: relative;
       display: inline;
       z-index: 1;
       margin-bottom: 100px;
       top: 0;
       left: 0;
-      background-color: #f8f9fa;
       padding-top: 20px;
+      width: 200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    gap: 20px;
+    height: 200px;
     }
     #note1 {
       margin-left: 0;
@@ -162,39 +175,53 @@ Login
       flex-direction: column;
       display: block;
     }
+    #customers {
+      width: 100%;
+      overflow-x: scroll;
+    }
+    #product, #sales, #purchase, #defaultOpen,#help {
+      width: 100%;
+      margin-left: 0;
+      display: flex;
+      max-height: 50px;
+      font-size: 12px;
+      margin-left: 10px;
+  
+    }
     
   }
 </style>
-  
-   <div class="flex flex-col md:flex-row" id="oppen">
-  <!-- Tabs (left side) -->
-  <div class=" w-[300px] shadow bg-green-100 py-10 overflow h-auto md:h-[100%] border-white"  id="mySidenav2">
-    <a href="{% url 'index' %}">
+   <a href="{% url 'index' %}">
       <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12 mx-auto md:mx-0" alt="Pharmadeals Logo">
     </a>
-    <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
-      class="w-full mb-6 shadow mt-2 text-left px-8 py-4 button2 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none use"
+   <div class="flex flex-col md:flex-row" id="oppen">
+     
+  <!-- Tabs (left side) -->
+  <div class=" w-[200px]   py-10 overflow h-auto md:h-[100%] border-white"  id="mySidenav2">
+  
+    <button 
+      class="w-full mb-6  mt-2 text-left px-8 py-4 button2 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none use"
       onclick="getuser()" 
       id="defaultOpen">
       User Profile
     </button>
-    <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+    <button 
       class="w-full mb-6 mt-2 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
       onclick="opensales()" id="sales">
       Sales
     </button>
-    <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+    <button 
       class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
       onclick="purchase()" id="purchase">
       Purchases
     </button>
-    <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+    <button 
       class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
       onclick="openCity()" id="product">
       Products
     </button>
     <a href="{% url 'help' %}">
-      <button style="box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);"
+      <button id="help" 
         class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none">
         Help
       </button>
@@ -202,7 +229,7 @@ Login
   </div>
 
   <!-- Content (right side) -->
-  <div class="w-full md:w-[70%] md:ml-[-60px] px-3 h-auto md:h-[300px] min-h-[284px]" id="note1">
+  <div class="w-full md:w-[70%] md:ml-[-60px] px-3 h-auto md:h-[300px] min-h-[284px]" id="note1" style="">
     <!-- Tab content here -->
   </div>
 </div>
