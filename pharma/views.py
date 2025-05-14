@@ -30,6 +30,17 @@ from .models import popular
 from .models import cart
 from .models import Pharma
 from .forms import help_form
+from django.views.decorators.csrf import csrf_exempt
+from .models import searchProduct
+# search for products 
+
+@csrf_exempt
+def submit_search():
+    if request.method == "POST":
+        search = request.POST.get('search')
+        result = Pharma.objects.filter()
+
+
 
 def help(request):
     if request.method == 'POST':

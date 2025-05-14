@@ -7,6 +7,9 @@ from django.core.exceptions import ValidationError
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+class searchProduct(models.Model):
+    search = models.CharField(max_length=1000)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True)
 
 class help(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -35,7 +38,7 @@ class Pharma(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     categor = models.ForeignKey(Categories, on_delete=models.CASCADE, default=1, verbose_name="Category")
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='pharma/images/', validators=[FileExtensionValidator(['jpg', 'png'])])
+    image = models.ImageField(upload_to='pharma/images/', validators=[FileExtensionValidator(['jpg', 'png', 'jpeg'])])
     description = models.TextField()
     price = models.IntegerField()
     stock = models.IntegerField()

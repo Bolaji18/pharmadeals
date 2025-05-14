@@ -16,14 +16,7 @@ Login
   body {font-family: Arial, Helvetica, sans-serif;}
   
   /* Full-width input fields */
-  input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    
-    box-sizing: border-box;
-  }
+
   
   /* Set a style for all buttons */
   .button2 {
@@ -138,14 +131,10 @@ Login
   #mySidenav2{
     min-height: 100vh;
     max-width: 200px;
-    position: absolute;
-    margin-right: 20%;
+   
     
   }
-  #note1{
-    margin-left:20%;
-    
-  }
+ 
   @media screen and (max-width: 768px) {
     #mySidenav2 {
       min-height: auto;
@@ -186,19 +175,29 @@ Login
       max-height: 50px;
       font-size: 12px;
       margin-left: 10px;
+      border-radius: 10px;
+      padding: 10px 10px;
+      text-align: center;
+      width: 80px;
+      z-index: 0;
+      background-color: #04AA6D;
   
+    }
+    #inxex1{
+      display: none;
     }
     
   }
 </style>
-   <a href="{% url 'index' %}">
-      <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12 mx-auto md:mx-0" alt="Pharmadeals Logo">
-    </a>
+
+   
    <div class="flex flex-col md:flex-row" id="oppen">
      
   <!-- Tabs (left side) -->
   <div class=" w-[200px]   py-10 overflow h-auto md:h-[100%] border-white"  id="mySidenav2">
-  
+  <a href="{% url 'index' %}" id="inxex1">
+      <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12 mx-auto md:mx-0" alt="Pharmadeals Logo">
+    </a>
     <button 
       class="w-full mb-6  mt-2 text-left px-8 py-4 button2 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none use"
       onclick="getuser()" 
@@ -229,17 +228,13 @@ Login
   </div>
 
   <!-- Content (right side) -->
-  <div class="w-full md:w-[70%] md:ml-[-60px] px-3 h-auto md:h-[300px] min-h-[284px]" id="note1" style="">
+  <div class="w-full md:w-[70%] md:ml-[-60px] px-3 h-auto md:h-[300px] min-h-[284px]" id="note1" >
     <!-- Tab content here -->
   </div>
 </div>
 <style>
-  #footer2{
-    display: none;
-  }
-  #header5{
-    display: none;
-  }
+ 
+
 </style>
 
 

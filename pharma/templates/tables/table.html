@@ -21,9 +21,20 @@
     <tbody>
       {% for name in categories %}
       <tr class="hover:bg-gray-100">
-        <td class="border border-[#ccc] px-4 py-2">{{ name.name.name }}</td>
+        <td class="border border-[#ccc] px-4 py-2">
+         {% if name.name.Approval %}
+          <a href="{% url 'item' name=name.name.name id=name.name.id %}">{{ name.name.name }}</a>
+        {% else %}
+        {{name.name.name}}
+        {% endif %}
+        </td>
         <td class="border border-[#ccc] px-4 py-2">₦ {{ name.name.price }}</td>
-        <td class="border border-[#ccc] px-4 py-2">{{ name.name.Approval }}</td>
+        <td class="border border-[#ccc] px-4 py-2">
+          {% if name.name.Approval %}
+          <span style="color: green;">Approved</span>
+          {% else %}
+          <span style="color: red;">Awaiting Approval</span>
+          {% endif %}</td>
         <td class="border border-[#ccc] px-4 py-2">{{ name.name.description }}</td>
         <td class="border border-[#ccc] px-4 py-2">{{ name.name.categor }}</td>
         <td class="border border-[#ccc] px-4 py-2">

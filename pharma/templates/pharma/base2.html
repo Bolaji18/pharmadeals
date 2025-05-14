@@ -22,12 +22,13 @@
       border-radius: 9999px; /* fully rounded */
       line-height: 1;
     }
+    
     </style>
         <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
   </head>
   <body class=" bg-white font-sans text-gray-800 overflow-x-hidden">
 
-  <div id="mySidenav" class="sidenav">
+  <div id="mySidenav" class="sidenav" style="z-index: 2;">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#">About</a>
   <a href="#">Services</a>
@@ -68,7 +69,7 @@
       <!-- Search Bar -->
       <div class="flex items-center bg-blue-100 border border-gray-800 rounded-full px-4 py-2 mt-4 md:mt-0 w-full md:w-[442px] max-w-full md:ml-10">
         <span class="text-gray-600">{% heroicon_outline "magnifying-glass" size=20 %}</span>
-        <input type="text" placeholder="Search for Pharmaceuticals"
+        <input type="text" name="search" placeholder="Search for Pharmaceuticals"
           class="ml-2 flex-grow bg-transparent focus:outline-none text-sm md:text-base text-black" />
         <span class="ml-2 text-gray-600">{% heroicon_outline "bars-3-center-left" size=20 %}</span>
       </div>
