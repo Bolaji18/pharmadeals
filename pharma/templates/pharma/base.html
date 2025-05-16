@@ -36,7 +36,7 @@
 </div>
 
     <!-- Top Bar -->
-    <div class="h-9 w-full bg-green-500 text-xs text-gray-700 flex items-center px-4">
+    <div class="h-9 w-full bg-green-500 text-xs text-white font-serif flex items-center px-4">
       <span>Welcome to Pharmadeals.ng</span>
       <div class="ml-auto flex items-center space-x-4 text-[10px] sm:text-sm">
         <span class="flex items-center gap-1">
@@ -71,7 +71,7 @@
          {% if request.user.username %}
 
         <a href="{% url 'profile' %}">
-          <button class="bg-green-500 text-white-800 text-sm md:text-base rounded-full border border-blue-300 w-[45px] h-[36px] md:w-[45px] md:h-[41px]">
+          <button class="bg-green-500 text-white text-sm md:text-base rounded-full border border-blue-300 w-[45px] h-[36px] md:w-[45px] md:h-[41px]">
              {% heroicon_outline "user-circle" size=40 %}
           </button>
         </a>
@@ -79,12 +79,12 @@
 
 
         <a href="{% url 'login' %}">
-          <button class="bg-green-500 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+          <button class="bg-green-500 text-white text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
             Login
           </button>
         </a>
         <a href="{% url 'register' %}">
-          <button class="bg-green-500 text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+          <button class="bg-green-500 text-white text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
             Sign up
           </button>
         </a>
@@ -92,7 +92,7 @@
       </div>
     </header>
 
-<div >
+<div class="font-serif" >
 
 
      {% block content %} {% endblock %}

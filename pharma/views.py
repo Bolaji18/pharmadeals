@@ -76,6 +76,11 @@ def purchase(request):
                         'quantity': item.quantity,
                         'price': item.total_earned,
                         'image_url': product.image.url,
+                        'total': item.total_earned * item.quantity,
+                        'status': item.status,
+                        'date': item.created_at,
+                        'order_id': item.order_id,
+                        
                     })
                
             return render(request, 'tables/purchase_table.html', {'cart_items': cart_data})
@@ -154,7 +159,10 @@ def item(request,name, id):
     return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'none', 'message': message,})
 
 def profile(request):
+  if request.user.is_authenticated:
     return render(request, 'pharma/profile.html', context={'display': 'none'})
+  else:
+    return redirect('login')
 
 # Create your views here.
 def index(request):
@@ -302,7 +310,7 @@ def see_cart(request):
                 name.save()
                 cart_items = cart.objects.filter(user=name.user)
                 
-                if method == "2":
+                if method == "2" or method == "1":
                     message = send_email(request, messages="", subjects="order is being processed", emails=email, html='email/process.html',  context={'name': name2} )
                     text = "Your order is being processed, please wait for a confirmation email. Thank you for your order."
                     
@@ -315,8 +323,10 @@ def see_cart(request):
                         quantity = item.quantity
                         total_earned = item.name.price * item.quantity
                         order_id = item.id
+                        status = "pending"
+                        
                         buyer_info = buyerinfo.objects.filter(user=name.user).order_by('-id').first()
-                        bought_item = boughtitem.objects.create(email=email, name=name2, users=users, product_name=product_name, quantity=quantity, total_earned=total_earned, order_id=order_id, buyer_info=buyer_info)
+                        bought_item = boughtitem.objects.create(email=email, name=name2, users=users, product_name=product_name, quantity=quantity, total_earned=total_earned, order_id=order_id, buyer_info=buyer_info, status=status)
                         bought_item.save()
 
                         message = send_email(request, messages="", subjects="Item bought on Pharmadeals", emails=email, html='email/bought.html',  context={'username': name, 'product_name':product_name,'quantity':quantity, 'total_earned':total_earned,'order_id':order_id } )

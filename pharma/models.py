@@ -72,6 +72,8 @@ class boughtitem(models.Model):
     total_earned = models.IntegerField(default=0)
     order_id = models.CharField(max_length=100)
     buyer_info = models.ForeignKey(buyerinfo, on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=20, default='pending')  # e.g., 'pending', 'success', 'failed'
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     def __str__(self):
         return f"{self.email}: {self.buyer_info} bought item"
 
