@@ -44,7 +44,7 @@
     {% csrf_token %}
 
   
-  <div class="border border-gray-400 border-l-4 border-l-blue-900 px-4 py-3 w-full max-w-[540px]">
+  <div class="border border-gray-400 border-l-4 border-l-blue-900 px-4 rounded-lg w-full max-w-[540px]">
     
     <label class="text-base text-gray-700 block mb-1" for="{{ name.id_for_label }}">{{ name.label }}</label>
   {{ name|add_class:"w-8 h-11 text-base focus:bg-green-500" }}

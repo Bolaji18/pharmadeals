@@ -33,14 +33,14 @@ Login
         <span class="text-lg text-gray-700 block -mt-2">Welcome back! Please login to your account.</span>
 
         <!-- Username Field -->
-        <div class="border border-gray-400 border-l-4 border-l-blue-900 px-4 py-3 w-full max-w-[540px]">
+        <div class="border border-gray-400 border-l-4 border-l-blue-900 px-4 py-3 rounded-lg w-full max-w-[540px]">
           <label class="text-base text-gray-700 block mb-1">Username:</label>
           {{ form.username|add_class:"w-full h-11 text-base focus:outline-none" }}
         </div>
 
 
         <!-- Password Field -->
-        <div class="w-full max-w-lg mx-auto border border-gray-400 border-l-4 border-l-blue-900 px-4 py-3">
+        <div class="w-full max-w-lg mx-auto border border-gray-400 border-l-4 border-l-blue-900 rounded-lg px-4 py-3">
           <label class="text-base text-gray-700 block mb-1">Password:</label>
           {{ form.password}}
          <br> <input type="checkbox" onclick="togglePassword()">Show Password

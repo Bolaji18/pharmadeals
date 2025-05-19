@@ -57,10 +57,10 @@ def help(request):
             name.save()
             messages= f"Your message has been sent successfully"
             
-            return render(request, 'pharma/register.html', context={'message': messages, 'display': 'block', 'text':messages, 'success': "Your message has been sent successfully"})
+            return render(request, 'pharma/register.html', context={'message': messages, 'none': 'none', 'text':messages, 'success': "Your message has been sent successfully"})
     else:
         form = help_form()
-    return render(request, 'pharma/register.html', context={'form': form, 'display': 'none', 'text': 'How can we help you?'})
+    return render(request, 'pharma/register.html', context={'form': form, 'none': 'none', 'text': 'How can we help you?'})
 
 def purchase(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':

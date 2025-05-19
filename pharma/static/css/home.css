@@ -142,16 +142,16 @@ body {
       padding: 0 20px;
     }
 
-    .nav-buttons a {
-      background-color: #ffffff;
-      color: #333333;
-      border: none;
-      padding: 10px 15px;
-      text-decoration: none;
-      font-size: 50px;
-      padding:30px;
-      border-radius: 9999px;
-      cursor: pointer;
+ .nav-buttons a {
+        background-color: transparent;
+        color: #333333;
+        border: none;
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 50px;
+        padding: 30px;
+        border-radius: 9999px;
+        cursor: pointer;
     }
     .hero-move{
     background:#34C759;
@@ -162,7 +162,7 @@ body {
 
     }
     .hero-text{
-     color:#043CAA;
+     color:white;
      font-size:38px;
      margin-left:110px;
      padding-top:50px;
@@ -174,12 +174,19 @@ body {
     .hero-start{
       margin-left:110px;
      margin-top:50px;
-     width:178px;
+     width:auto;
      height:44px;
      border-radius:50px;
      border:1px #000000 solid;
      font-size:20px;
+     color:white;
+     padding: 1px 20px;
+     cursor: pointer;
+     background-color: #043CAA;
 
+    }
+    .start2{
+      margin-left: 10px;
     }
     .head-hope{
     margin-top:50px;
@@ -199,7 +206,7 @@ body {
     .hero-in{
     width:208px;
     height:50%;
-    margin-left:-50px;
+    margin-left: 100px;
     border:none;
 
     }
@@ -410,7 +417,7 @@ color:red;
     width:129px;
      height:54px;
      border:1px #3751FE solid;
-     background:transparent
+     background:transparent;
      font:18px;
      color:#3751FE;
 
@@ -473,6 +480,19 @@ color:red;
 
 
     @media  (min-width: 700px)  and (max-width: 1025px) {
+          .hero-move {
+        background: #34C759;
+        height: 371px;
+        border-radius: 10px;
+        display: block;
+        grid-template-columns: 1fr 1fr;
+    }
+    .carousel-item img {
+    width: auto;
+    display: block;
+    height: 200px;
+    margin-left: 20%;
+}
   .head-search{
   display:none;
   }
@@ -491,23 +511,22 @@ color:red;
 
     }
 
-     .nav-buttons a {
-      background-color: transparent;
-      color: #333333;
-      border: none;
-      padding: 10px 15px;
-      text-decoration: none;
-      font-size: 50px;
-      padding:30px;
-      border-radius: 9999px;
-      cursor: pointer;
+         .nav-buttons a {
+        background-color: transparent;
+        color: #333333;
+        border: none;
+        text-decoration: none;
+        font-size: 50px;
+        border-radius: 9999px;
+        cursor: pointer;
+        margin-top: 50px;
     }
 
-      .hero-text{
-     color:#043CAA;
-     font-size:38px;
-     margin-left:70px;
-     padding-top:50px;
+         .hero-text {
+        color: white;
+        font-size: 18px;
+        margin-left: 70px;
+        padding-top: 10px;
     }
     .hero-mag{
      display:inline-flex;
@@ -516,7 +535,7 @@ color:red;
     .hero-start{
       margin-left:70px;
      margin-top:50px;
-     width:178px;
+     width:auto;
      height:44px;
      border-radius:50px;
      border:1px #000000 solid;
@@ -527,12 +546,12 @@ color:red;
     .hero-start{
       margin-left:110px;
      margin-top:50px;
-     width:178px;
+     width:auto;
      height:44px;
      border-radius:50px;
      border:1px #000000 solid;
      font-size:20px;
-     display:none;
+     
     }
       .head-hope{
       margin-left:50px;
@@ -680,6 +699,19 @@ color:red;
 
     @media (max-width: 700px) {
 
+        .hero-move {
+        background: #34C759;
+        height: 371px;
+        border-radius: 10px;
+        display: block;
+    }
+    .carousel-item img {
+    width: auto;
+    display: block;
+    height: 200px;
+    margin-left: 20%;
+}
+
      .category-pharma{
     display:grid;
     grid-template-columns:1fr;
@@ -699,50 +731,50 @@ color:red;
 .head-log {
   margin-left: 20%;
 }
-
-
-     .nav-buttons a {
-      background-color: transparent;
-      color: #333333;
-      border: none;
-      padding: 10px 15px;
-      text-decoration: none;
-      font-size: 50px;
-      padding:30px;
-      border-radius: 9999px;
-      cursor: pointer;
+    .hero-text {
+        color: white;
+        font-size: 18px;
+        margin-left: 70px;
+        padding-top: 10px;
     }
 
-      .hero-text{
-     color:#043CAA;
-     font-size:38px;
-     margin-left:70px;
-     padding-top:50px;
-    }
-    .hero-mag{
-     display:inline-flex;
 
+         .nav-buttons a {
+        background-color: transparent;
+        color: #333333;
+        border: none;
+        text-decoration: none;
+        font-size: 50px;
+        border-radius: 9999px;
+        cursor: pointer;
+        margin-top: 50px;
     }
+
+    
     .hero-start{
       margin-left:70px;
      margin-top:50px;
-     width:178px;
+     width:auto;
      height:44px;
      border-radius:50px;
      border:1px #000000 solid;
      font-size:20px;
+     z-index: 2;
 
     }
 
     .hero-start{
-      margin-left:110px;
+      margin-left:10px;
      margin-top:50px;
-     width:178px;
+     width:auto;
      height:44px;
      border-radius:50px;
      border:1px #000000 solid;
-     font-size:20px;
-     display:none;
+     font-size:10px;
+     padding: 1px 5px;
+      display:block;
+      z-index: 2;
+     
     }
       .head-hope{
       margin-left:50px;
