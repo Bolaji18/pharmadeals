@@ -34,6 +34,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import searchProduct
 from .forms import bid_form
 from datetime import datetime
+from .models import bid
 # search for products 
 
 
@@ -95,11 +96,14 @@ def help(request):
         form = help_form()
     return render(request, 'pharma/register.html', context={'form': form, 'none': 'none', 'text': 'How can we help you?'})
 
+# purchase function to get all the items bought by the user
+# and display them in a table
 def purchase(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         if request.user.is_authenticated:
             name = request.user
             items = boughtitem.objects.filter(buyer_info__user=name)
+            bid_items = bid.objects.filter(user=name)
             cart_data = []
             for item in items:
                 product= Pharma.objects.filter(name=item.product_name).first()
@@ -116,7 +120,7 @@ def purchase(request):
                         
                     })
                
-            return render(request, 'tables/purchase_table.html', {'cart_items': cart_data})
+            return render(request, 'tables/purchase_table.html', {'cart_items': cart_data, 'Bid_items': bid_items})
         else:
             return redirect('login')
     else:
@@ -182,10 +186,12 @@ def item(request,name, id):
                 name.name = option
                 name.save()
                 messages= f"{quantity} items added to cart successfully "
-                return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block'})
+                format = bid_form() 
+                return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block', 'format':format})
         else:
+              format = bid_form()
               messages= f"pls login to add item to cart"
-              return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block'})
+              return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block', 'format':format})
     else:
         form = cart_form() 
     format = bid_form() 
