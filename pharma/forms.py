@@ -5,6 +5,21 @@ from .models import Pharma
 from .models import cart
 from .models import buyerinfo
 from .models import help
+from .models import bid
+
+
+class bid_form(forms.ModelForm):
+    class Meta:
+        model = bid
+        fields = [ 'bid_price', 'message']
+        widgets = {
+            'bid_price': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the price of your product'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your message'}),
+        }
+        help_texts = {
+            'price': 'Price must be greater than 0',
+            'message': 'Message must be at least 10 characters long',
+        }
 
 class help_form(forms.ModelForm):
     class Meta:

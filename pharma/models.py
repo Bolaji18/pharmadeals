@@ -46,6 +46,15 @@ class Pharma(models.Model):
     shipping = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.user}: {self.name} product"
+class bid(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
+    bid_price = models.IntegerField()
+    message = models.TextField()
+    status = models.CharField(max_length=20, default='pending')  # e.g., 'pending', 'success', 'failed'
+    bid_time = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.user}: {self.name} bid"
 
 class buyerinfo(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)

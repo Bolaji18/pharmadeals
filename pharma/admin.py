@@ -14,7 +14,10 @@ from .models import paymentmethod
 from .models import bought
 from .models import boughtitem
 from .models import help
+from .models import bid
+from .models import help
 
+admin.site.register(bid)
 admin.site.register(help)
 admin.site.register(boughtitem)
 #admin.site.register(bought)

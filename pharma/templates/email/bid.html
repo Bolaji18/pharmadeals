@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>You've Received a New Bid!</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: Arial, sans-serif;">
+  <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);">
+
+    <div style="text-align: center; border-bottom: 1px solid #eeeeee; padding-bottom: 20px;">
+      <h1 style="color: #1a73e8; margin: 0;">Pharmadeals.ng</h1>
+      <p style="color: #888888; font-size: 14px;">Marketplace for Pharmacy Deals</p>
+    </div>
+
+    <div style="color: #333333; line-height: 1.6; padding-top: 20px;">
+      <h2 style="color: #28a745;">Hi {{ username }},</h2>
+
+      <p style="margin: 0 0 15px;">Good news! A buyer has just placed a bid on your product <strong>{{ product_name }}</strong>.</p>
+
+      <h3 style="color: #1a73e8; margin-top: 20px;">Bid Details:</h3>
+      <p style="margin: 0 0 5px;"><strong>Product:</strong> {{ product_name }}</p>
+      <p style="margin: 0 0 5px;"><strong>Bid Amount:</strong> ₦{{ bid_amount }}</p>
+      <p style="margin: 0 0 5px;"><strong>Bidder:</strong> {{ bidder_username }}</p>
+      <p style="margin: 0 0 15px;"><strong>Time:</strong> {{ bid_time }}</p>
+
+      <a href="https://pharmadeals.ng/dashboard/bids" style="display: inline-block; margin-top: 20px; padding: 12px 20px; background-color: #1a73e8; color: #ffffff; text-decoration: none; border-radius: 5px;">View Bid</a>
+
+      <p style="margin-top: 30px;">You can accept or reject this bid by visiting your <a href="https://pharmadeals.ng/dashboard/bids" style="color: #1a73e8;">bids dashboard</a>.</p>
+
+      <p>Thank you for using Pharmadeals.ng!</p>
+      <p style="margin: 0;">– The Pharmadeals.ng Team</p>
+    </div>
+
+    <div style="margin-top: 40px; font-size: 12px; color: #777777; text-align: center;">
+      <p style="margin: 0;">This is an automated message. For questions, contact us at <a href="mailto:support@pharmadeals.ng" style="color: #777777;">support@pharmadeals.ng</a></p>
+    </div>
+
+  </div>
+</body>
+</html>

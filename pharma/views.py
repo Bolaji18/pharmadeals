@@ -32,7 +32,40 @@ from .models import Pharma
 from .forms import help_form
 from django.views.decorators.csrf import csrf_exempt
 from .models import searchProduct
+from .forms import bid_form
+from datetime import datetime
 # search for products 
+
+
+# function to place a bid and send email
+def bids_app(request, id):
+    if request.method == 'POST':
+     if request.user.is_authenticated:
+        form = bid_form(request.POST)
+        if form.is_valid():
+            name = form.save(commit=False)
+            name.user = request.user
+            email = request.user.email
+            name.name = Pharma.objects.get(id=id)
+            email2 = Pharma.objects.get(id=id).user.email
+            username = Pharma.objects.get(id=id).user.username
+            bid_price = request.POST.get('bid_price')
+            name.bid_time = datetime.now()
+            name.status = "pending"
+            subject = f"PharmaDeals Bid Request by {name.user}"
+            name.save()
+            send_email(request, messages='', subjects=subject, emails=email2, html='email/bid.html', context={'username':username, 'bid_amount': bid_price, 'product_name': name.name.name, 'bidder_username':name.user, 'bid_time': name.bid_time})
+            send_email(request, messages='', subjects=subject, emails=email, html='email/bidplaced.html', context={'username':name.user, 'bid_amount': bid_price, 'product_name': name.name.name, 'bid_time': name.bid_time})
+            return render(request, 'pharma/register.html', context={ 'none': 'none',  'success': "Your bid has been sent successfully"})
+     else:
+        option = Pharma.objects.filter(id=id).first()
+        form = cart_form() 
+        format = bid_form() 
+        message ="pls login to place a bid"
+        return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'block', 'message': message, 'format':format})
+    else:
+        
+      return HttpResponse("Bid not placed")
 
 @csrf_exempt
 def submit_search():
@@ -154,9 +187,10 @@ def item(request,name, id):
               messages= f"pls login to add item to cart"
               return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block'})
     else:
-        form = cart_form()  
+        form = cart_form() 
+    format = bid_form() 
     message ="you can add item to cart"
-    return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'none', 'message': message,})
+    return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'none', 'message': message, 'format':format})
 
 def profile(request):
   if request.user.is_authenticated:

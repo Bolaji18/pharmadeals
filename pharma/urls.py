@@ -28,5 +28,6 @@ urlpatterns = [
     path('get_user', views.get_user, name='get_user'),
     path('purchase', views.purchase, name='purchase'),
     path('help', views.help, name='help'),
+    path('bid/<int:id>/', views.bids_app, name='bid'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

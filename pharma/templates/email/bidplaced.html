@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bid Placed Successfully</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: Arial, sans-serif;">
+  <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);">
+
+    <div style="text-align: center; border-bottom: 1px solid #eeeeee; padding-bottom: 20px;">
+      <h1 style="color: #1a73e8; margin: 0;">Pharmadeals.ng</h1>
+      <p style="color: #888888; font-size: 14px;">Connecting Pharmacies With the Best Deals</p>
+    </div>
+
+    <div style="color: #333333; line-height: 1.6; padding-top: 20px;">
+      <h2 style="color: #1a73e8;">Hi {{ username }},</h2>
+
+      <p style="margin: 0 0 15px;">✅ Your bid on <strong>{{ product_name }}</strong> has been successfully placed!</p>
+
+      <h3 style="color: #1a73e8; margin-top: 20px;">Bid Summary:</h3>
+      <p style="margin: 0 0 5px;"><strong>Product:</strong> {{ product_name }}</p>
+      <p style="margin: 0 0 5px;"><strong>Bid Amount:</strong> ₦{{ bid_amount }}</p>
+      <p style="margin: 0 0 5px;"><strong>Time:</strong> {{ bid_time }}</p>
+
+      <p style="margin: 20px 0;">We’ve notified the seller, and they will review your bid shortly. You’ll receive an update once the bid is accepted or declined.</p>
+
+      <a href="https://pharmadeals.ng/dashboard/my-bids" style="display: inline-block; margin-top: 10px; padding: 12px 20px; background-color: #1a73e8; color: #ffffff; text-decoration: none; border-radius: 5px;">View My Bids</a>
+
+      <p style="margin-top: 30px;">Need help? Reach out to us at <a href="mailto:support@pharmadeals.ng" style="color: #1a73e8;">support@pharmadeals.ng</a>.</p>
+
+      <p style="margin: 0;">Thanks for using Pharmadeals.ng!</p>
+      <p style="margin: 0;">– The Pharmadeals.ng Team</p>
+    </div>
+
+    <div style="margin-top: 40px; font-size: 12px; color: #777777; text-align: center;">
+      <p style="margin: 0;">This is an automated message. Please do not reply directly to this email.</p>
+    </div>
+
+  </div>
+</body>
+</html>
