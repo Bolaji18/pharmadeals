@@ -50,6 +50,9 @@ class bid(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
     bid_price = models.IntegerField()
+    phone = models.IntegerField(default=0)
+    email = models.EmailField(default="")
+    address = models.TextField(default="")
     message = models.TextField()
     status = models.CharField(max_length=20, default='pending')  # e.g., 'pending', 'success', 'failed'
     bid_time = models.DateTimeField(auto_now_add=True)

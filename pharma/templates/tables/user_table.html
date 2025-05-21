@@ -13,7 +13,7 @@
   }
 </style>
 
-<div class="bg-gray-100 p-10 rounded-lg shadow-md w-full max-w-4xl mx-auto"  style="margin-left: 20px; margin-top: 50px; overflow: hidden;">
+<div class="bg-gray-100 p-10 rounded-lg shadow-md "  style="margin-left: 20px; margin-top: 50px;">
   <h2 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h2>
   <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8"  id="name1" style="gap: 24px; padding-right: 50px;">
     <!-- Total Sales -->
@@ -23,7 +23,7 @@
     </div>
     <!-- Total Views -->
     <div class="bg-green-500 text-white p-24 shadow-lg shadow-cyan-500/50 rounded-lg" id="name2">
-      <h3 class="text-lg ">Email:</h3>
+      <p class="text-lg ">Email:</p>
       <p class="text-base  mt-2">{{ request.user.email }}</p>
     </div>
   </div>
@@ -37,20 +37,33 @@
   
 
     
-<div class="bg-gray-100 p-6 rounded-lg shadow-md w-full mt-4 max-w-md ml-10 mx-auto" style="margin-left: 10px; width: 100%;">
+<div class="bg-gray-100 p-6 rounded-lg shadow-md w-full mt-4 " style="margin-left: 10px; width: 100%;">
     <h2 class="text-2xl font-bold text-gray-800 mb-4">Product Details</h2>
     <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 ml-10 gap-6   gap-4">
       <!-- Total Sales -->
-      <div class="bg-green-500 text-white p-4   shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);">
+      <div class="bg-green-500 text-white p-4   shadow-lg shadow-cyan-500/50 " style="    box-shadow: 0px 4px 0px 0px rgb(241, 255, 242);">
         <h3 class="text-lg ">Total Sales</h3>
         <p class="text-2xl mt-2">{{ sales }}</p>
       </div>
       <!-- Total Views -->
-      <div class="bg-green-500  text-white  p-4 shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);" >
+      <div class="bg-green-500  text-white  p-4 shadow-lg shadow-cyan-500/50 " style="    box-shadow: 0px 4px 0px 0px rgb(242, 252, 243);" >
         <h3 class="text-lg ">Total Views</h3>
         <p class="text-2xl  mt-2">{{ views }}</p>
       </div>
     </div>
+    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1">
+      <!-- Total Sales -->
+      
+      
+
+    </div>
   </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
+    
+    <img src="data:image/png;base64,{{ data }}" alt="Chart"/>
+
+    <img src="data:image/png;base64,{{ tab }}" alt="Chart"/>
+   </div>
   
 

@@ -1,6 +1,8 @@
 from urllib import request
 from urllib import request
-
+import matplotlib.pyplot as plt
+import io
+import urllib, base64
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
@@ -296,11 +298,45 @@ def get_user(request):
             sales = boughtitem.objects.filter(users=name).count()
             user = User.objects.filter(username=name).first()
             views = sum(item.views for item in popular.objects.filter(name__user=name))
-            return render(request, 'tables/user_table.html', {'user': user, 'sales': sales, 'views': views})
+            labels = [p.name.name for p in popular.objects.all() if p.name.user == request.user]
+            values = [int(p.views) for p in popular.objects.all() if p.name.user == request.user]
+      
+                # Create the bar chart
+            fig, ax = plt.subplots()
+            ax.plot(labels, values, marker='o')
+            ax.set_title('Views per Product')
+            ax.set_xlabel('Product Name')
+            # Save it to a bytes buffer
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png')
+            buf.seek(0)
+            # Encode to base64
+            string = base64.b64encode(buf.read())
+            uri = urllib.parse.quote(string)
+            tab = saleschart(request)
+            return render(request, 'tables/user_table.html', {'user': user, 'sales': sales, 'views': views, 'data': uri, 'tab':tab})
         else:
             return redirect('login')
     else:
         return JsonResponse({"error": "invalid request"}, status=400)
+#chart to show sales
+def saleschart(request):
+            name = request.user
+            labels = [p.product_name for p in boughtitem.objects.filter(users=name)]
+            values = [int(p.total_earned) for p in boughtitem.objects.filter(users=name)]
+            # Create the bar chart
+            fig, ax = plt.subplots()
+            ax.bar(labels, values)
+            ax.set_title('Total Sales Per Product')
+            ax.set_xlabel('Product Name')
+            # Save it to a bytes buffer
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png')
+            buf.seek(0)
+            # Encode to base64
+            string = base64.b64encode(buf.read())
+            uri = urllib.parse.quote(string)
+            return uri
 
 def get_sales(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -309,7 +345,24 @@ def get_sales(request):
             sales = boughtitem.objects.filter(users=name).count()
             sale = boughtitem.objects.filter(users=name).order_by('-id')
             views = sum(item.views for item in popular.objects.filter(name__user=name))
-            return render(request, 'tables/sales_table.html', {'total': sales, 'sales': sale, 'views':views})
+            bids = bid.objects.filter(name__user=name).order_by('-bid_time') # to get the first bid
+            bid_count= bid.objects.filter(name__user=name).count()
+            total_earned = sum([item.total_earned for item in sale])
+            labels = [p.product_name for p in boughtitem.objects.filter(users=name)]
+            values = [int(p.total_earned) for p in boughtitem.objects.filter(users=name)]
+            # Create the bar chart
+            fig, ax = plt.subplots()
+            ax.bar(labels, values)
+            ax.set_title('Total Sales Per Product')
+            ax.set_xlabel('Product Name')
+            # Save it to a bytes buffer
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png')
+            buf.seek(0)
+            # Encode to base64
+            string = base64.b64encode(buf.read())
+            uri = urllib.parse.quote(string)
+            return render(request, 'tables/sales_table.html', {'total': sales, 'sales': sale, 'views':views, 'bids':bids, 'bid_count': bid_count, 'total_earned': total_earned, 'data': uri})
         else:
             return redirect('login')
     else:

@@ -11,14 +11,20 @@ from .models import bid
 class bid_form(forms.ModelForm):
     class Meta:
         model = bid
-        fields = [ 'bid_price', 'message']
+        fields = [ 'bid_price', 'message', 'phone', 'email', 'address']
         widgets = {
-            'bid_price': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the price of your product'}),
+            'bid_price' : forms.NumberInput(attrs={ 'class': 'form-control', 'placeholder': 'Enter the price of your product'}),
             'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your message'}),
+            'phone': forms.NumberInput(attrs={ 'class': 'form-control', 'placeholder': 'Enter your phone number'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
+            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your address'}),
         }
         help_texts = {
             'price': 'Price must be greater than 0',
             'message': 'Message must be at least 10 characters long',
+            'phone': 'Phone number must be at least 10 digits long',
+            'email': 'Email must be a valid email address',
+            'address': 'Address must be at least 10 characters long',
         }
 
 class help_form(forms.ModelForm):

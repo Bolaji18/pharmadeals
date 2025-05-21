@@ -1,19 +1,32 @@
 {% load heroicons %}
 {% load static %}
-
-<div class="bg-gray-100 p-6 rounded-lg shadow-md w-full max-w-md ml-10 mx-auto"  style="margin-top: 30px;">
   <h2 class="text-2xl font-bold text-gray-800 mb-4">Dashboard</h2>
-  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 ml-10 gap-6   gap-4">
+<div class="bg-gray-100 p-6 rounded-lg shadow-md w-full  mx-auto grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2"  style="margin-top: 10px;">
+
+  
+  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4    gap-4">
     <!-- Total Sales -->
-    <div class="bg-green-500 text-white p-4   shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);">
+    <div class="bg-green-500 text-white p-4   shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(245, 253, 245);">
       <h3 class="text-lg font-semibold">Total Sales</h3>
       <p class="text-2xl font-bold mt-2">{{ total }}</p>
     </div>
     <!-- Total Views -->
-    <div class="bg-green-500  text-white  p-4 shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208);" >
+    <div class="bg-green-500  text-white  p-4 shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(241, 252, 241);" >
       <h3 class="text-lg font-semibold">Total Views</h3>
       <p class="text-2xl font-bold mt-2">{{ views }}</p>
     </div>
+    <div class="bg-green-500 text-white p-4  shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(245, 255, 245);">
+      <h3 class="text-lg font-semibold">Total Bids</h3>
+      <p class="text-2xl font-bold mt-2">{{ bid_count }}</p>
+
+    </div>
+    <div class="bg-green-500 text-white p-4  shadow-lg shadow-cyan-500/50  p-10" style=" padding-right:100px;   box-shadow: 4px 4px 0px 0px rgb(255, 255, 255);">
+      <h3 class="text-lg font-semibold">Total Earned</h3>
+      <p class="text-2xl font-bold mt-2">{{ total_earned }}</p>
+  </div>
+  </div>
+  <div>
+    <img src="data:image/png;base64,{{ data }}" alt="Chart"/>
   </div>
 </div>
 
@@ -62,6 +75,51 @@
 
 </div>
 
+
+
+
+
+<div class="container overflow-x-auto overflow-y-auto" id="customers" >
+  <table class="table-auto w-full border-collapse border border-gray-300" style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208); " id="customers">
+    <caption class="text-2xl font-bold text-center mb-4" style="margin-right:90%">Bids</caption>
+    <thead class="bg-green-500 text-white">
+      <tr>
+        <th class="border border-gray-100 px-4 py-2">Bidder Name</th>
+        <th class="border border-gray-300 px-4 py-2">Product Name</th>
+        <th class="border border-gray-300 px-4 py-2">Bid Price</th>
+        <th class="border border-gray-300 px-4 py-2">Bidder Email Address</th>
+        <th class="border border-gray-300 px-4 py-2">Bidder Message</th>
+        <th class="border border-gray-300 px-4 py-2">Bidder Address</th>
+        <th class="border border-gray-300 px-4 py-2">Bid Date</th>
+        <th class="border border-gray-300 px-4 py-2">Status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for name in bids %}
+      <tr class="hover:bg-gray-100">
+        <td class="border border-gray-300 px-4 py-2">{{ name.user.first_name }} {{name.user.last_name}}</td>
+        <td class="border border-gray-300 px-4 py-2"> {{ name.name }}</td>
+        <td class="border border-gray-300 px-4 py-2">₦ {{ name.bid_price }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ name.email }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ name.message}}</td>
+        
+        <td class="border border-gray-300 px-4 py-2">{{ name.address }}</td>
+       
+        <td class="border border-gray-300 px-4 py-2"> {{ name.bid_time }}</td>
+        <td class="border border-gray-300 px-4 py-2"> {{ name.status }}</td>
+
+   
+       
+      </tr>
+
+      <!-- Modal -->
+    
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
 <style>
   #sales{
       background-color: #38c500;
