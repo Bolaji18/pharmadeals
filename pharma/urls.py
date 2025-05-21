@@ -30,4 +30,9 @@ urlpatterns = [
     path('help', views.help, name='help'),
     path('bid/<int:id>/', views.bids_app, name='bid'),
 
+
+
+    path('api/products/', views.product_list_api, name='product_list_api'),
+
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

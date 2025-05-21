@@ -38,6 +38,55 @@ from .forms import bid_form
 from datetime import datetime
 from .models import bid
 # search for products 
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+
+# from django.db.models import Case, When, Value, IntegerField
+
+# def product_list_api(request):
+#     page = int(request.GET.get('page', 1))
+#     per_page = 8
+#     category_id = request.GET.get('category_id')  # or whatever parameter you use
+
+#     # Annotate: 0 if product is in the selected category, 1 otherwise
+#     products = Pharma.objects.filter(Approval=True).annotate(
+#         category_priority=Case(
+#             When(categor_id=category_id, then=Value(0)),
+#             default=Value(1),
+#             output_field=IntegerField(),
+#         )
+#     ).order_by('category_priority', 'id')  # category first, then by id
+
+#     paginator = Paginator(products, per_page)
+#     page_obj = paginator.get_page(page)
+#     data = []
+#     for item in page_obj:
+#         data.append({
+#             'id': item.id,
+#             'name': item.name,
+#             'price': item.price,
+#             'image_url': item.image.url,
+#             'shipping': item.shipping,
+#         })
+#     return JsonResponse({'items': data, 'has_next': page_obj.has_next()})
+
+
+def product_list_api(request):
+    page = int(request.GET.get('page', 1))
+    per_page = 8  # or whatever your grid shows per "page"
+    products = Pharma.objects.filter(Approval=True).order_by('id')
+    paginator = Paginator(products, per_page)
+    page_obj = paginator.get_page(page)
+    data = []
+    for item in page_obj:
+        data.append({
+            'id': item.id,
+            'name': item.name,
+            'price': item.price,
+            'image_url': item.image.url,
+            'shipping': item.shipping,
+        })
+    return JsonResponse({'items': data, 'has_next': page_obj.has_next()})
 
 
 # function to place a bid and send email
@@ -147,7 +196,7 @@ def pharma_delete(request, id):
 
 def product(request, categor):
     options = Categories.objects.filter(category=categor).first()
-    option = Pharma.objects.filter(categor=options, Approval=True)
+    option = Pharma.objects.filter(categor=options, Approval=True)[:10]
     return render(request, 'pharma/product.html', context={"popular_items": option})
 
 def category(request):
@@ -210,7 +259,7 @@ def profile(request):
 def index(request):
     cate = Categories.objects.all()[:4]
     #cate = Categories.objects.all().order_by('id')[:4]
-    popular_items = popular.objects.all().order_by('-views')[:4]
+    popular_items = popular.objects.filter(name__Approval=True).order_by('-views')[:8]
 
     return render(request, 'pharma/home.html', context = {
     "categories": cate,

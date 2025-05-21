@@ -33,4 +33,48 @@
   {% endif %}
 </div>
 
+<script>
+let page = 1;
+let loading = false;
+let hasNext = true;
+
+function renderProduct(item) {
+  return `
+    <div>
+      <a href="/categories/${item.name}/${item.id}/" class="block space-y-2">
+        <img src="${item.image_url}" class="w-full h-[284px] object-contain" alt="Popular Product"/>
+        <h6 class="text-blue-900 text-lg">${item.name}</h6>
+        <span class="text-green-400 px-8 ml-10 text-xl font-sans">₦ ${item.price}</span><br>
+        ${item.shipping == 0
+          ? `<span class="text-gray-500 px-8 ml-10 text-xl font-sans">Free Shipping</span>`
+          : `<span class="text-gray-500 px-8 ml-10 text-xl font-sans">Shipping: ₦ ${item.shipping}</span>`
+        }
+      </a>
+    </div>
+  `;
+}
+
+async function loadMoreProducts() {
+  if (loading || !hasNext) return;
+  loading = true;
+  page += 1;
+  const res = await fetch(`/api/products/?page=${page}`);
+  const data = await res.json();
+  hasNext = data.has_next;
+  const grid = document.querySelector('.grid');
+  data.items.forEach(item => {
+    grid.insertAdjacentHTML('beforeend', renderProduct(item));
+  });
+  loading = false;
+}
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY || window.pageYOffset;
+  const viewportHeight = window.innerHeight;
+  const fullHeight = document.body.offsetHeight;
+  if (scrollY + viewportHeight >= fullHeight - 100) {
+    loadMoreProducts();
+  }
+});
+</script>
 {% endblock %}
