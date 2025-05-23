@@ -120,10 +120,16 @@ def bids_app(request, id):
       return HttpResponse("Bid not placed")
 
 @csrf_exempt
-def submit_search():
+def submit_search(request):
     if request.method == "POST":
+        user = request.user
         search = request.POST.get('search')
-        result = Pharma.objects.filter()
+        result = Pharma.objects.filter(name__icontains=search, Approval=True)
+        if user.is_authenticated:
+            search_product = searchProduct.objects.create(search=search, user=request.user)
+            return render(request, 'pharma/product.html', {'popular_items': result})
+        else:
+            return render(request, 'pharma/product.html', {'popular_items': result})
 
 
 

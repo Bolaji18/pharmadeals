@@ -1,67 +1,66 @@
 {% load heroicons %}
 {% load static %}
-  <h2 class="text-2xl font-bold text-gray-800 mb-4">Dashboard</h2>
-<div class="bg-gray-100 p-6 rounded-lg shadow-md w-full  mx-auto grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2"  style="margin-top: 10px;">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4 lg:ml-14">Dashboard</h2>
+<div class="bg-gray-100 p-6 rounded-lg shadow-md w-full  mx-auto grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 lg:ml-14"  style="margin-top: 10px;">
 
   
   <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4    gap-4">
     <!-- Total Sales -->
-    <div class="bg-green-500 text-white p-4   shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(245, 253, 245);">
+    <div class="bg-green-200 text-black p-4   shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(245, 253, 245);">
       <h3 class="text-lg font-semibold">Total Sales</h3>
       <p class="text-2xl font-bold mt-2">{{ total }}</p>
     </div>
     <!-- Total Views -->
-    <div class="bg-green-500  text-white  p-4 shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(241, 252, 241);" >
+    <div class="bg-green-200  text-black  p-4 shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(241, 252, 241);" >
       <h3 class="text-lg font-semibold">Total Views</h3>
       <p class="text-2xl font-bold mt-2">{{ views }}</p>
     </div>
-    <div class="bg-green-500 text-white p-4  shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(245, 255, 245);">
+    <div class="bg-green-200 text-black p-4  shadow-lg shadow-cyan-500/50 " style="    box-shadow: 4px 4px 0px 0px rgb(245, 255, 245);">
       <h3 class="text-lg font-semibold">Total Bids</h3>
       <p class="text-2xl font-bold mt-2">{{ bid_count }}</p>
 
     </div>
-    <div class="bg-green-500 text-white p-4  shadow-lg shadow-cyan-500/50  p-10" style=" padding-right:100px;   box-shadow: 4px 4px 0px 0px rgb(255, 255, 255);">
+    <div class="bg-green-200 text-black p-2  shadow-lg shadow-cyan-500/50  p-2" style=" padding-right:100px;   box-shadow: 4px 4px 0px 0px rgb(255, 255, 255);">
       <h3 class="text-lg font-semibold">Total Earned</h3>
       <p class="text-2xl font-bold mt-2">{{ total_earned }}</p>
   </div>
   </div>
-  <div>
-    <img src="data:image/png;base64,{{ data }}" alt="Chart"/>
-  </div>
+  
 </div>
+   
 
-
-<div class="container overflow-x-auto overflow-y-auto" id="customers" >
-  <table class="table-auto w-full border-collapse border border-gray-300" style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208); " id="customers">
-    <caption class="text-2xl font-bold text-center mb-4" style="margin-right:90%">Sales</caption>
-    <thead class="bg-green-500 text-white">
+<div class="overflow-x-auto lg:ml-14" >
+  
+<caption class="text-2xl font-bold text-center lg:ml-10" >Sales</caption>
+  <table class="table" >
+    <thead >
       <tr>
-        <th class="border border-gray-100 px-4 py-2">Buyer Name</th>
-        <th class="border border-gray-300 px-4 py-2">Product Name</th>
-        <th class="border border-gray-300 px-4 py-2">Quantity Bought</th>
-        <th class="border border-gray-300 px-4 py-2">Total Earned</th>
-        <th class="border border-gray-300 px-4 py-2">Order ID</th>
-        <th class="border border-gray-300 px-4 py-2">Phone No</th>
-        <th class="border border-gray-300 px-4 py-2">Buyer Address</th>
-        <th class="border border-gray-300 px-4 py-2">Payment Method</th>
-        <th class="border border-gray-300 px-4 py-2">Status</th>
+        <th>Buyer Name</th>
+        <th>Product Name</th>
+        <th>Quantity Bought</th>
+        <th>Total Earned</th>
+        <th>Order ID</th>
+        <th>Phone No</th>
+        <th>Buyer Address</th>
+        <th>Payment Method</th>
+        <th>Status</th>
 
       </tr>
     </thead>
     <tbody>
       {% for name in sales %}
-      <tr class="hover:bg-gray-100">
-        <td class="border border-gray-300 px-4 py-2">{{ name.buyer_info.name }}</td>
-        <td class="border border-gray-300 px-4 py-2"> {{ name.product_name }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.quantity }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.total_earned }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.order_id}}</td>
+      <tr >
+        <td>{{ name.buyer_info.name }}</td>
+        <td> {{ name.product_name }}</td>
+        <td>{{ name.quantity }}</td>
+        <td>{{ name.total_earned }}</td>
+        <td>{{ name.order_id}}</td>
         
-        <td class="border border-gray-300 px-4 py-2">{{ name.buyer_info.phone }}</td>
+        <td>{{ name.buyer_info.phone }}</td>
        
-        <td class="border border-gray-300 px-4 py-2"> {{ name.buyer_info.address }}</td>
-        <td class="border border-gray-300 px-4 py-2"> {{ name.buyer_info.method }}</td>
-        <td class="border border-gray-300 px-4 py-2"> {{ name.status }}</td>
+        <td> {{ name.buyer_info.address }}</td>
+        <td> {{ name.buyer_info.method }}</td>
+        <td> {{ name.status }}</td>
 
    
        
@@ -78,36 +77,36 @@
 
 
 
-
-<div class="container overflow-x-auto overflow-y-auto" id="customers" >
-  <table class="table-auto w-full border-collapse border border-gray-300" style="    box-shadow: 4px 4px 0px 0px rgb(207, 237, 208); " id="customers">
-    <caption class="text-2xl font-bold text-center mb-4" style="margin-right:90%">Bids</caption>
-    <thead class="bg-green-500 text-white">
+ <caption class="text-2xl font-bold text-center mb-4" style="margin-right:90%">Bids</caption>
+   
+<div  class="overflow-x-auto">
+  <table class="table">
+    <thead >
       <tr>
-        <th class="border border-gray-100 px-4 py-2">Bidder Name</th>
-        <th class="border border-gray-300 px-4 py-2">Product Name</th>
-        <th class="border border-gray-300 px-4 py-2">Bid Price</th>
-        <th class="border border-gray-300 px-4 py-2">Bidder Email Address</th>
-        <th class="border border-gray-300 px-4 py-2">Bidder Message</th>
-        <th class="border border-gray-300 px-4 py-2">Bidder Address</th>
-        <th class="border border-gray-300 px-4 py-2">Bid Date</th>
-        <th class="border border-gray-300 px-4 py-2">Status</th>
+        <th>Bidder Name</th>
+        <th>Product Name</th>
+        <th>Bid Price</th>
+        <th>Bidder Email Address</th>
+        <th>Bidder Message</th>
+        <th>Bidder Address</th>
+        <th>Bid Date</th>
+        <th>Status</th>
 
       </tr>
     </thead>
     <tbody>
       {% for name in bids %}
-      <tr class="hover:bg-gray-100">
-        <td class="border border-gray-300 px-4 py-2">{{ name.user.first_name }} {{name.user.last_name}}</td>
-        <td class="border border-gray-300 px-4 py-2"> {{ name.name }}</td>
-        <td class="border border-gray-300 px-4 py-2">₦ {{ name.bid_price }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.email }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ name.message}}</td>
+      <tr >
+        <td>{{ name.user.first_name }} {{name.user.last_name}}</td>
+        <td> {{ name.name }}</td>
+        <td>₦ {{ name.bid_price }}</td>
+        <td>{{ name.email }}</td>
+        <td>{{ name.message}}</td>
         
-        <td class="border border-gray-300 px-4 py-2">{{ name.address }}</td>
+        <td>{{ name.address }}</td>
        
-        <td class="border border-gray-300 px-4 py-2"> {{ name.bid_time }}</td>
-        <td class="border border-gray-300 px-4 py-2"> {{ name.status }}</td>
+        <td> {{ name.bid_time }}</td>
+        <td> {{ name.status }}</td>
 
    
        
@@ -120,6 +119,9 @@
   </table>
 
 </div>
+<div>
+    <img src="data:image/png;base64,{{ data }}" alt="Chart"/>
+  </div>
 <style>
   #sales{
       background-color: #38c500;

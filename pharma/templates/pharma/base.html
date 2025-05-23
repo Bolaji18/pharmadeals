@@ -8,9 +8,13 @@
     <meta charset="UTF-8" />
     <title>{% block title %} {% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
    {% tailwind_css %}
+   <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
- <style>
+         <style>
   button:hover{
     opacity: 0.8;
     cursor: pointer;
@@ -40,7 +44,7 @@
 </div>
 
     <!-- Top Bar -->
-    <div class="h-9 w-full bg-green-500 text-xs text-white font-serif flex items-center px-4">
+    <div class="h-9 w-full bg-green-300 text-xs text-black font-sans flex items-center px-4">
       <span>Welcome to Pharmadeals.ng</span>
       <div class="ml-auto flex items-center space-x-4 text-[10px] sm:text-sm">
         <span class="flex items-center gap-1">
@@ -65,7 +69,7 @@
       <div class="flex items-center bg-blue-100 border border-gray-800 rounded-full px-4 py-2 mt-4 md:mt-0 w-full md:w-[442px] max-w-full md:ml-10">
         <span class="text-gray-600">{% heroicon_outline "magnifying-glass" size=20 %}</span>
         <input type="text" placeholder="Search for Pharmaceuticals"
-          class="ml-2 flex-grow bg-transparent focus:outline-none text-sm md:text-base text-black" />
+          class="ml-2 flex-grow bg-transparent border-none focus:outline-none border-none text-sm md:text-base text-black" />
         <span class="ml-2 text-gray-600">{% heroicon_outline "bars-3-center-left" size=20 %}</span>
       </div>
 
@@ -74,8 +78,8 @@
         <span>{% heroicon_outline "shopping-cart" size=20 %}</span>
          {% if request.user.username %}
 
-        <a href="{% url 'profile' %}">
-          <button class="bg-green-500 text-white text-sm md:text-base rounded-full border border-blue-300 w-[45px] h-[36px] md:w-[45px] md:h-[41px]">
+         <a href="{% url 'profile' %}" class="avatar">
+          <button class="w-24 rounded-full">
              {% heroicon_outline "user-circle" size=40 %}
           </button>
         </a>
@@ -83,12 +87,12 @@
 
 
         <a href="{% url 'login' %}">
-          <button class="bg-green-500 text-white text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+          <button class="btn btn-active btn-success">
             Login
           </button>
         </a>
         <a href="{% url 'register' %}">
-          <button class="bg-green-500 text-white text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] md:w-[126px] md:h-[41px]">
+          <button class="btn btn-active btn-success">
             Sign up
           </button>
         </a>

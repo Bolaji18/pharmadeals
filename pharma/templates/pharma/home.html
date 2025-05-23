@@ -13,44 +13,38 @@ Categories
 {% block content %}
 
 
- <div class="carousel">
-   <div id="slide1" class="carousel-item active">
-      <div class="hero-move">
-       <div class="hero-first">
-         <div class="hero-text">Online Marketplace for<br />Pharmacies to BUY and SELL<br />
-           Pharmaceuticals</div>
-         <div class="hero-mag">
-           <a href="{% url 'register' %}"><button class="hero-start">Sign Up as a Manufacturer or Distributor</button></a>
-           <a href="{% url 'register' %}"><button class="hero-start start2">Sign Up as a Buyer</button></a>
-
-           <!-- <span class="head-hope">
-             
-
-             <input type="text" class="hero-in" placeholder="Search  for  drugs in our store " />
-             <button class="hero-btn">Find drugs</button>
-           </span> -->
-         </div>
-       </div>
-
-        <div>
-          <!-- <img class="hero-image" src="{% static 'images/cheerful-ethnic-doctor-with-arms-crossed-removebg-preview.png' %}"> -->
-            <img class="hero-image" src="{% static 'images/3644225-removebg-preview.png' %}">
-        </div>
-     </div>
-     <div class="nav-buttons">
-       <a href="#slide4" class="nav-buttons1">{% heroicon_outline "arrow-left-circle" size=90 class="mt-10"%}</a>
-       <a href="#slide2" class="nav-buttons2">{% heroicon_outline "arrow-right-circle" size=90 class="mt-10" %}</a>
-     </div>
-
-
-   </div>
+ <div class="carousel bg-green-300">
+   <div id="slide1" class="carousel-item active bg-green-300">
+  <div class="bg-green-300 rounded-lg grid grid-cols-1 md:grid-cols-2 items-center min-h-[350px] p-6 md:p-10">
+    <div class="flex flex-col justify-center">
+      <div class="text-black text-2xl md:text-4xl font-bold mb-6">
+        Online Marketplace <br /> to BUY and SELL<br />Medications
+      </div>
+      <div class="flex flex-col sm:flex-row items-center gap-4 mt-6 lg:ml-10">
+        <a href="{% url 'register' %}">
+          <button class="bg-blue-300 text-black rounded-full px-6 py-2 text-base md:text-lg font-semibold hover:bg-blue-100 transition ml-0 sm:ml-10">
+            Sign Up as an Importer,Distributor,Sales rep
+          </button>
+        </a>
+        <a href="{% url 'register' %}">
+          <button class="bg-blue-300 text-black rounded-full px-6 py-2 text-base md:text-lg font-semibold hover:bg-blue-100 transition ml-0 sm:ml-2">
+            Sign Up as a Buyer
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="flex justify-center mt-6 md:mt-0">
+      <img class="h-72 w-auto object-contain" src="{% static 'images/3644225-removebg-preview.png' %}" alt="Marketplace">
+    </div>
+  </div>
+</div>
    <div id="slide2" class="carousel-item">
      <div class="hero-move">
        <div class="hero-first">
          <div class="hero-text">Purchase Pharmaceuticals from <br />Pharmacies<br />
            </div>
          <div class="hero-mag">
-           <button class="hero-start">Start Buying</button>
+           <button class="btn btn-primary ml-10">Start Buying</button>
 
            <!-- <span class="head-hope">
              
@@ -77,7 +71,7 @@ Categories
          <div class="hero-text">Free Marketplace for<br />Purchase of Original<br />
            Pharmaceuticals</div>
          <div class="hero-mag">
-           <button class="hero-start">Start Selling</button>
+           <button class="btn btn-primary ml-10">Start Selling</button>
 
            <!-- <div class="head-hope">
              
@@ -106,7 +100,7 @@ Categories
          <div class="hero-text">Online store for the<br />Purchase of Original<br />
            Pharmaceuticals</div>
          <div class="hero-mag">
-           <button class="hero-start">Start Selling</button>
+           <button class="btn btn-primary ml-10">Start Selling</button>
 
            <!-- <span class="head-hope">
               
@@ -152,10 +146,10 @@ Categories
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {% for index in categories %}
       <a href="categories/{{index.category}}/">
-      <div class="relative bg-green-500 rou nded-2xl overflow-hidden p-4 h-[316px]">
+      <div class="relative bg-green-300 rounded-2xl overflow-hidden p-4 h-[316px] card bg-base-100 shadow-sm">
         <img src="{{ index.image.url }}" class="w-full h-[284px] object-contain mx-auto" alt="{{ index.category}}">
-        <h6 class="absolute bottom-3 left-4 text-xl text-white">{{ index.category }}</h6>
-        <span class="absolute top-3 right-3 text-red-500">{% heroicon_outline "arrow-right-circle" size=40 %}</span>
+        <h6 class="absolute bottom-3 left-4 text-xl text-black">{{ index.category }}</h6>
+        <span class="absolute top-3 right-3 text-black">{% heroicon_outline "arrow-right-circle" size=40 %}</span>
       </div>
     </a>
       {% endfor %}
@@ -178,13 +172,13 @@ Categories
       </span>
     </div>
   
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for item in popular_items %}
       
-      <div>
+      <div class="card bg-base-100 w-96 shadow-sm">
     
           <img src="{{ item.name.image.url }}" class="w-full h-[284px] object-contain" alt="Popular Product">
-          <a href="{% url 'item' name=item.name.name  id=item.name.id %}" > <h6 class="text-blue-900 text-lg">{{ item.name.name }}</h6> </a>
+          <a class="card-body" href="{% url 'item' name=item.name.name  id=item.name.id %}" > <h6 class="card-title">{{ item.name.name }}</h6> </a>
    
       </div> 
       {% endfor %}
@@ -192,7 +186,7 @@ Categories
   
     <div class="mt-8 text-center">
       <a href="{% url 'category'%}">
-      <button class="bg-cyan-200 border border-black rounded-full px-6 py-2 text-lg font-bold">Start Buying</button>
+      <button class="btn btn-accent">Start Buying</button>
     </a>
     </div>
   </section>

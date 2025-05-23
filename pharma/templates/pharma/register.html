@@ -37,7 +37,7 @@ Login
         <small class="text-sm text-gray-500">{{ field.help_text }}</small>
         <div class="border border-gray-400 border-l-4 border-l-blue-900 rounded-lg px-4 py-3 w-full max-w-[540px]">
           <label class="text-base  text-gray-700 block mb-1" for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field|add_class:"w-full h-11 text-base focus:outline-none" }}
+          {{ field|add_class:"w-full h-11 border-none text-base focus:outline-none" }}
         </div>
        
 
@@ -68,7 +68,7 @@ Login
 
         <!-- Buttons -->
         <div class="flex gap-4 mt-4">
-          <button type="submit" class="w-[129px] h-[54px] bg-green-500 text-white text-lg rounded-md">Submit</button>
+          <button type="submit" class="w-[129px] h-[54px] btn btn-success">Submit</button>
         </div>
       {% endif %}
     </form>

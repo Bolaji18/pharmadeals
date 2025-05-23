@@ -102,7 +102,9 @@ Login
   
   /* Add Zoom Animation */
  
-  
+  #footer2{
+    display: none;
+  }
 
   
   /* Change styles for span and cancel button on extra small screens */
@@ -206,29 +208,29 @@ Login
       <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12 mx-auto md:mx-0" alt="Pharmadeals Logo">
     </a>
     <button 
-      class="w-full mb-6  mt-2 text-left px-8 py-4 button2 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none use"
+      class="btn btn-success"
       onclick="getuser()" 
       id="defaultOpen">
       User Profile
     </button>
     <button 
-      class="w-full mb-6 mt-2 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      class="btn btn-success"
       onclick="opensales()" id="sales">
       Sales
     </button>
     <button 
-      class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      class="btn btn-success"
       onclick="purchase()" id="purchase">
       Purchases/Bids
     </button>
     <button 
-      class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none"
+      class="btn btn-success"
       onclick="openCity()" id="product">
       Products
     </button>
     <a href="{% url 'help' %}">
       <button id="help" 
-        class="w-full mt-2 mb-6 text-left button2 px-8 py-4 text-black text-[18px] md:text-[24px] hover:bg-gray-200 transition duration-300 focus:outline-none">
+        class="btn btn-success">
         Help
       </button>
     </a>

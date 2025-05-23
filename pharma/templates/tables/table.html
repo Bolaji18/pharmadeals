@@ -1,52 +1,53 @@
 {% load heroicons %}
 {% load static %}
-<div class="container overflow-x-auto overflow-y-auto" id="customers" style="overflow-x: scroll; width: 98%;">
-  <table class="table-auto w-full border-collapse border border-gray-300" style="overflow: scroll;">
-    <caption class="text-lg font-bold text-center mb-4" style="margin-right:80%">Pharma Products</caption>
-    <thead class="bg-green-500 text-white">
+ <caption class="text-lg font-bold text-center mb-4" >Pharma Products</caption>
+   
+<div class="overflow-x-auto lg:ml-[5%]">
+  <table class="table">
+    <thead >
       <tr>
-        <th class="border border-gray-300 px-4 py-2">Product Name</th>
-        <th class="border border-gray-300 px-4 py-2">Price</th>
-        <th class="border border-gray-300 px-4 py-2">Approval</th>
-        <th class="border border-gray-300 px-4 py-2">Description</th>
-        <th class="border border-gray-300 px-4 py-2">Categories</th>
-        <th class="border border-gray-300 px-4 py-2">Images</th>
-        <th class="border border-gray-300 px-4 py-2">Stock</th>
-        <th class="border border-gray-300 px-4 py-2">Shipping Price</th>
-        <th class="border border-gray-300 px-4 py-2">Views</th>
-        <!-- <th class="border border-gray-300 px-4 py-2">Update</th> -->
-        <th class="border border-gray-300 px-4 py-2">Delete</th>
+        <th >Product Name</th>
+        <th>Price</th>
+        <th>Approval</th>
+        <th>Description</th>
+        <th>Categories</th>
+        <th>Images</th>
+        <th>Stock</th>
+        <th>Shipping Price</th>
+        <th>Views</th>
+        <!-- <th>Update</th> -->
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
       {% for name in categories %}
       <tr class="hover:bg-gray-100">
-        <td class="border border-[#ccc] px-4 py-2">
+        <td>
          {% if name.name.Approval %}
           <a href="{% url 'item' name=name.name.name id=name.name.id %}">{{ name.name.name }}</a>
         {% else %}
         {{name.name.name}}
         {% endif %}
         </td>
-        <td class="border border-[#ccc] px-4 py-2">₦ {{ name.name.price }}</td>
-        <td class="border border-[#ccc] px-4 py-2">
+        <td>₦ {{ name.name.price }}</td>
+        <td>
           {% if name.name.Approval %}
           <span style="color: green;">Approved</span>
           {% else %}
           <span style="color: red;">Awaiting Approval</span>
           {% endif %}</td>
-        <td class="border border-[#ccc] px-4 py-2">{{ name.name.description }}</td>
-        <td class="border border-[#ccc] px-4 py-2">{{ name.name.categor }}</td>
-        <td class="border border-[#ccc] px-4 py-2">
+        <td>{{ name.name.description }}</td>
+        <td>{{ name.name.categor }}</td>
+        <td>
           <img src="{{ name.name.image.url }}" class="h-12 w-12 object-cover" alt="Product Image">
         </td>
-        <td class="border border-[#ccc] px-4 py-2">{{ name.name.stock }}</td>
+        <td>{{ name.name.stock }}</td>
         {% if name.shipping == 0 %}
-        <td class="border border-[#ccc] px-4 py-2">Free</td>
+        <td>Free</td>
         {% else %}
-        <td class="border border-[#ccc] px-4 py-2">₦ {{ name.name.shipping }}</td>
+        <td>₦ {{ name.name.shipping }}</td>
         {% endif %}
-        <td class="border border-[#ccc] px-4 py-2">{{ name.views }}</td>
+        <td>{{ name.views }}</td>
         <!-- <td class="border border-[#ccc] px-4 py-2 text-center">
           <a href="#" class="text-blue-500 hover:underline">Update</a>
         </td> -->
@@ -103,7 +104,7 @@
   <div class=" items-center space-x-4 mb-4 " id="name3" style="gap:10px; border: 2px solid #ccc; ">
    
  
-    <img src="{{ name.name.image.url }}" alt="Product Image" class="w-10 h-[200px] rounded-lg" style="height: 200px;">
+    <img src="{{ name.name.image.url }}" alt="Product Image" class=" h-[200px] rounded-lg" style="height: 200px;">
     <div>
       <h3 class="text-lg font-semibold text-blue-900">{{ name.name.name }}</h3>
       <p class="text-gray-600">Price: ₦ {{ name.name.price }}</p>

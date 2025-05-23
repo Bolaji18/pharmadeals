@@ -29,6 +29,7 @@ urlpatterns = [
     path('purchase', views.purchase, name='purchase'),
     path('help', views.help, name='help'),
     path('bid/<int:id>/', views.bids_app, name='bid'),
+    path('search/', views.submit_search, name='search'),
 
 
 

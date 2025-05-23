@@ -8,50 +8,115 @@
 
 
   {% block content%}
-  <div >
+  <div  >
     <ul>
-        <li class="mt-2 rounded-lg bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3" style="display: {{display}};" id="time">{{message}}</li>
+        <li role="alert" class="alert alert-info" style="display: {{display}};" id="time">{{message}}</li>
     </ul>
   </div>
-  <div class="grid grid-cols-1 mb-6 min-h-[384px] sm:grid-cols-2 lg:grid-cols-2 gap-6 ml-10 mt-10">
+  <div class="grid grid-cols-1 mb-6 min-h-[384px] sm:grid-cols-2 lg:grid-cols-2 gap-6 ml-1 lg:ml-10 mt-10">
     <script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
  
   <div class="w-[200px] h-[304px] object-contain">
-    <img src="{{ item.image.url }}" class="w-full h-[284px] object-contain" alt="Popular Product" />
+    <img src="{{ item.image.url }}" class="w-full h-[284px] object-contain lg:ml-14" alt="Popular Product" />
+    <button onclick="sharePage()" id="share" class="text-gray-500 w-10 px-4" data-title="share this page"><span>{% heroicon_outline "share" size=20 %} share</span></button>
+
   </div>
-  <div class="w-[200px] h-[284px] object-contain ml-10">
-    <h6 class="text-blue-900 text-lg">{{ item.name }}</h6>
-    <span class="text-green-400 px-8 ml-10 text-xl font-sans"> ₦ {{ item.price }}</span>
+  <div class=" object-contain ">
+    <h6 class="text-blue-900 ml-1 text-lg">{{ item.name }}</h6>
+    <span class="text-green-400  ml-1 text-xl font-sans"> ₦ {{ item.price }}</span>
     <br>
     {% if item.shipping == 0%}
-    <span class="text-gray-500 px-8 ml-10 text-xl font-sans">Free Shipping</span>
+    <span class="text-gray-500  ml-1 text-xl font-sans">Free Shipping</span>
     {% else %}
-    <span class="text-gray-500 px-8 ml-10 text-xl font-sans">Shipping: ₦ {{ item.shipping }}</span>
+    <span class="text-gray-500  ml-1 text-xl font-sans">Shipping: ₦ {{ item.shipping }}</span>
     {% endif %}
     <br>
-    <span class="text-gray-500 px-8 ml-10 text-xl font-sans ">Description: {{ item.description }}</span>
+    <span class="text-gray-500   text-xl font-sans ">Description: {{ item.description }}</span>
     <br>
    
+  <!-- Bid Button -->
+<button class="btn btn-success" id="bid">Bid</button>
+
+<!-- Modal -->
+<div id="idoo" class="fixed inset-0 z-50 flex items-center  justify-center bg-gray-200 bg-opacity-2 hidden">
+  <form class="bg-white rounded-2xl shadow-lg w-full lg:ml-94 max-w-md p-6 animate-zoom relative" action="{% url 'bid' id=item.id %}" method="post">
+    {% csrf_token %}
+    <div class="flex flex-col items-center mb-4">
+      <button type="button"
+        onclick="document.getElementById('idoo').style.display='none'"
+        class="absolute top-2 right-4 text-3xl text-gray-700 hover:text-red-500 font-bold focus:outline-none"
+        title="Close Modal">&times;</button>
+      <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" alt="Avatar" class="w-34 h-24 rounded-full mx-auto mb-2">
+    </div>
+    <div class="space-y-4">
+      {% for field in format %}
+      <label for="{{ field.id_for_label }}" style="margin-top: 50px;"><b>{{ field.label }}</b></label>
+      {{ field|add_class:"w-full h-11 mb-[20px] border border-green-400 text-base rounded-md shadow-glow" }}
+
+      {% if field.errors %}
+                            <div class="mt-2 rounded-lg bg-red-100 border border-red-400 text-red-700 px-4 py-3 ">
+                                <ul>
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        
+
+         {% endfor %}
         
+      <button class="bg-green-500 text-white px-4 py-2 rounded-lg w-full" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+<!-- Add this Tailwind animation to your CSS if you want the zoom effect -->
+<style>
+@keyframes zoom {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+.animate-zoom {
+  animation: zoom 0.6s;
+}
+</style>
+
+<!-- Place this script at the end of your template, after all HTML elements -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var bidBtn = document.getElementById("bid");
+  var modal = document.getElementById("idoo");
+  if (bidBtn && modal) {
+    bidBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      modal.style.display = 'block';
+    });
+  }
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+});
+</script>      
   
-  <a href="#"><button class="bg-green-500 mb-2 text-gray-800 text-sm md:text-base rounded-full cursor border border-blue-300 w-[100px] h-[36px] md:w-[126px] px-16 md:h-[41px]" onclick="document.getElementById('id01').style.display='block'">Bid</button>
-  </a>
-    
-    <a href="{% url 'buynow' name=item.name  id=item.id %}"><button class="bg-green-500  cursor text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] px-16 md:w-[126px] md:h-[41px]">Buy Now</button>
+    <a href="{% url 'buynow' name=item.name  id=item.id %}"><button class="btn btn-success">Buy Outright</button>
   </a>
   {% for name in form %}
   <form method="post" id="myForm" enctype="multipart/form-data" class="space-y-6">
     {% csrf_token %}
 
   
-  <div class="border border-gray-400 border-l-4 border-l-blue-900 px-4 rounded-lg w-full max-w-[540px]">
+  <div class="border border-gray-400 border-l-4 border-l-blue-900 px-4 rounded-lg w-full max-w-[540px py-4">
     
     <label class="text-base text-gray-700 block mb-1" for="{{ name.id_for_label }}">{{ name.label }}</label>
-  {{ name|add_class:"w-8 h-11 text-base focus:bg-green-500" }}
+  {{ name|add_class:"w-8 h-11 text-base focus:border border-blue-400 rounded-md" }}
   <br>
   <small class="text-sm text-gray-500">{{ name.help_text }}</small>
   <br>
-  <button type="submit" class="bg-green-500 mb-2 cursor text-gray-800 text-sm md:text-base rounded-full border border-blue-300 w-[100px] h-[36px] px-16 md:w-[126px] md:h-[41px]">Add to Cart</button>
+  <button type="submit" class="btn btn-success">Add to Cart</button>
  
   {% if name.errors %}
   <div class="mt-2 rounded-lg bg-red-100 border border-red-400 text-red-700 px-4 py-3">
@@ -171,13 +236,14 @@ span.psw {
 
 
 
-<div id="id01" class="modal">
+<div id="idoo" class="modal">
   
   <form class="modal-content animate" action="{% url 'bid' id=item.id %}" method="post">
     {% csrf_token %}
     <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <span onclick="document.getElementById('idoo').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" alt="Avatar" class="avatar">
+      
     </div>
     
 
@@ -209,9 +275,11 @@ span.psw {
 
 
 
+
+
 <script>
   // Get the modal
-  var modal = document.getElementById('id01');
+  var modal = document.getElementById('idoo');
   
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
@@ -225,6 +293,46 @@ span.psw {
    
 
   </div>
+  
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById("bid").addEventListener("click", () => {
+    document.getElementById('idoo').style.display = 'block';
+  });
+});
+    </script>
+    <script>
+      document.getElementById("share").addEventListener("click", () => {
+   if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      text: 'Check out this page!',
+      url: window.location.href,
+    }).catch(console.error);
+  } else {
+    alert('Sharing is not supported by your browser.');
+  }
+});
+    </script>
+
+    <script>
+function sharePage() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      text: 'Check out this page!',
+      url: window.location.href,
+    }).catch(console.error);
+  } else {
+    alert('Sharing is not supported by your browser.');
+  }
+}
+
+
+
+
+</script>
+
 
   {% endblock %}

@@ -6,23 +6,29 @@
   Categories 
   {% endblock %} 
   {% block content%}
-<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 ml-10 gap-6" style="margin-left: 10px;">
+
+  <style>
+    #footer2{
+      display: none;
+    }
+  </style>
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 ml-10 gap-6" style="margin-left: 10px; margin-bottom: 500px;">
   {% if popular_items %} {% for item in popular_items %}
 
-  <div>
+  <div class="shadow-sm bg-base-100 py-4">
     <a href="{% url 'item' name=item.name  id=item.id %}" class="block space-y-2">
       <img
         src="{{ item.image.url }}"
         class="w-full h-[284px] object-contain"
         alt="Popular Product"
       />
-      <h6 class="text-blue-900 text-lg">{{ item.name }}</h6>
-      <span class="text-green-400 px-8 ml-10 text-xl font-sans"> ₦ {{ item.price }}</span>
+      <h6 class="text-blue-900  text-lg">{{ item.name }}</h6>
+      <span class="text-green-400   text-xl font-sans"> ₦ {{ item.price }}</span>
       <br>
       {% if item.shipping == 0%}
-      <span class="text-gray-500 px-8 ml-10 text-xl font-sans">Free Shipping</span>
+      <span class="text-gray-500   text-xl font-sans">Free Shipping</span>
       {% else %}
-      <span class="text-gray-500 px-8 ml-10 text-xl font-sans">Shipping: ₦ {{ item.shipping }}</span>
+      <span class="text-gray-500  text-xl font-sans">Shipping: ₦ {{ item.shipping }}</span>
       {% endif %}
     </a>
   </div>
@@ -40,14 +46,14 @@ let hasNext = true;
 
 function renderProduct(item) {
   return `
-    <div>
+    <div class="shadow-sm bg-base-100 py-4">
       <a href="/categories/${item.name}/${item.id}/" class="block space-y-2">
         <img src="${item.image_url}" class="w-full h-[284px] object-contain" alt="Popular Product"/>
         <h6 class="text-blue-900 text-lg">${item.name}</h6>
-        <span class="text-green-400 px-8 ml-10 text-xl font-sans">₦ ${item.price}</span><br>
+        <span class="text-green-400   text-xl font-sans">₦ ${item.price}</span><br>
         ${item.shipping == 0
-          ? `<span class="text-gray-500 px-8 ml-10 text-xl font-sans">Free Shipping</span>`
-          : `<span class="text-gray-500 px-8 ml-10 text-xl font-sans">Shipping: ₦ ${item.shipping}</span>`
+          ? `<span class="text-gray-500   text-xl font-sans">Free Shipping</span>`
+          : `<span class="text-gray-500   text-xl font-sans">Shipping: ₦ ${item.shipping}</span>`
         }
       </a>
     </div>
