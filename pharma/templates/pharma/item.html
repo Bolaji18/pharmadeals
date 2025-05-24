@@ -16,12 +16,12 @@
   <div class="grid grid-cols-1 mb-6 min-h-[384px] sm:grid-cols-2 lg:grid-cols-2 gap-6 ml-1 lg:ml-10 mt-10">
     <script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
  
-  <div class="w-[200px] h-[304px] object-contain">
+  <div class="w-[200px] h-[304px] object-contain mt-24">
     <img src="{{ item.image.url }}" class="w-full h-[284px] object-contain lg:ml-14" alt="Popular Product" />
     <button onclick="sharePage()" id="share" class="text-gray-500 w-10 px-4" data-title="share this page"><span>{% heroicon_outline "share" size=20 %} share</span></button>
 
   </div>
-  <div class=" object-contain ">
+  <div class=" object-contain mt-24 ">
     <h6 class="text-blue-900 ml-1 text-lg">{{ item.name }}</h6>
     <span class="text-green-400  ml-1 text-xl font-sans"> ₦ {{ item.price }}</span>
     <br>

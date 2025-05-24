@@ -265,7 +265,8 @@ def profile(request):
 def index(request):
     cate = Categories.objects.all()[:4]
     #cate = Categories.objects.all().order_by('id')[:4]
-    popular_items = popular.objects.filter(name__Approval=True).order_by('-views')[:8]
+    # popular_items = popular.objects.filter(name__Approval=True).order_by('-views')[:8] #order by views
+    popular_items = popular.objects.filter(name__Approval=True).order_by('-id')[:8]
 
     return render(request, 'pharma/home.html', context = {
     "categories": cate,

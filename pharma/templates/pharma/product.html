@@ -12,7 +12,7 @@
       display: none;
     }
   </style>
-<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 ml-10 gap-6" style="margin-left: 10px; margin-bottom: 500px;">
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 ml-10 gap-6 pt-20" style="margin-left: 10px; margin-bottom: 500px;">
   {% if popular_items %} {% for item in popular_items %}
 
   <div class="shadow-sm bg-base-100 py-4">
@@ -38,6 +38,9 @@
 
   {% endif %}
 </div>
+
+<span class="loading loading-spinner text-primary mt-[-400px] lg:ml-156 lg:mt-[-450px] w-16 h-16 ml-16 lg:w-26 lg:h-26" id="spin" style="display: none;"></span>
+
 
 <script>
 let page = 1;
@@ -79,7 +82,10 @@ window.addEventListener('scroll', () => {
   const viewportHeight = window.innerHeight;
   const fullHeight = document.body.offsetHeight;
   if (scrollY + viewportHeight >= fullHeight - 100) {
+    document.getElementById('spin').style.display = 'block';
+    setTimeout(() => { document.getElementById('spin').style.display = 'none'; }, 5000);
     loadMoreProducts();
+    
   }
 });
 </script>

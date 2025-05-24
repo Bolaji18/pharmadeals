@@ -31,7 +31,7 @@
   </head>
   <body class=" bg-white font-sans text-gray-800 overflow-x-hidden">
 
-  <div id="mySidenav" class="sidenav" style="z-index: 2;">
+  <div id="mySidenav" class="sidenav" style="z-index: 70;">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#">About</a>
   <a href="#">Services</a>
@@ -48,7 +48,7 @@
 </div>
 
     <!-- Top Bar -->
-    <div class="h-9 w-full bg-green-300 text-xs text-black font-sans flex items-center px-4">
+    <div class="h-9 w-full bg-green-300 text-xs text-black font-sans fixed flex items-center px-4 hidden" >
       <span>Welcome to Pharmadeals.ng</span>
       <div class="ml-auto flex items-center space-x-4 text-[10px] sm:text-sm">
         <span class="flex items-center gap-1">
@@ -61,7 +61,7 @@
     </div>
 
     <!-- Header Section -->
-    <header class="flex flex-wrap items-center justify-between p-4 md:px-8" id="header5">
+    <header class="flex flex-wrap items-center justify-between p-4 md:px-8 fixed bg-white w-full z-10 mb-24 top:0 " id="header5" style="top:0;">
       <!-- Left Section -->
       <div class="flex items-center space-x-3">
         <span onclick="openNav()" id="nav-2">{% heroicon_outline "bars-3-bottom-left" size=24 %}</span>
@@ -139,7 +139,7 @@
       </div>
     </header>
 
-<div class="mb-[50px] font-sans">
+<div class="mb-[50px] font-sans mt-44 lg:mt-5">
 
 
      {% block content %} {% endblock %}
