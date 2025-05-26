@@ -71,21 +71,23 @@ from django.core.paginator import Paginator
 #     return JsonResponse({'items': data, 'has_next': page_obj.has_next()})
 
 
-def product_list_api(request):
-    page = int(request.GET.get('page', 1))
-    per_page = 8  # or whatever your grid shows per "page"
-    products = Pharma.objects.filter(Approval=True).order_by('id')
+def product_list_api(request, page):
+    page = int(page)
+    per_page = 10  # or whatever your grid shows per "page"
+    # start = page - 3 
+    products = Pharma.objects.filter(Approval=True).order_by('-id')
     paginator = Paginator(products, per_page)
     page_obj = paginator.get_page(page)
     data = []
     for item in page_obj:
-        data.append({
-            'id': item.id,
-            'name': item.name,
-            'price': item.price,
-            'image_url': item.image.url,
-            'shipping': item.shipping,
-        })
+       
+            data.append({
+                'id': item.id,
+                'name': item.name,
+                'price': item.price,
+                'image_url': item.image.url,
+                'shipping': item.shipping,
+            })
     return JsonResponse({'items': data, 'has_next': page_obj.has_next()})
 
 

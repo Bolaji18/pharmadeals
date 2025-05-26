@@ -45,7 +45,7 @@ class Pharma(models.Model):
     Approval = models.BooleanField(default=False)
     shipping = models.IntegerField(default=0)
     def __str__(self):
-        return f"{self.user}: {self.name} product"
+        return f"{self.user}: {self.name} product,\a Approval  status:  {self.Approval}"
 class bid(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.ForeignKey(Pharma, on_delete=models.CASCADE)

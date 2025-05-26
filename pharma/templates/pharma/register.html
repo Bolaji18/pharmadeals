@@ -68,7 +68,7 @@ Login
 
         <!-- Buttons -->
         <div class="flex gap-4 mt-4">
-          <button type="submit" class="w-[129px] h-[54px] btn btn-success">Submit</button>
+          <button type="submit" class="w-[129px] h-[54px] btn btn-success" onclick="loadform()">Submit <span class="loading loading-spinner text-primary  w-10 h-10 " style="display: none;" id="loader"></span></button>
         </div>
       {% endif %}
     </form>
@@ -89,5 +89,13 @@ Login
   }
 }
 
+</script>
+
+<script>
+  function loadform(){
+  
+    document.getElementById('loader').style.display = "block" ; //add loading animation // Generate the URL dynamically
+    setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 15000);
+  }
 </script>
 {% endblock %}

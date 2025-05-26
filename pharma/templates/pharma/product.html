@@ -34,7 +34,7 @@
   </div>
 
   {% endfor %} {% else %}
-  <h6 class="text-blue-900 text-lg w-full h-[284px]">No item found</h6>
+  <h6 class="text-blue-900 text-lg w-full h-[284px]">No item found, scroll down to see more</h6>
 
   {% endif %}
 </div>
@@ -67,7 +67,8 @@ async function loadMoreProducts() {
   if (loading || !hasNext) return;
   loading = true;
   page += 1;
-  const res = await fetch(`/api/products/?page=${page}`);
+  const res = await fetch(`/api/products/${page}`);
+  console.log(page);
   const data = await res.json();
   hasNext = data.has_next;
   const grid = document.querySelector('.grid');

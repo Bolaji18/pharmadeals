@@ -103,3 +103,5 @@ Email sent to daropaleb@gmail.com with subject "PharmaDeals Bid Request by darop
 Email sent to daropaleb@gmail.com with subject "PharmaDeals Bid Request by daropale"
 Email sent to trustallianceng@gmail.com with subject "order is being processed"
 Email sent to daropaleb@gmail.com with subject "Item bought on Pharmadeals"
+Email sent to daropaleb@gmail.com with subject "Product upload"
+Email sent to daropaleb@gmail.com with subject "Product upload"

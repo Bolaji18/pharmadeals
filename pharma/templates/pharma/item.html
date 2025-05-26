@@ -8,16 +8,14 @@
 
 
   {% block content%}
-  <div  >
-    <ul>
-        <li role="alert" class="alert alert-info" style="display: {{display}};" id="time">{{message}}</li>
-    </ul>
-  </div>
+ 
+        <li role="alert" class="alert alert-info mt-54 lg:mt-24" style="display: {{display}};" id="time">{{message}}</li>
+    
   <div class="grid grid-cols-1 mb-6 min-h-[384px] sm:grid-cols-2 lg:grid-cols-2 gap-6 ml-1 lg:ml-10 mt-10">
     <script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
  
-  <div class="w-[200px] h-[304px] object-contain mt-24">
-    <img src="{{ item.image.url }}" class="w-full h-[284px] object-contain lg:ml-14" alt="Popular Product" />
+  <div class="w-[100%] lg:w-[200px] lg:h-[304px] object-contain mt-24">
+    <img src="{{ item.image.url }}" class="w-[100%] lg:h-[284px] lg:h-[304px]  object-contain lg:ml-14" alt="Popular Product" />
     <button onclick="sharePage()" id="share" class="text-gray-500 w-10 px-4" data-title="share this page"><span>{% heroicon_outline "share" size=20 %} share</span></button>
 
   </div>
@@ -31,7 +29,7 @@
     <span class="text-gray-500  ml-1 text-xl font-sans">Shipping: ₦ {{ item.shipping }}</span>
     {% endif %}
     <br>
-    <span class="text-gray-500   text-xl font-sans ">Description: {{ item.description }}</span>
+    <span class="text-gray-500   text-base font-sans ">Description: {{ item.description }}</span>
     <br>
    
   <!-- Bid Button -->
