@@ -1,10 +1,10 @@
 {% extends 'pharma/base2.html' %}
  {% load static %}
-  {% load widget_tweaks %} 
-  {%load heroicons %} 
-  {% block title %} 
-  Categories 
-  {% endblock %} 
+  {% load widget_tweaks %}
+  {%load heroicons %}
+  {% block title %}
+  Buy Our Product by Category
+  {% endblock %}
   {% block content%}
 
   <style>
@@ -15,11 +15,11 @@
 <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 ml-10 gap-6 pt-20" style="margin-left: 10px; margin-bottom: 500px;">
   {% if popular_items %} {% for item in popular_items %}
 
-  <div class="shadow-sm bg-base-100 py-4">
+  <div class="shadow-sm bg-base-100 py-4 h-[286px] lg:h-[316px]">
     <a href="{% url 'item' name=item.name  id=item.id %}" class="block space-y-2">
       <img
         src="{{ item.image.url }}"
-        class="w-full h-[284px] object-contain"
+        class="w-full h-[154px] lg:h-[204px] object-contain"
         alt="Popular Product"
       />
       <h6 class="text-blue-900  text-lg">{{ item.name }}</h6>
@@ -49,9 +49,9 @@ let hasNext = true;
 
 function renderProduct(item) {
   return `
-    <div class="shadow-sm bg-base-100 py-4">
+    <div class="shadow-sm bg-base-100 py-4 h-[286px] lg:h-[316px]">
       <a href="/categories/${item.name}/${item.id}/" class="block space-y-2">
-        <img src="${item.image_url}" class="w-full h-[284px] object-contain" alt="Popular Product"/>
+        <img src="${item.image_url}" class="w-full h-[154px] lg:h-[204px] object-contain" alt="Popular Product"/>
         <h6 class="text-blue-900 text-lg">${item.name}</h6>
         <span class="text-green-400   text-xl font-sans">₦ ${item.price}</span><br>
         ${item.shipping == 0
@@ -86,7 +86,7 @@ window.addEventListener('scroll', () => {
     document.getElementById('spin').style.display = 'block';
     setTimeout(() => { document.getElementById('spin').style.display = 'none'; }, 5000);
     loadMoreProducts();
-    
+
   }
 });
 </script>

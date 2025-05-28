@@ -7,9 +7,16 @@ from django.core.exceptions import ValidationError
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+class newsletter(models.Model):
+    email = models.EmailField()
+    def __str__(self):
+        return f"{self.email}"
+
 class searchProduct(models.Model):
     search = models.CharField(max_length=1000)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True)
+    def __str__(self):
+        return f"{self.user} searched for {self.search}"
 
 class help(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -94,7 +101,7 @@ class bought(models.Model):
     name = models.ForeignKey(cart, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.user}:  items bought"
-    
+
 class popular(models.Model):
     name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
     views = models.IntegerField(default=0)

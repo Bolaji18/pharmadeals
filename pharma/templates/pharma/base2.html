@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-   
+
     <style>
        #notification-badge {
       display: inline-block;
@@ -25,7 +25,7 @@
       border-radius: 9999px; /* fully rounded */
       line-height: 1;
     }
-    
+
     </style>
         <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
   </head>
@@ -70,14 +70,21 @@
       </div>
 
       <!-- Search Bar -->
-       <form action="{% url 'search' %}" method="post"  >
-      <div class="flex items-center bg-blue-100 border border-gray-800 rounded-full px-4 py-1 mt-4 md:mt-0 w-full md:w-[442px] max-w-full md:ml-10">
-        
+       <form action="{% url 'search' %}" method="post" style="display: none;"  id="post_search_item">
+      <div class="flex items-center bg-blue-100 border border-gray-800 rounded-full px-0 py-0 mt-4 md:mt-0 w-full md:w-[442px] max-w-full md:ml-10">
+        <span onclick="document.getElementById('post_search_item').style.display='none';
+         document.getElementById('post_search_item565').style.display='block';
+        " class="cursor-pointer">&times;</span>
         <input type="text" name="search" placeholder="Search for Pharmaceuticals"
-          class="ml-2 flex-grow bg-transparent border-none focus:outline-none text-sm md:text-base text-black" />
-        <span class="ml-2 text-gray-600"> <button class="bg-green-100 text-black px-4 rounded-r-full h-[100%]" type="submit">{% heroicon_outline "magnifying-glass" size=30 %}</button></span>
+          class="ml-2 flex-grow bg-transparent border-none focus:outline-none text-sm md:text-base text-black " />
+        <span class="ml-2 text-gray-600 cursor-pointer "> <button class="bg-green-300 ml-14 lg:ml-0 text-black px-4 py-1 rounded-r-full h-[100%] cursor-pointer" type="submit">{% heroicon_outline "magnifying-glass" size=30 %}</button></span>
+
       </div>
       </form>
+        <button onclick="document.getElementById('post_search_item').style.display='block';
+         document.getElementById('post_search_item565').style.display='none';
+        " class="bg-green-300 ml-14 lg:ml-0 text-black px-4 py-1 rounded-full h-[100%] cursor-pointer lg:ml-[50%]" id="post_search_item565" type="submit">{% heroicon_outline "magnifying-glass" size=30 %}</button>
+
 
       <!-- Cart & Auth Buttons -->
        <a href="{% url 'see_cart' %}" class="flex items">
@@ -85,7 +92,7 @@
         <span>{% heroicon_outline "shopping-cart" size=20 %}</span>
         <span id="notification-badge" class="rounded-full py-8 px-8"></span>
       </a>
-        
+
 
         <script>
            const url = `{% url 'get_pharma'  %}`; // Generate the URL dynamically
@@ -117,7 +124,7 @@
         </script>
          {% if request.user.username %}
 
-        <a href="{% url 'profile' %}" class="avatar">
+        <a href="{% url 'profile' %}" class="avatar cursor-pointer">
           <button class="w-24 rounded-full">
              {% heroicon_outline "user-circle" size=40 %}
           </button>
@@ -139,12 +146,15 @@
       </div>
     </header>
 
-<div class="mb-[50px] font-sans mt-44 sm:mt-20 lg:mt-12">
 
+<div class="mb-[50px] font-sans mt-30 sm:mt-30 lg:mt-12">
+
+ <a href="#"><img src="{% static 'images/8380012-removebg-preview.png' %}" class="sm:w-34 lg:w-34 lg:w-34 sm:h-34  h-24 w-24 fixed ml-80% sm:ml-[80%] lg:ml-[90%] z-999 bottom-0 cursor-pointer"></a>
 
      {% block content %} {% endblock %}
 
 </div>
+
 
 
 
@@ -161,11 +171,14 @@
 
     <!-- Email Subscription -->
     <div>
+      <form method="post" action="{% url 'newsletter_email' %}">
+        {% csrf_token %}
       <h4 class="mb-2">Your Email</h4>
       <div class="flex items-center bg-blue-100 rounded-l-full overflow-hidden w-full max-w-[416px] h-12">
-        <input type="email" placeholder="Example@email.com" class="bg-blue-100 border-none text-black text-base px-4 w-full focus:outline-none" />
+        <input type="email" name="email" placeholder="Example@email.com" class="bg-blue-100 border-none text-black text-base px-4 w-full focus:outline-none" />
         <button class="bg-green-500 text-white px-4 rounded-r-full h-full">{% heroicon_outline "paper-airplane" size=20 %}</button>
       </div>
+      </form>
     </div>
 
     <!-- About Pharmabids -->
@@ -223,7 +236,5 @@ function closeNav() {
    document.getElementById("sidenav2").style.display = "fixed";
 }
 </script>
-
-
 </body>
 </html>

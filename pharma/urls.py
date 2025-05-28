@@ -19,7 +19,7 @@ urlpatterns = [
     path('categories/<str:categor>/', views.product, name='product'),
     path('categories/<str:name>/<int:id>/', views.item, name='item'),
     path('get_pharma', views.get_pharma, name='get_pharma'),
-    path('see_cart/', views.see_cart, name='see_cart'), 
+    path('see_cart/', views.see_cart, name='see_cart'),
     path('remove_from_cart/<int:id>/', views.remove_from_cart, name='remove_from_cart'),
     path('buynow/<str:name>/<int:id>/', views.buynow, name='buynow'),
     path('get_sales', views.get_sales, name='get_sales'),
@@ -30,10 +30,9 @@ urlpatterns = [
     path('help', views.help, name='help'),
     path('bid/<int:id>/', views.bids_app, name='bid'),
     path('search/', views.submit_search, name='search'),
-
-
-
     path('api/products/<int:page>', views.product_list_api, name='product_list_api'),
+    path('update_status/<int:id>', views.update_status, name='update_status'),
+    path('newsletter_email/', views.newsletter_email, name='newsletter_email'),
 
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

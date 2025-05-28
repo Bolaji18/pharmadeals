@@ -14,10 +14,10 @@ Login
 
 <style>
   body {font-family: Arial, Helvetica, sans-serif;}
-  
+
   /* Full-width input fields */
 
-  
+
   /* Set a style for all buttons */
   .button2 {
     background-color: #04AA6D;
@@ -28,39 +28,39 @@ Login
     cursor: pointer;
     width: 100%;
   }
-  
+
   button:hover {
     opacity: 0.8;
   }
-  
+
   /* Extra styles for the cancel button */
   .cancelbtn {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
   }
-  
+
   /* Center the image and position the close button */
   .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
     position: relative;
   }
-  
+
   img.avatar {
     width: 40%;
     border-radius: 50%;
   }
-  
+
   .container {
     padding: 16px;
   }
-  
+
   span.psw {
     float: right;
     padding-top: 16px;
   }
-  
+
   /* The Modal (background) */
   .modal {
     display: none; /* Hidden by default */
@@ -75,7 +75,7 @@ Login
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
   }
-  
+
   /* Modal Content/Box */
   .modal-content {
     background-color: #fefefe;
@@ -83,7 +83,7 @@ Login
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
   }
-  
+
   /* The Close Button (x) */
   .close {
     position: absolute;
@@ -93,20 +93,20 @@ Login
     font-size: 35px;
     font-weight: bold;
   }
-  
+
   .close:hover,
   .close:focus {
     color: red;
     cursor: pointer;
   }
-  
+
   /* Add Zoom Animation */
- 
+
   #footer2{
     display: none;
   }
 
-  
+
   /* Change styles for span and cancel button on extra small screens */
   @media screen and (max-width: 300px) {
     span.psw {
@@ -123,23 +123,19 @@ Login
 
 
 
-      <li class=" mt-20 rounded-lg bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3" style="display: {{display}};" id="time">{{message}}</li>
-  
-
-<script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
-<style>
+      <style>
   #mySidenav2{
     min-height: 100vh;
     max-width: 200px;
-   
-    
+
+
   }
- 
+
   @media screen and (max-width: 768px) {
     #mySidenav2 {
       min-height: auto;
       max-height: 100px;
-     
+
       position: relative;
       display: inline;
       z-index: 1;
@@ -149,14 +145,14 @@ Login
       padding-top: 20px;
       width: 200px;
     display: grid;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr  ;
     gap: 20px;
     height: 200px;
     }
     #note1 {
       margin-left: 0;
       display: inline;
-      margin-top: 100px;
+      margin-top: 0px;
       overflow-x: scroll;
       overflow: hidden;
     }
@@ -188,47 +184,52 @@ Login
         flex-wrap: nowrap;
         align-content: flex-end;
     } */
-  
+
     }
     #inxex1{
       display: none;
     }
-    
+
   }
 </style>
 
-   
+ <li role="alert" class="alert alert-info mt-54 lg:mt-24" style="display: {{display}};" id="time">{{message}}</li>
+
+    <script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
+
+
+
    <div class="flex flex-col md:flex-row " id="oppen">
-     
+
   <!-- Tabs (left side) -->
   <div class=" w-[200px]   py-10 overflow h-auto md:h-[100%] border-white "  id="mySidenav2">
   <a href="{% url 'index' %}" id="inxex1">
       <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12 mx-auto md:mx-0" alt="Pharmadeals Logo">
     </a>
-    <button 
-      class="btn btn-success"
-      onclick="getuser()" 
+    <button
+      class="btn btn-primary lg:min-w-[100%]"
+      onclick="getuser()"
       id="defaultOpen">
       User Profile
-    </button><br>
-    <button 
-      class="btn btn-success"
+    </button>
+    <button
+      class="btn btn-primary lg:min-w-[100%]"
       onclick="opensales()" id="sales">
       Sales
     </button>
-    <button 
-      class="btn btn-success"
+    <button
+      class="btn btn-primary lg:min-w-[100%]"
       onclick="purchase()" id="purchase">
       Purchases/Bids
     </button>
-    <button 
-      class="btn btn-success"
+    <button
+      class="btn btn-primary lg:min-w-[100%]"
       onclick="openCity()" id="product">
       Products
     </button>
     <a href="{% url 'help' %}">
-      <button id="help" 
-        class="btn btn-success">
+      <button id="help"
+        class="btn btn-primary  lg:min-w-[100%]">
         Help
       </button>
     </a>
@@ -240,7 +241,7 @@ Login
   </div>
 </div>
 <style>
- 
+
 
 </style>
 
@@ -250,7 +251,7 @@ Login
 
   function openCity() {
     // Get all elements with class="tabcontent
-    
+
   const url = `{% url 'get_table'  %}`;
    document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation // Generate the URL dynamically
 fetch(url, {
@@ -268,7 +269,7 @@ fetch(url, {
 .then(data => {
    document.getElementById('note1').innerHTML = data;
   // Log the data to the console for debugging
-   
+
 
 })
 .catch(error => {
@@ -302,7 +303,7 @@ fetch(url, {
 .then(data => {
    document.getElementById('note1').innerHTML = data;
   // Log the data to the console for debugging
-   
+
 
 })
 .catch(error => {
@@ -334,7 +335,7 @@ fetch(url, {
 .then(data => {
    document.getElementById('note1').innerHTML = data;
   // Log the data to the console for debugging
-   
+
 
 })
 .catch(error => {
@@ -343,7 +344,7 @@ fetch(url, {
 
   }
 
- 
+
 </script>
 
 
@@ -370,7 +371,7 @@ fetch(url, {
 .then(data => {
    document.getElementById('note1').innerHTML = data;
   // Log the data to the console for debugging
-   
+
 
 })
 .catch(error => {
@@ -383,15 +384,15 @@ fetch(url, {
    getuser(); // Call the function when the page loads
   };
 </script>
- 
+
 <style>
-  
+
 
 #customers tr:nth-child(even){background-color: #f2f2f2;}
 
 #customers tr:hover {background-color: #ddd;}
 </style>
-  
+
 
 
 

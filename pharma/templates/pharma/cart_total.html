@@ -8,40 +8,59 @@
 
 
 {% block title %}
-Cart  Total 
+Cart  Total
 {% endblock %}
 
 
 {% block content %}
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24 px-6 md:px-16 py-10 items-center">
- 
+<div class="grid grid-cols-2 md:grid-cols-2 gap-6 mb-24 px-6 md:px-16 py-10 items-center">
 
-   
+
+
 
 {% if cart_items%}
 {% with "" as previous %}
 {% for item in cart_items %}
 {% if item != previous %}
-<div class="justify-between grid grid-cols-2  items-center mb-2 border-b-2 border-gray-300 py-4 px-6">
+<div class="justify-between grid grid-cols-2 h-[286px] lg:h-[316px]  items-center mb-2 border-b-2 border-gray-300 py-4 px-6">
   <div class=" items-center space-x-4">
-    <img src="{{ item.name.image.url }}" alt="{{ item.name.name }}" class=" h-[200px] rounded-lg" style="height: 200px;">
+    <img src="{{ item.name.image.url }}" alt="{{ item.name.name }}" class=" h-[120px] w-[150px]  lg:h-[200px] rounded-lg" >
     <div>
       <h3 class="text-lg font-semibold text-blue-900">{{ item.name.name }}</h3>
       <p class="text-gray-600">Price: ₦ {{ item.name.price }}</p>
       <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
     </div>
-    
+
   </div>
-  <div class="flex justify-end mt-4 px-6">
-    <form method="post" action="{% url 'remove_from_cart' item.id %}">
-      {% csrf_token %}
+  <div class="flex justify-end mt-4 ml-6 px-6">
+
       <input type="hidden" name="item_id" value="{{ item.name.id }}">
-      <button type="submit" style="cursor: pointer;" class="cursor-pointer text-red-500 hover:text-red-700 focus:outline-none">
-        <span>{% heroicon_outline "trash" size=20 %}</span> 
+      <button onclick="document.getElementById('id01{{ item.name.id }}').style.display='block'" style="cursor: pointer;" class="cursor-pointer text-red-500 hover:text-red-700 focus:outline-none">
+        <span>{% heroicon_outline "trash" size=20 %}</span>
       </button>
-    </form>
+
 </div>
 </div>
+
+   <div id="id01{{ item.name.id }}" class="fixed inset-0 bg-[#cccccc] bg-opacity-50 flex items-center justify-center hidden z-10 ">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-[90%] mt-54 lg:w-1/3 lg:ml-94  lg:mt-34">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold">Confirm Deletion</h2>
+            <button onclick="document.getElementById('id01{{ item.name.id }}').style.display='none'" class="text-gray-500 hover:text-gray-700">&times;</button>
+          </div>
+           <form method="post" action="{% url 'remove_from_cart' item.id %}">
+            {% csrf_token %}
+          <p class="mt-4">Are you sure you want to delete this item?</p>
+          <p class="mt-2 mb-4">  {{ item.name.name }}</p>
+          <button  type="submit" class="bg-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-600 text-white mt-4">Delete</button>
+           </form>
+          <div class="mt-6 flex justify-end space-x-4">
+            <button onclick="document.getElementById('id01{{ item.name.id }}').style.display='none'" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">Cancel</button>
+
+          </div>
+        </div>
+      </div>
+
 
   {% endif %}
   {% with item as previous %}
@@ -49,13 +68,13 @@ Cart  Total
   {% endfor %}
   {% endwith %}
     <!-- <div class="text-right"> -->
-    
+
 </div>
 </div>
 {% else %}
         <p class="text-lg font-semibold text-blue-900">No item found</p>
 {% endif %}
-   
+
 
 {% if cart_items%}
 <div class=" block justify-end mt-4 px-6">
@@ -68,7 +87,7 @@ Cart  Total
 {% endif %}
 
 <style>
-  
+
 
 .cancelbtn {
   width: auto;
@@ -104,7 +123,7 @@ span.psw {
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
-  
+
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
@@ -145,12 +164,12 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
+  from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
+  from {transform: scale(0)}
   to {transform: scale(1)}
 }
 
@@ -192,10 +211,10 @@ span.psw {
                                 </ul>
                             </div>
                         {% endif %}
-                        
+
 
          {% endfor %}
-        
+
       <button class="bg-green-500 text-white px-4 py-2 rounded-lg w-full" type="submit">Submit</button>
     </div>
   </form>
@@ -217,7 +236,7 @@ span.psw {
 <script>
   // Get the modal
   var modal = document.getElementById('id01');
-  
+
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
       if (event.target == modal) {
@@ -225,7 +244,7 @@ span.psw {
       }
   }
   </script>
-  
 
-  
+
+
 {% endblock %}

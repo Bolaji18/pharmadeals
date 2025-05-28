@@ -37,9 +37,12 @@ from .models import searchProduct
 from .forms import bid_form
 from datetime import datetime
 from .models import bid
-# search for products 
+# search for products
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+from .models import newsletter
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 # from django.db.models import Case, When, Value, IntegerField
 
@@ -70,17 +73,43 @@ from django.core.paginator import Paginator
 #         })
 #     return JsonResponse({'items': data, 'has_next': page_obj.has_next()})
 
+# for saving newsletter emails
+def newsletter_email(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        form = newsletter(email=email)
+        try:
+            validate_email(email)
+            form.save()
+            return redirect('index')
+        except ValidationError:
+            return redirect('index')
+
+
+
+def update_status(request, id):
+    item = get_object_or_404(boughtitem, id=id)
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            status = request.POST.get('status')
+            item.status = status
+            item.save()
+            message = f"Status updated to {status} for {item.product_name}"
+            return render(request, 'pharma/profile.html', context={'message': message, 'display': 'block'})
+        else:
+            message = f"You don't have permission to update this item"
+            return render(request, 'pharma/profile.html', context={'message': message, 'display': 'block'})
 
 def product_list_api(request, page):
     page = int(page)
     per_page = 10  # or whatever your grid shows per "page"
-    # start = page - 3 
+    # start = page - 3
     products = Pharma.objects.filter(Approval=True).order_by('-id')
     paginator = Paginator(products, per_page)
     page_obj = paginator.get_page(page)
     data = []
     for item in page_obj:
-       
+
             data.append({
                 'id': item.id,
                 'name': item.name,
@@ -113,12 +142,12 @@ def bids_app(request, id):
             return render(request, 'pharma/register.html', context={ 'none': 'none',  'success': "Your bid has been sent successfully"})
      else:
         option = Pharma.objects.filter(id=id).first()
-        form = cart_form() 
-        format = bid_form() 
+        form = cart_form()
+        format = bid_form()
         message ="pls login to place a bid"
         return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'block', 'message': message, 'format':format})
     else:
-        
+
       return HttpResponse("Bid not placed")
 
 @csrf_exempt
@@ -145,11 +174,11 @@ def help(request):
             username = request.POST.get('name')
             subject = "PharmaDeals Help Request"
             subject2 = f"PharmaDeals Help Request by {name}"
-            message = send_email(request, messages='', subjects=subject, emails=email, html='email/help.html', context={'name': name})
-            owner = send_email(request, messages='', subjects=subject2, emails='daropaleb@gmail.com', html='email/help.html', context={'name': name})
+            send_email(request, messages='', subjects=subject, emails=email, html='email/help.html', context={'name': name})
+            send_email(request, messages='', subjects=subject2, emails='daropaleb@gmail.com', html='email/help.html', context={'name': name})
             name.save()
             messages= f"Your message has been sent successfully"
-            
+
             return render(request, 'pharma/register.html', context={'message': messages, 'none': 'none', 'text':messages, 'success': "Your message has been sent successfully"})
     else:
         form = help_form()
@@ -176,9 +205,9 @@ def purchase(request):
                         'status': item.status,
                         'date': item.created_at,
                         'order_id': item.order_id,
-                        
+
                     })
-               
+
             return render(request, 'tables/purchase_table.html', {'cart_items': cart_data, 'Bid_items': bid_items})
         else:
             return redirect('login')
@@ -187,19 +216,19 @@ def purchase(request):
 
 
 def pharma_delete(request, id):
-    
+
         if request.user.is_authenticated:
             pharma_item = get_object_or_404(Pharma, id=id)
             if pharma_item.user != request.user:
                 return HttpResponse("You are not authorized to delete this item.")
             else:
-                
+
                  messages= f"{pharma_item.name} has been deleted successfully"
                  pharma_item.delete()
                  return render(request, 'pharma/profile.html', context={'message': messages, 'display': 'block'})
         else:
             return redirect('login')
-   
+
 
 
 def product(request, categor):
@@ -212,16 +241,17 @@ def category(request):
     return render(request, 'pharma/category.html', context={'categories':option})
 
 def buynow(request, name , id):
-     
+
         if request.user.is_authenticated:
             cart.objects.create(user=request.user, name=Pharma.objects.get(name=name, id=id), quantity=1)
-            
+
             return redirect('see_cart')
         else:
               option = Pharma.objects.filter(name=name, id=id).first()
-              form = cart_form() 
+              form = cart_form()
+              format = bid_form()
               messages= f"pls login to add item to cart"
-              return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block'})
+              return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block', 'format':format})
 
 
 def item(request,name, id):
@@ -245,15 +275,15 @@ def item(request,name, id):
                 name.name = option
                 name.save()
                 messages= f"{quantity} items added to cart successfully "
-                format = bid_form() 
+                format = bid_form()
                 return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block', 'format':format})
         else:
               format = bid_form()
               messages= f"pls login to add item to cart"
               return render(request, 'pharma/item.html', context={"item": option, "form": form, 'message': messages, 'display': 'block', 'format':format})
     else:
-        form = cart_form() 
-    format = bid_form() 
+        form = cart_form()
+    format = bid_form()
     message ="you can add item to cart"
     return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'none', 'message': message, 'format':format})
 
@@ -338,16 +368,16 @@ def send_email(request, messages, subjects, emails, html, context=None):
     subject = subjects
     message = messages
     from_email = 'admin@pharmadeals.ng'
-    
+
     # Render the HTML template with context
     html_message = render_to_string(html, context or {})
-    
+
     send_mail(subject, message, from_email, [email], html_message=html_message)
-    
+
     # Log the email for debugging
     with open('email.txt', 'a') as f:
         f.write(f'Email sent to {email} with subject "{subject}"\n')
-    
+
     return f'Email sent to {email}'
 def get_user(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -358,7 +388,7 @@ def get_user(request):
             views = sum(item.views for item in popular.objects.filter(name__user=name))
             labels = [p.name.name for p in popular.objects.all() if p.name.user == request.user]
             values = [int(p.views) for p in popular.objects.all() if p.name.user == request.user]
-      
+
                 # Create the bar chart
             fig, ax = plt.subplots()
             ax.plot(labels, values, marker='o')
@@ -460,13 +490,13 @@ def see_cart(request):
                 name2 = request.POST.get('name')
                 name.save()
                 cart_items = cart.objects.filter(user=name.user)
-                
+
                 if method == "2" or method == "1":
                     message = send_email(request, messages="", subjects="order is being processed", emails=email, html='email/process.html',  context={'name': name2} )
                     text = "Your order is being processed, please wait for a confirmation email. Thank you for your order."
-                    
+
                     cart_items = cart.objects.filter(user=name.user)
-                    for item in cart_items:   
+                    for item in cart_items:
                         email = item.name.user.email
                         users = item.name.user.username
                         name2 = item.name.user.first_name
@@ -475,19 +505,19 @@ def see_cart(request):
                         total_earned = item.name.price * item.quantity
                         order_id = item.id
                         status = "pending"
-                        
+
                         buyer_info = buyerinfo.objects.filter(user=name.user).order_by('-id').first()
                         bought_item = boughtitem.objects.create(email=email, name=name2, users=users, product_name=product_name, quantity=quantity, total_earned=total_earned, order_id=order_id, buyer_info=buyer_info, status=status)
                         bought_item.save()
 
                         message = send_email(request, messages="", subjects="Item bought on Pharmadeals", emails=email, html='email/bought.html',  context={'username': name, 'product_name':product_name,'quantity':quantity, 'total_earned':total_earned,'order_id':order_id } )
                     return render(request, 'pharma/register.html', {'text': text})
-                    
-                
+
+
                 return redirect('index')
             else:
                return render(request, 'pharma/cart_total.html', {'cart_items': cart_items, 'total_price': total_price, 'form': form, 'item': item})
-        
+
         name = request.user
         cart_items = cart.objects.filter(user=name)
         total_price = 0
@@ -499,7 +529,7 @@ def see_cart(request):
         return render(request, 'pharma/cart_total.html', {'cart_items': cart_items, 'total_price': total_price, 'form': form, 'item': item})
     else:
         return redirect('login')
-    
+
 def remove_from_cart(request, id):
     if request.method == 'POST':
      if request.user.is_authenticated:

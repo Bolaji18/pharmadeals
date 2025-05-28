@@ -1,25 +1,25 @@
 {% extends 'pharma/base2.html' %}
  {% load static %}
-  {% load widget_tweaks %} 
-  {%load heroicons %} 
-  {% block title %} 
+  {% load widget_tweaks %}
+  {%load heroicons %}
+  {% block title %}
   {{ item.name }}
-  {% endblock %} 
+  {% endblock %}
 
 
   {% block content%}
- 
+
         <li role="alert" class="alert alert-info mt-54 lg:mt-24" style="display: {{display}};" id="time">{{message}}</li>
-    
+
   <div class="grid grid-cols-1 mb-6 min-h-[384px] sm:grid-cols-2 lg:grid-cols-2 gap-6 ml-1 lg:ml-10 mt-10">
     <script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
- 
+
   <div class="w-[100%] lg:w-[200px] lg:h-[304px] object-contain mt-24">
-    <img src="{{ item.image.url }}" class="w-[100%] lg:h-[284px] lg:h-[304px]  object-contain lg:ml-14" alt="Popular Product" />
+    <img src="{{ item.image.url }}" class="w-[100%] h-[284px] lg:h-[304px]   object-contain lg:ml-14" alt="Popular Product" />
     <button onclick="sharePage()" id="share" class="text-gray-500 w-10 px-4" data-title="share this page"><span>{% heroicon_outline "share" size=20 %} share</span></button>
 
   </div>
-  <div class=" object-contain mt-24 ">
+  <div class=" object-contain lg:mt-24 ">
     <h6 class="text-blue-900 ml-1 text-lg">{{ item.name }}</h6>
     <span class="text-green-400  ml-1 text-xl font-sans"> ₦ {{ item.price }}</span>
     <br>
@@ -31,7 +31,7 @@
     <br>
     <span class="text-gray-500   text-base font-sans ">Description: {{ item.description }}</span>
     <br>
-   
+
   <!-- Bid Button -->
 <button class="btn btn-success" id="bid">Bid</button>
 
@@ -44,7 +44,7 @@
         onclick="document.getElementById('idoo').style.display='none'"
         class="absolute top-2 right-4 text-3xl text-gray-700 hover:text-red-500 font-bold focus:outline-none"
         title="Close Modal">&times;</button>
-      <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" alt="Avatar" class="w-34 h-24 rounded-full mx-auto mb-2">
+      <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" alt="Avatar" class="w-44 h-24 rounded-full mx-auto mb-2">
     </div>
     <div class="space-y-4">
       {% for field in format %}
@@ -60,10 +60,10 @@
                                 </ul>
                             </div>
                         {% endif %}
-                        
+
 
          {% endfor %}
-        
+
       <button class="bg-green-500 text-white px-4 py-2 rounded-lg w-full" type="submit">Submit</button>
     </div>
   </form>
@@ -98,28 +98,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
-</script>      
-  
+</script>
+
     <a href="{% url 'buynow' name=item.name  id=item.id %}"><button class="btn btn-success">Buy Outright</button>
   </a>
   {% for name in form %}
   <form method="post" id="myForm" enctype="multipart/form-data" class="space-y-6">
     {% csrf_token %}
 
-  
+
   <div class="border border-gray-400 border-l-4 border-l-blue-900 px-4 rounded-lg w-full max-w-[540px py-4">
-    
+
     <label class="text-base text-gray-700 block mb-1" for="{{ name.id_for_label }}">{{ name.label }}</label>
   {{ name|add_class:"w-8 h-11 text-base focus:border border-blue-400 rounded-md" }}
   <br>
   <small class="text-sm text-gray-500">{{ name.help_text }}</small>
   <br>
   <button type="submit" class="btn btn-success">Add to Cart</button>
- 
+
   {% if name.errors %}
   <div class="mt-2 rounded-lg bg-red-100 border border-red-400 text-red-700 px-4 py-3">
-    <ul> 
-        
+    <ul>
+
         {% for error in name.errors %}
             <li>{{ error }}</li>
         {% endfor %}
@@ -128,13 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
   {% endfor %}
 
 </form>
-  
+
 
 
 
 
 <style>
-  
+
 
 .cancelbtn {
   width: auto;
@@ -170,7 +170,7 @@ span.psw {
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
-  
+
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
@@ -211,12 +211,12 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
+  from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
+  from {transform: scale(0)}
   to {transform: scale(1)}
 }
 
@@ -235,15 +235,15 @@ span.psw {
 
 
 <div id="idoo" class="modal">
-  
+
   <form class="modal-content animate" action="{% url 'bid' id=item.id %}" method="post">
     {% csrf_token %}
     <div class="imgcontainer">
       <span onclick="document.getElementById('idoo').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" alt="Avatar" class="avatar">
-      
+
     </div>
-    
+
 
     <div class="container">
       {% for field in format %}
@@ -259,15 +259,15 @@ span.psw {
                                 </ul>
                             </div>
                         {% endif %}
-                        
+
 
          {% endfor %}
-        
+
       <button class="bg-green-500 text-white px-4 py-2 rounded-lg ml-4" type="submit">Submit</button>
-      
+
     </div>
 
-    
+
   </form>
 </div>
 
@@ -278,7 +278,7 @@ span.psw {
 <script>
   // Get the modal
   var modal = document.getElementById('idoo');
-  
+
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
       if (event.target == modal) {
@@ -288,10 +288,10 @@ span.psw {
   </script>
 
 
-   
+
 
   </div>
-  
+
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -1,4 +1,4 @@
-{% extends 'pharma/base.html' %}
+{% extends 'pharma/base2.html' %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -8,6 +8,11 @@ Login
 {% endblock %}
 
 {% block content %}
+<style>
+  #footer2{
+    display: none;
+  }
+</style>
 <section class="  grid grid-cols-1 md:grid-cols-2 gap-6 mb-24 px-6 md:px-16 py-10 items-center">
   <!-- Left: Form -->
   <div class="mt-10 md:ml-24">
@@ -57,12 +62,19 @@ Login
 
         <!-- Buttons -->
         <div class="flex gap-4 mt-4">
-          <button type="submit" class="w-[129px] h-[54px] btn btn-success">Login</button>
+          <button type="submit" class="w-[129px] h-[54px] btn btn-success" onclick="loadform()"> Submit <span class="loading loading-spinner text-primary  w-10 h-10 " style="display: none;" id="loader"></span></button>
           <a href="{% url 'register' %}" class=" w-[129px] h-[54px] btn btn-outline btn-success">Sign up</a>
         </div>
       {% endif %}
     </form>
   </div>
+  <script>
+   function loadform(){
+
+    document.getElementById('loader').style.display = "block" ; //add loading animation // Generate the URL dynamically
+    setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 150000);
+  }
+</script>
 
   <!-- Right: Image -->
   <div class="flex justify-center mt-10 md:mt-0">

@@ -16,6 +16,8 @@ from .models import boughtitem
 from .models import help
 from .models import bid
 from .models import help
+from .models import searchProduct
+from .models import newsletter
 
 admin.site.register(bid)
 admin.site.register(help)
@@ -31,7 +33,8 @@ admin.site.register(Categories)
 admin.site.register(Approval)
 admin.site.register(Pharma)
 admin.site.register(Seller)
-
+admin.site.register(searchProduct)
+admin.site.register(newsletter)
 
 
 # Register your models here.
