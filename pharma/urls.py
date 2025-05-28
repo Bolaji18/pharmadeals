@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/products/<int:page>', views.product_list_api, name='product_list_api'),
     path('update_status/<int:id>', views.update_status, name='update_status'),
     path('newsletter_email/', views.newsletter_email, name='newsletter_email'),
+    path('popular_all', views.popular_items_all, name='popular_all')
 
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

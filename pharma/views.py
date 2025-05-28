@@ -229,6 +229,10 @@ def pharma_delete(request, id):
         else:
             return redirect('login')
 
+def popular_items_all(request):
+    option = Pharma.objects.filter(Approval=True).order_by('-id')[:30]
+    return render(request, 'pharma/product.html', context={"popular_items": option})
+
 
 
 def product(request, categor):
