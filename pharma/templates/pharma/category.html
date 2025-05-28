@@ -11,11 +11,11 @@ Categories
 
 
 {% block content %}
- <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-0 ">
+ <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 mt-0 ">
     {% for catego in categories %}
      <a href="categories/{{catego.category}}/">
-    <div class="relative bg-green-300 rounded-2xl mt-14 p-4 h-[316px] ">
-      <img src="{{ catego.image.url }}" class="w-full h-[284px] object-contain mx-auto" alt="{{ catego.category }}">
+    <div class="relative bg-green-300 rounded-2xl mt-2  p-4 lg:w-96 w-44  lg:h-[316px] h-[206px] ">
+      <img src="{{ catego.image.url }}" class="w-full h-[184px] object-contain mx-auto" alt="{{ catego.category }}">
       <h6 class="absolute bottom-3 left-4 text-xl text-blue-900">{{ catego.category }}</h6>
       <span class="absolute top-3 right-3 text-red-500">{% heroicon_outline "arrow-right-circle" size=40 %}</span>
     </div>
