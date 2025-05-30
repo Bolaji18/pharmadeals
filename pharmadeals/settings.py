@@ -147,7 +147,7 @@ USE_TZ = True
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
-LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
@@ -168,7 +168,7 @@ LOGIN_URL = 'login'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-LOGIN_REDIRECT_URL = 'accounts/profile/'
+LOGIN_REDIRECT_URL = '/'
 
 
 EMAIL_PORT = 465

@@ -8,6 +8,11 @@ from .models import help
 from .models import bid
 
 
+
+class UsernamePasswordResetForm(forms.Form):
+    username = forms.CharField(label="Username", max_length=150)
+
+
 class bid_form(forms.ModelForm):
     class Meta:
         model = bid

@@ -183,7 +183,7 @@ Pharmaceuticals Marketplace, Buy and Sell Drugs Online.
 
       <div class="card bg-base-100 lg:w-96 w-44  sm:h-[316px] h-[256px] shadow-sm">
          <a href="{% url 'item' name=item.name.name  id=item.name.id %}"></a>
-          <img src="{{ item.name.image.url }}" class="w-full h-[284px] object-contain" alt="Popular Product">
+          <img src="{{ item.name.image.url }}" class="w-full h-[274px] lg:h-[200px] object-contain" alt="Popular Product">
           <a class="card-body" href="{% url 'item' name=item.name.name  id=item.name.id %}" > <h6 class="card-title">{{ item.name.name }}</h6> </a>
             </a>
       </div>

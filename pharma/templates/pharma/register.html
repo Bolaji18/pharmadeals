@@ -13,6 +13,11 @@ Login
     display: none;
   }
 </style>
+
+ <li role="alert" class="alert alert-info mt-54 lg:mt-24" style="display: {% if display %} {{display}}{% else %} none {% endif %};" id="time">{{message}}</li>
+
+     <script>setTimeout(() => { document.getElementById('time').style.display = 'none'; }, 5000);</script>
+
 <section class="  grid grid-cols-1 md:grid-cols-2 gap-6 mb-24 px-6 md:px-16 py-10 items-center">
   <!-- Left: Form -->
   <div class="mt-10 md:ml-24">

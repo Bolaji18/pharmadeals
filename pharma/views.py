@@ -43,6 +43,12 @@ from django.core.paginator import Paginator
 from .models import newsletter
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from .forms import UsernamePasswordResetForm
+
 
 # from django.db.models import Case, When, Value, IntegerField
 
@@ -72,6 +78,41 @@ from django.core.exceptions import ValidationError
 #             'shipping': item.shipping,
 #         })
 #     return JsonResponse({'items': data, 'has_next': page_obj.has_next()})
+
+def password_reset_by_username(request):
+    message = ''
+    if request.method == 'POST':
+        form = UsernamePasswordResetForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            try:
+                user = User.objects.get(username=username)
+                token = default_token_generator.make_token(user)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                reset_link = request.build_absolute_uri(
+                    f"/reset/{uid}/{token}/"
+                )
+                # Send email to user.email with the reset link
+                # send_mail(
+                #     'Password Reset',
+                #     f'Click the link to reset your password: {reset_link}',
+                #     'admin@pharmadeals.com',
+                #     [user.email],
+                # )
+                send_email(request, messages='', subjects='Password Reset', emails=user.email, html='email/passwordreset.html', context={'username':user, 'reset_link':reset_link})
+
+                message = "A password reset link has been sent to your email."
+                return render(request, 'pharma/register.html', {'success': message})
+
+            except User.DoesNotExist:
+                message = "Username not found."
+                form = UsernamePasswordResetForm()
+                return render(request, 'pharma/register.html', {'form': form, 'success': message})
+
+    else:
+        form = UsernamePasswordResetForm()
+    return render(request, 'pharma/register.html', {'form': form})
+
 
 # for saving newsletter emails
 def newsletter_email(request):

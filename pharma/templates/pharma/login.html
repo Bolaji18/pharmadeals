@@ -65,6 +65,9 @@ Login
           <button type="submit" class="w-[129px] h-[54px] btn btn-success" onclick="loadform()"> Submit <span class="loading loading-spinner text-primary  w-10 h-10 " style="display: none;" id="loader"></span></button>
           <a href="{% url 'register' %}" class=" w-[129px] h-[54px] btn btn-outline btn-success">Sign up</a>
         </div>
+        <div class="mt-2 ">
+          <a href="{% url 'password_reset_by_username' %}" class="text-base text-primary">Forgot password</a>
+        </div>
       {% endif %}
     </form>
   </div>

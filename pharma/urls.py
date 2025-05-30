@@ -33,7 +33,13 @@ urlpatterns = [
     path('api/products/<int:page>', views.product_list_api, name='product_list_api'),
     path('update_status/<int:id>', views.update_status, name='update_status'),
     path('newsletter_email/', views.newsletter_email, name='newsletter_email'),
-    path('popular_all', views.popular_items_all, name='popular_all')
-
+    path('popular_all', views.popular_items_all, name='popular_all'),
+    path('password_reset_by_username/', views.password_reset_by_username, name='password_reset_by_username'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+urlpatterns += [
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='pharma/register.html'), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='pharma/register.html'), name='password_reset_complete'),
+]
