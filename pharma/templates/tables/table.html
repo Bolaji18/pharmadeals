@@ -1,8 +1,9 @@
 {% load heroicons %}
 {% load static %}
- <caption class="text-lg font-bold text-center mb-4" >Pharma Products</caption>
-   
+
 <div class="overflow-x-auto lg:ml-[5%]">
+  <caption class="text-lg font-bold text-center mb-4 mt-24" >Pharma Products</caption>
+
   <table class="table">
     <thead >
       <tr>
@@ -70,7 +71,7 @@
           <a href="{% url 'pharma_delete' id=name.name.id %}" class="bg-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-600 text-white mt-4">Delete</a>
           <div class="mt-6 flex justify-end space-x-4">
             <button onclick="document.getElementById('id01{{ name.name.id }}').style.display='none'" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">Cancel</button>
-           
+
           </div>
         </div>
       </div>
@@ -103,8 +104,8 @@
 <div class="justify-between  items-center mb-2 border-b-2 border-gray-300 py-4 px-6" id="name2">
   {% for name in categories %}
   <div class=" items-center space-x-4 mb-4 " id="name3" style="gap:10px; border: 2px solid #ccc; ">
-   
- 
+
+
     <img src="{{ name.name.image.url }}" alt="Product Image" class=" h-[200px] rounded-lg" style="height: 200px;">
     <div>
       <h3 class="text-lg font-semibold text-blue-900">{{ name.name.name }}</h3>
@@ -118,15 +119,13 @@
       <p class="text-gray-600">Status: {% if name.name.Approval %} <span style="color: #38c500;"> Approved</span> {% else %} <span style="color: red;">Awaiting Approval</span> {% endif %}</p>
       <p class="text-gray-600">Category: {{name.name.categor}}</p>
     </div>
-    
+
   </div>
   {% endfor %}
 </div>
 
 <style>
-  #product{
-      background-color: #38c500;
-  }
+
   #customers tr:nth-child(even){background-color: #f2f2f2;}
 
 #customers tr:hover {background-color: #ddd;}

@@ -11,6 +11,9 @@ from .models import bid
 
 class UsernamePasswordResetForm(forms.Form):
     username = forms.CharField(label="Username", max_length=150)
+    widgets = {
+            'username' : forms.NumberInput(attrs={ 'class': 'form-control',  'placeholder':'Enter your Username'}),
+     }
 
 
 class bid_form(forms.ModelForm):
@@ -105,7 +108,7 @@ class NewUserForm(UserCreationForm):
         required=True,
         initial=False,
         label='Agree to Terms',
-        help_text='I agree to the terms and conditions to register.',
+        help_text='I agree to the terms and conditions to register. ',
     )
 
     class Meta:

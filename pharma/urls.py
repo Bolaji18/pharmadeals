@@ -35,7 +35,7 @@ urlpatterns = [
     path('newsletter_email/', views.newsletter_email, name='newsletter_email'),
     path('popular_all', views.popular_items_all, name='popular_all'),
     path('password_reset_by_username/', views.password_reset_by_username, name='password_reset_by_username'),
-
+    path('terms', views.terms, name='terms')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

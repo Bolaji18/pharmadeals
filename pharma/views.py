@@ -79,6 +79,10 @@ from .forms import UsernamePasswordResetForm
 #         })
 #     return JsonResponse({'items': data, 'has_next': page_obj.has_next()})
 
+def terms(request):
+    date = datetime.now()
+    return render(request, 'pharma/terms.html', {'date':date})
+
 def password_reset_by_username(request):
     message = ''
     if request.method == 'POST':
@@ -102,7 +106,7 @@ def password_reset_by_username(request):
                 send_email(request, messages='', subjects='Password Reset', emails=user.email, html='email/passwordreset.html', context={'username':user, 'reset_link':reset_link})
 
                 message = "A password reset link has been sent to your email."
-                return render(request, 'pharma/register.html', {'success': message})
+                return render(request, 'pharma/register.html', {'success': message, 'none':'none'})
 
             except User.DoesNotExist:
                 message = "Username not found."
@@ -111,7 +115,8 @@ def password_reset_by_username(request):
 
     else:
         form = UsernamePasswordResetForm()
-    return render(request, 'pharma/register.html', {'form': form})
+    success = "Enter your username to change your password "
+    return render(request, 'pharma/register.html', {'form': form, 'success':success, 'none':'none'})
 
 
 # for saving newsletter emails

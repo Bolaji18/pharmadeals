@@ -6,7 +6,7 @@
 
 
 {% block title %}
-Login
+Admin Dashboard
 {% endblock %}
 
 {% block content %}
@@ -139,7 +139,7 @@ Login
       position: relative;
       display: inline;
       z-index: 1;
-      margin-bottom: 100px;
+      margin-bottom: 00px;
       top: 0;
       left: 0;
       padding-top: 20px;
@@ -202,7 +202,7 @@ Login
    <div class="flex flex-col md:flex-row " id="oppen">
 
   <!-- Tabs (left side) -->
-  <div class=" w-[200px]   py-10 overflow h-auto md:h-[100%] border-white "  id="mySidenav2">
+  <div class=" w-[200px]   py-10 overflow h-auto md:h-[100%] lg:h-[100%] border-white "  id="mySidenav2">
   <a href="{% url 'index' %}" id="inxex1">
       <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12 mx-auto md:mx-0" alt="Pharmadeals Logo">
     </a>
@@ -236,7 +236,7 @@ Login
   </div>
 
   <!-- Content (right side) -->
-  <div class="w-full md:w-[100%] md:ml-[-60px] px-3 h-auto md:h-[300px] min-h-[284px]" id="note1" >
+  <div class="w-full md:w-[100%] md:ml-[-60px] px-3 h-auto md:h-[300px] min-h-[284px] mt-14" id="note1" >
     <!-- Tab content here -->
   </div>
 </div>
@@ -253,7 +253,7 @@ Login
     // Get all elements with class="tabcontent
 
   const url = `{% url 'get_table'  %}`;
-   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation // Generate the URL dynamically
+   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 mt-14 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation // Generate the URL dynamically
 fetch(url, {
     method: 'GET',
    headers: {
@@ -287,7 +287,7 @@ fetch(url, {
     // Get all elements with class="tabcontent
   const url = `{% url 'get_sales'  %}`;
    // Generate the URL dynamically
-   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation
+   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 mt-14 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation
 fetch(url, {
     method: 'GET',
    headers: {
@@ -319,7 +319,7 @@ fetch(url, {
   function purchase() {
     // Get all elements with class="tabcontent
   const url = `{% url 'purchase'  %}`;
-   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation // Generate the URL dynamically
+   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 mt-14 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation // Generate the URL dynamically
 fetch(url, {
     method: 'GET',
    headers: {
@@ -355,7 +355,7 @@ fetch(url, {
   function getuser() {
     // Get all elements with class="tabcontent
   const url = `{% url 'get_user'  %}`; // Generate the URL dynamically
-   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation
+   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 mt-14 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation
 fetch(url, {
     method: 'GET',
    headers: {
@@ -381,7 +381,7 @@ fetch(url, {
   }
 
   window.onload = function() {
-   getuser(); // Call the function when the page loads
+   opensales(); // Call the function when the page loads
   };
 </script>
 
