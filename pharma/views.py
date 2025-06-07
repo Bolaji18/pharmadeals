@@ -48,7 +48,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from .forms import UsernamePasswordResetForm
-
+import threading
 
 # from django.db.models import Case, When, Value, IntegerField
 
@@ -283,7 +283,7 @@ def popular_items_all(request):
 
 def product(request, categor):
     options = Categories.objects.filter(category=categor).first()
-    option = Pharma.objects.filter(categor=options, Approval=True)[:10]
+    option = Pharma.objects.filter(categor=options, Approval=True).order_by('-id')[:10]
     return render(request, 'pharma/product.html', context={"popular_items": option})
 
 def category(request):
@@ -379,7 +379,7 @@ def register(request):
 
            email = request.POST.get("email")
            name = request.POST.get("first_name")
-           message = send_email(request, messages='', subjects="Welcome to PharmaDeals", emails=email, html='email/welcome.html',  context={'name': name} )
+           send_email(request, messages='', subjects="Welcome to PharmaDeals", emails=email, html='email/welcome.html',  context={'name': name} )
            user = form.save()
            return redirect('login')
        else:
@@ -404,31 +404,48 @@ def pharma_upload(request):
             # Send email to the user after successful product upload
             email = request.user.email
             name = request.user.first_name
-            message = send_email(request, messages='', subjects="Product upload", emails=email, html='email/upload.html', context={'name': name})
-            success= "Your product has been uploaded"
+            send_email(request, messages='', subjects="Product upload", emails=email, html='email/upload.html', context={'name': name})
+            success= "Your product has been uploaded, Approval can take up to 24hrs, please wait for an email confirmation."
             return render(request, 'pharma/register.html', {'success': success, 'none':'none'})
     else:
         form = pharma_form()
     return render(request, 'pharma/register.html', {'form': form, 'text':text})
 
-
-
+# this is s threaded function to send email
 def send_email(request, messages, subjects, emails, html, context=None):
-    email = emails
-    subject = subjects
-    message = messages
-    from_email = 'admin@pharmadeals.ng'
+    def email_worker():
+        email = emails
+        subject = subjects
+        message = messages
+        from_email = 'admin@pharmadeals.ng'
 
-    # Render the HTML template with context
-    html_message = render_to_string(html, context or {})
+        html_message = render_to_string(html, context or {})
 
-    send_mail(subject, message, from_email, [email], html_message=html_message)
+        send_mail(subject, message, from_email, [email], html_message=html_message)
 
-    # Log the email for debugging
-    with open('email.txt', 'a') as f:
-        f.write(f'Email sent to {email} with subject "{subject}"\n')
+        with open('email.txt', 'a') as f:
+            f.write(f'Email sent to {email} with subject "{subject}"\n')
 
-    return f'Email sent to {email}'
+    threading.Thread(target=email_worker).start()
+
+
+# def send_email(request, messages, subjects, emails, html, context=None):
+
+#     email = emails
+#     subject = subjects
+#     message = messages
+#     from_email = 'admin@pharmadeals.ng'
+
+#     # Render the HTML template with context
+#     html_message = render_to_string(html, context or {})
+
+#     send_mail(subject, message, from_email, [email], html_message=html_message)
+
+#     # Log the email for debugging
+#     with open('email.txt', 'a') as f:
+#         f.write(f'Email sent to {email} with subject "{subject}"\n')
+
+#     return f'Email sent to {email}'
 def get_user(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         if request.user.is_authenticated:
@@ -542,7 +559,7 @@ def see_cart(request):
                 cart_items = cart.objects.filter(user=name.user)
 
                 if method == "2" or method == "1":
-                    message = send_email(request, messages="", subjects="order is being processed", emails=email, html='email/process.html',  context={'name': name2} )
+                    send_email(request, messages="", subjects="order is being processed", emails=email, html='email/process.html',  context={'name': name2} )
                     text = "Your order is being processed, please wait for a confirmation email. Thank you for your order."
 
                     cart_items = cart.objects.filter(user=name.user)
@@ -560,7 +577,7 @@ def see_cart(request):
                         bought_item = boughtitem.objects.create(email=email, name=name2, users=users, product_name=product_name, quantity=quantity, total_earned=total_earned, order_id=order_id, buyer_info=buyer_info, status=status)
                         bought_item.save()
 
-                        message = send_email(request, messages="", subjects="Item bought on Pharmadeals", emails=email, html='email/bought.html',  context={'username': name, 'product_name':product_name,'quantity':quantity, 'total_earned':total_earned,'order_id':order_id } )
+                        send_email(request, messages="", subjects="Item bought on Pharmadeals", emails=email, html='email/bought.html',  context={'username': name, 'product_name':product_name,'quantity':quantity, 'total_earned':total_earned,'order_id':order_id } )
                     return render(request, 'pharma/register.html', {'text': text})
 
 
