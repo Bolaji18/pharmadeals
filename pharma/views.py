@@ -236,8 +236,8 @@ def purchase(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         if request.user.is_authenticated:
             name = request.user
-            items = boughtitem.objects.filter(buyer_info__user=name)
-            bid_items = bid.objects.filter(user=name)
+            items = boughtitem.objects.filter(buyer_info__user=name).order_by('-id')
+            bid_items = bid.objects.filter(user=name).order_by('-id')
             cart_data = []
             for item in items:
                 product= Pharma.objects.filter(name=item.product_name).first()
@@ -500,7 +500,7 @@ def get_sales(request):
             sales = boughtitem.objects.filter(users=name).count()
             sale = boughtitem.objects.filter(users=name).order_by('-id')
             views = sum(item.views for item in popular.objects.filter(name__user=name))
-            bids = bid.objects.filter(name__user=name).order_by('-bid_time') # to get the first bid
+            bids = bid.objects.filter(name__user=name).order_by('-id') # to get the first bid
             bid_count= bid.objects.filter(name__user=name).count()
             total_earned = sum([item.total_earned for item in sale])
             labels = [p.product_name for p in boughtitem.objects.filter(users=name)]
@@ -527,7 +527,7 @@ def get_table(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         if request.user.is_authenticated:
             name = request.user
-            pharma = popular.objects.filter(name__user=name)
+            pharma = popular.objects.filter(name__user=name).order_by('-id')
             return render(request, 'tables/table.html', {'categories': pharma})
         else:
             return redirect('login')
