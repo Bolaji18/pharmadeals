@@ -1,0 +1,189 @@
+{% load heroicons %}
+{% load static %}
+
+{% if user.is_superuser%}
+<div class="overflow-x-auto lg:ml-[5%]">
+  <caption class="text-lg font-bold text-center mb-4 mt-24" >Pharma Products</caption>
+
+  <table class="table">
+    <thead >
+      <tr>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Approval</th>
+        <th>Description</th>
+        <th>Categories</th>
+        <th>Images</th>
+        <th>Stock</th>
+        <th>Shipping Price</th>
+        <th>Views</th>
+        <!-- <th>Update</th> -->
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for name in categories %}
+      <tr class="hover:bg-gray-100">
+        <td>{{ name.name.user.username }}</td>
+        <td>{{ name.name.user.email }}</td>
+        <td>
+         {% if name.name.Approval %}
+          <a href="{% url 'item' name=name.name.name id=name.name.id %}">{{ name.name.name }}</a>
+        {% else %}
+        {{name.name.name}}
+        {% endif %}
+        </td>
+        <td>₦ {{ name.name.price }}</td>
+        <td>
+          {% if name.name.Approval %}
+          <span style="color: green;"  onclick="document.getElementById('id02{{ name.name.id }}').style.display='block'" class=" cursor">Approved</span>
+          {% else %}
+          <span style="color: red;"  onclick="document.getElementById('id02{{ name.name.id }}').style.display='block'" class="text-red-500 cursor">Awaiting Approval</span>
+          {% endif %}</td>
+        <td>{{ name.name.description }}</td>
+        <td>{{ name.name.categor }}</td>
+        <td>
+          <img src="{{ name.name.image.url }}" class="h-12 w-12 object-cover" alt="Product Image">
+        </td>
+        <td>{{ name.name.stock }}</td>
+        {% if name.shipping == 0 %}
+        <td>Free</td>
+        {% else %}
+        <td>₦ {{ name.name.shipping }}</td>
+        {% endif %}
+        <td>{{ name.views }}</td>
+        <!-- <td class="border border-[#ccc] px-4 py-2 text-center">
+          <a href="#" class="text-blue-500 hover:underline">Update</a>
+        </td> -->
+        <td class="border border-[#ccc] px-4 py-2 text-center">
+          <a href="javascript:void(0);" onclick="document.getElementById('id01{{ name.name.id }}').style.display='block'" class="text-red-500 hover:underline">
+            <span>{% heroicon_outline "trash" size=20 %}</span>
+          </a>
+        </td>
+      </tr>
+
+      <!-- Modal -->
+      <div id="id01{{ name.name.id }}" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-10 ">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-[90%] mt-54 lg:w-1/3 lg:ml-94  lg:mt-34">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold">Confirm Deletion</h2>
+            <button onclick="document.getElementById('id01{{ name.name.id }}').style.display='none'" class="text-gray-500 hover:text-gray-700">&times;</button>
+          </div>
+          <p class="mt-4">Are you sure you want to delete this item?</p>
+          <p class="mt-2 mb-4">  {{name.name.name}}</p>
+          <a href="{% url 'pharma_delete' id=name.name.id %}" class="bg-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-600 text-white mt-4">Delete</a>
+          <div class="mt-6 flex justify-end space-x-4">
+            <button onclick="document.getElementById('id01{{ name.name.id }}').style.display='none'" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">Cancel</button>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      {% endfor %}
+    </tbody>
+  </table>
+  <button class="bg-gray-300 text-black px-5 py-2.5 text-center rounded-full hover:bg-gray-400">
+    <a href="{% url 'upload' %}" class="mr-6">Upload Product</a>
+  </button>
+</div>
+
+
+
+
+      {% for name in categories %}
+
+       <div id="id02{{ name.name.id }}" class="fixed inset-0 bg-[#cccccc] bg-opacity-50 flex items-center justify-center hidden z-10 ">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-[90%] mt-54 lg:w-1/3 lg:ml-94  lg:mt-34">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold">Do you want to update this item</h2>
+            <button onclick="document.getElementById('id02{{ name.name.id }}').style.display='none'" class="text-gray-500 hover:text-gray-700">&times;</button>
+          </div>
+            <p class="mt-2 text-base"> {{ name.name.name }}  </p>
+            <p class="mt-2 text-base">{{ name.name.categor }} Category </p>
+            <p class="mt-2 text-base">₦ {{ name.name.price }}</p>
+            <form method="post" action="{% url 'admin_update' id=name.name.id %}" class="mt-4">
+              {% csrf_token %}
+              <fieldset class="fieldset">
+              <legend class="fieldset-legend">Update Status</legend>
+                <select class="select" id="status" name="status">
+              <option value="True" {% if name.name.Approval %}selected{% endif %}>Approved</option>
+              <option value="False" {% if name.name.Approval == "False" %}selected{% endif %}>Not Approved</option>
+               </select>
+              <span class="label">Update the delivery status </span>
+                </fieldset>
+              <button type="submit" class="btn btn-success mt-2"> Submit</button>
+             </form>
+           <div class="mt-6 flex justify-end space-x-4">
+            <button onclick="document.getElementById('id02{{ name.name.id }}').style.display='none'" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">Cancel</button>
+
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+
+
+
+<style>
+    @media screen and (max-width: 768px)  {
+      #name2{
+        display: block;
+        width: 100%;
+      }
+      #name3{
+        border: 2px solid #ccc;
+        width: 100%;
+        padding: 10px 10px;
+        font-size: 18px;
+      }
+
+
+    }
+</style>
+
+<div class="justify-between  items-center mb-2 border-b-2 border-gray-300 py-4 px-6" id="name2">
+  {% for name in categories %}
+  <div class=" items-center space-x-4 mb-4 " id="name3" style="gap:10px; border: 2px solid #ccc; ">
+
+
+    <img src="{{ name.name.image.url }}" alt="Product Image" class=" h-[200px] rounded-lg" style="height: 200px;">
+    <div>
+      <h3 class="text-lg font-semibold text-blue-900">{{ name.name.name }}</h3>
+      <p class="text-gray-600">Price: ₦ {{ name.name.price }}</p>
+      <p class="text-gray-600">Quantity: {{ name.name.stock }}</p>
+      {% if name.shipping == 0 %}
+      <p class="text-gray-600">Shipping: Free</p>
+      {% else %}
+      <p class="text-gray-600">Shipping: ₦ {{ name.name.shipping }}</p>
+      {% endif %}
+      <p class="text-gray-600">Status: {% if name.name.Approval %} <span style="color: #38c500;"> Approved</span> {% else %} <span style="color: red;">Awaiting Approval</span> {% endif %}</p>
+      <p class="text-gray-600">Category: {{name.name.categor}}</p>
+    </div>
+
+  </div>
+  {% endfor %}
+</div>
+
+<style>
+
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+</style>
+
+{% else %}
+
+<div class="flex justify-center items-center h-screen">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold text-blue-900 mb-4">Access Denied</h1>
+    <p class="text-gray-600">You do not have permission to view this page.</p>
+    <a href="{% url 'index' %}" class="mt-6 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">Go to Home</a>
+  </div>
+
+  {% endif %}

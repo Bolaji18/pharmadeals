@@ -131,6 +131,30 @@ def newsletter_email(request):
         except ValidationError:
             return redirect('index')
 
+def admin_update(request, id):
+    item = get_object_or_404(Pharma, id=id)
+    if request.method == 'POST':
+        if request.user.is_authenticated and request.user.is_superuser:
+            status = request.POST.get('status')
+            email2 = item.user.email
+            username = item.user.username
+            subject = f"PharmaDeals Product Approval Status for {item.name}"
+
+            if status == 'True':
+                status = True
+                send_email(request, messages='', subjects=subject, emails=email2, html='email/approved.html', context={'username':username,  'product_name': item.name, 'product_category':item.categor, 'product_price': item.price})
+            elif status == 'False':
+                status = False
+            item.Approval = status
+            # to send email to the user after approval
+            item.save()
+            message = f"Status updated to {status} for {item.name}"
+            return render(request, 'pharma/profile.html', context={'message': message, 'display': 'block'})
+
+        else:
+            message = f"You don't have permission to update this item"
+            return render(request, 'pharma/profile.html', context={'message': message, 'display': 'block'})
+
 
 
 def update_status(request, id):
@@ -522,6 +546,21 @@ def get_sales(request):
             return redirect('login')
     else:
         return JsonResponse({"error": "invalid request"}, status=400)
+
+
+def admin_table(request):
+    if request.user.is_superuser:
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            if request.user.is_authenticated:
+                pharma = popular.objects.all().order_by('-id')
+                return render(request, 'tables/admin_table.html', {'categories': pharma})
+            else:
+                return redirect('login')
+        else:
+            return JsonResponse({"error": "invalid request"}, status=400)
+    else:
+        return redirect('login')
+
 
 def get_table(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':

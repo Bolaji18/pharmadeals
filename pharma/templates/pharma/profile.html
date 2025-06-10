@@ -233,6 +233,14 @@ Admin Dashboard
         Help
       </button>
     </a>
+    {% if user.is_superuser %}
+      <button id="admin"
+      onclick="admintable()"
+        class="btn btn-primary  lg:min-w-[100%]">
+        Admin
+      </button>
+
+    {% endif %}
   </div>
 
   <!-- Content (right side) -->
@@ -394,6 +402,37 @@ fetch(url, {
 </style>
 
 
+<script>
+
+  function admintable() {
+    // Get all elements with class="tabcontent
+
+  const url = `{% url 'admintable'  %}`;
+   document.getElementById('note1').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 mt-14 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation // Generate the URL dynamically
+fetch(url, {
+    method: 'GET',
+   headers: {
+       'X-Requested-With': 'XMLHttpRequest' // Indicate that this is an AJAX request
+   }
+})
+.then(response => {
+   if (!response.ok) {
+       throw new Error('Network response was not ok');
+   }
+   return response.text();
+})
+.then(data => {
+   document.getElementById('note1').innerHTML = data;
+  // Log the data to the console for debugging
+
+
+})
+.catch(error => {
+   console.error('There was a problem with the fetch operation:', error);
+});
+
+  }
+</script>
 
 
 

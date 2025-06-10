@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Product Approved</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: Arial, sans-serif;">
+  <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);">
+
+    <div style="text-align: center; border-bottom: 1px solid #eeeeee; padding-bottom: 20px;">
+      <h1 style="color: #1a73e8; margin: 0;">Pharmadeals.ng</h1>
+      <p style="color: #888888; font-size: 14px;">Your Pharmacy Marketplace</p>
+    </div>
+
+    <div style="color: #333333; line-height: 1.6; padding-top: 20px;">
+      <h2 style="color: #1a73e8;">Hi {{ username }},</h2>
+
+      <p style="margin: 0 0 15px;">🎉 Great news! Your product <strong>{{ product_name }}</strong> has been reviewed and approved. It is now live on Pharmadeals.ng and ready for buyers to view and purchase.</p>
+
+      <p style="margin: 20px 0;">Here are the details of your approved product:</p>
+      <p style="margin: 0 0 5px;"><strong>Product Name:</strong> {{ product_name }}</p>
+      <p style="margin: 0 0 5px;"><strong>Category:</strong> {{ product_category }}</p>
+      <p style="margin: 0 0 5px;"><strong>Price:</strong> ₦{{ product_price }}</p>
+
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="https://pharmadeals.ng/dashboard/my-products" style="display: inline-block; padding: 12px 20px; background-color: #1a73e8; color: #ffffff; text-decoration: none; border-radius: 5px;">View My Products</a>
+      </div>
+
+      <p style="margin: 20px 0;">We wish you the best of luck with your sales! If you have any questions or need assistance, please don't hesitate to reach out to our support team.</p>
+
+      <p style="margin-top: 30px;">Thank you for being part of Pharmadeals.ng!</p>
+      <p style="margin: 0;">– The Pharmadeals.ng Team</p>
+    </div>
+
+    <div style="margin-top: 40px; font-size: 12px; color: #777777; text-align: center;">
+      <p style="margin: 0;">This is an automated message. Please do not reply directly to this email.</p>
+      <p style="margin: 0;">For assistance, email <a href="mailto:support@pharmadeals.ng" style="color: #1a73e8;">support@pharmadeals.ng</a>.</p>
+    </div>
+
+  </div>
+</body>
+</html>
