@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('daropaleadminpage7853663/', admin.site.urls),
     path('', include('pharma.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 
