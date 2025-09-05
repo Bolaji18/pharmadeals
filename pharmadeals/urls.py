@@ -24,7 +24,7 @@ urlpatterns = [
     path('daropaleadminpage7853663/', admin.site.urls),
     path('', include('pharma.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
-
+     path('auth/', include('social_django.urls', namespace='social')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

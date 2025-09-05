@@ -6,6 +6,19 @@ from .models import cart
 from .models import buyerinfo
 from .models import help
 from .models import bid
+from .models import approved
+
+
+class approved_form(forms.ModelForm):
+    class Meta:
+        model = approved
+        fields = ['name', 'email', 'phone',  'Id_card']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your phone number'}),
+            'Id_card': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+        }
 
 
 

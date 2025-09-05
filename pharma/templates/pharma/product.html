@@ -16,7 +16,7 @@
   {% if popular_items %} {% for item in popular_items %}
 
   <div class="shadow-sm bg-base-100 py-4 h-[286px] lg:h-[316px]">
-    <a href="{% url 'item' name=item.name  id=item.id %}" class="block space-y-2">
+    <a href="{% url 'item' name=item.name  id=item.id %}" onclick='allUrl("{% url 'item' name=item.name  id=item.id %}", mainbody)'  class="block no-redirect space-y-2">
       <img
         src="{{ item.image.url }}"
         class="w-full h-[154px] lg:h-[204px] object-contain"

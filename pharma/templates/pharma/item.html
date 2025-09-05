@@ -2,12 +2,18 @@
  {% load static %}
   {% load widget_tweaks %}
   {%load heroicons %}
+  {% load humanize %}
   {% block title %}
   {{ item.name }}
   {% endblock %}
 
 
   {% block content%}
+  <style>
+  #footer2{
+    display: none;
+  }
+</style>
 
         <li role="alert" class="alert alert-info mt-54 lg:mt-24" style="display: {{display}};" id="time">{{message}}</li>
 
@@ -21,13 +27,17 @@
   </div>
   <div class=" object-contain lg:mt-24 ">
     <h6 class="text-blue-900 ml-1 text-lg">{{ item.name }}</h6>
-    <span class="text-green-400  ml-1 text-xl font-sans"> ₦ {{ item.price }}</span>
+    <span class="text-green-400  ml-1 text-xl font-sans"> ₦ {{ item.price|intcomma }}</span>
     <br>
-    {% if item.shipping == 0%}
-    <span class="text-gray-500  ml-1 text-xl font-sans">Free Shipping</span>
+
+    <span class="text-gray-500  ml-1 text-base font-sans">Location: {{ item.location }}</span>
+    <br>
+    {% if item.expiration_date %}
+    <span class="text-gray-500  ml-1 text-base font-sans">Expiration Date: {{ item.expiration_date }}</span>
     {% else %}
-    <span class="text-gray-500  ml-1 text-xl font-sans">Shipping: ₦ {{ item.shipping }}</span>
+    <span class="text-gray-500  ml-1 text-base font-sans">No Expiration Date</span>
     {% endif %}
+
     <br>
     <span class="text-gray-500   text-base font-sans ">Description: {{ item.description }}</span>
     <br>
@@ -48,8 +58,8 @@
     </div>
     <div class="space-y-4">
       {% for field in format %}
-      <label for="{{ field.id_for_label }}" style="margin-top: 50px;"><b>{{ field.label }}</b></label>
-      {{ field|add_class:"w-full h-11 mb-[20px] border border-green-400 text-base rounded-md shadow-glow" }}
+      <label for="{{ field.id_for_label }}" ><b>{{ field.label }}</b></label>
+      {{ field|add_class:"w-full h-11 border border-green-400 text-base rounded-md shadow-glow" }}
 
       {% if field.errors %}
                             <div class="mt-2 rounded-lg bg-red-100 border border-red-400 text-red-700 px-4 py-3 ">
@@ -247,8 +257,8 @@ span.psw {
 
     <div class="container">
       {% for field in format %}
-      <label for="{{ field.id_for_label }}" style="margin-top: 50px;"><b>{{ field.label }}</b></label>
-      {{ field|add_class:"w-full h-11 mb-[20px] border border-green-400 text-base rounded-md shadow-glow" }}
+      <label for="{{ field.id_for_label }}" ><b>{{ field.label }}</b></label>
+      {{ field|add_class:"w-full h-11  border border-green-400 text-base rounded-md shadow-glow" }}
 
       {% if field.errors %}
                             <div class="mt-2 rounded-lg bg-red-100 border border-red-400 text-red-700 px-4 py-3 ">

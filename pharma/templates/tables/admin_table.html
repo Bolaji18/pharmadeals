@@ -13,11 +13,14 @@
         <th>Product Name</th>
         <th>Price</th>
         <th>Approval</th>
+        <th> Location </th>
+        <th>Expiration Date</th>
         <th>Description</th>
         <th>Categories</th>
         <th>Images</th>
         <th>Stock</th>
         <th>Shipping Price</th>
+        <th>Edit</th>
         <th>Views</th>
         <!-- <th>Update</th> -->
         <th>Delete</th>
@@ -42,6 +45,8 @@
           {% else %}
           <span style="color: red;"  onclick="document.getElementById('id02{{ name.name.id }}').style.display='block'" class="text-red-500 cursor">Awaiting Approval</span>
           {% endif %}</td>
+        <td>{{ name.name.location }}</td>
+        <td>{{ name.name.expiration_date }}</td>
         <td>{{ name.name.description }}</td>
         <td>{{ name.name.categor }}</td>
         <td>
@@ -57,6 +62,11 @@
         <!-- <td class="border border-[#ccc] px-4 py-2 text-center">
           <a href="#" class="text-blue-500 hover:underline">Update</a>
         </td> -->
+        <td class="border border-[#ccc] px-4 py-2 text-center">
+          <a href="#"  class="text-blue-500 hover:underline">
+            <span>{% heroicon_outline "pencil" size=20 %}</span>
+          </a>
+        </td>
         <td class="border border-[#ccc] px-4 py-2 text-center">
           <a href="javascript:void(0);" onclick="document.getElementById('id01{{ name.name.id }}').style.display='block'" class="text-red-500 hover:underline">
             <span>{% heroicon_outline "trash" size=20 %}</span>

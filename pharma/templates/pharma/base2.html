@@ -2,17 +2,82 @@
 {% load static %}
 {% load heroicons %}
 {% load static tailwind_tags %}
+{% load humanize %}
 
 
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+
+    <meta name="title" content="{% block title1 %} Buy & Sell Pharmaceuticals Online in Nigeria | Pharmadeals Marketplace  {% endblock %}">
+
+Meta Description -->
+<meta name="description" content=" {% block describe1 %}Pharmadeals is Nigeria’s leading online marketplace to buy and sell pharmaceuticals, medicines, and healthcare products. Connect with trusted importers, distributors, sales reps, and buyers. Fast delivery, secure transactions, and the best prices nationwide. {% endblock %}">
+<!-- Meta Keywords -->
+<meta name="keywords" content="Pharmacy, medicine, b2b, Nigeria, prescription, Pharmacist, Nigeria store, Nigeria Medicine, pharmaceuticals, buy medicine online, sell medicine, Nigeria pharmacy, healthcare products, pharma marketplace, medicines importers, medicines distributors, medical supplies, pharma deals, online pharmacy Nigeria ">
+
+<!-- Meta Author -->
+<meta name="keywords" content="pharmaceuticals, buy medicine online, sell medicine, Nigeria pharmacy, healthcare products, pharma marketplace, medicine importers, medical distributors, medical supplies, pharma deals, online pharmacy Nigeria">
+<meta name="author" content="Pharmadeals Marketplace">
+<!-- Meta Robots -->
+<meta name="robots" content="index, follow">
+
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://www.pharmadeals.ng/" />
+
+<!-- Open Graph for social sharing -->
+<meta property="og:title" content="{% block title2 %} Buy & Sell Pharmaceuticals Online in Nigeria | Pharmadeals Marketplace  {% endblock %}">
+<meta property="og:description" content="{% block describe2 %}Pharmadeals is Nigeria’s leading online marketplace to buy and sell pharmaceuticals, medicines, and healthcare products. Connect with trusted importers, distributors, sales reps, and buyers. Fast delivery, secure transactions, and the best prices nationwide. {% endblock %}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.pharmadeals.ng/">
+<meta property="og:image" content="https://pharmadeals.ng/static/images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png">
+
+<!-- Twitter Card for social sharing -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% block title3 %} Buy & Sell Pharmaceuticals Online in Nigeria | Pharmadeals Marketplace  {% endblock %}">
+<meta name="twitter:description" content="{% block describe3 %}Pharmadeals is Nigeria’s leading online marketplace to buy and sell pharmaceuticals, medicines, and healthcare products. Connect with trusted importers, distributors, sales reps, and buyers. Fast delivery, secure transactions, and the best prices nationwide. {% endblock %}">
+<meta name="twitter:image" content="https://pharmadeals.ng/static/images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png">
+
+<!-- Favicon -->
+<link rel="icon" href="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.ico' %}" type="image/x-icon">
+
+<!-- Viewport for mobile responsiveness -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Charset -->
+<meta charset="UTF-8">
+
+<!-- Meta Viewport (for responsive design) -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Meta Charset -->
+<meta charset="UTF-8">
+
+<meta name="theme-color" content="#000000">
+
+
+
     <title>{% block title %} {% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"><link rel="preconnect" href="https://fonts.googleapis.com">
+
      {% tailwind_css %}
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link rel="manifest" href="{% static 'manifest.json' %}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital@0;1&display=swap" rel="stylesheet">
 
     <style>
        #notification-badge {
@@ -48,15 +113,33 @@
     }
 
     </style>
+
+    <style>
+
+       body {
+      transition: opacity 0.5s ease;
+      opacity: 1;
+    }
+
+    body.fade-out {
+      opacity: 0;
+    }
+      </style>
         <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
   </head>
-  <body class=" bg-white font-sans text-gray-800 overflow-x-hidden">
+  <body class=" bg-white  text-gray-800 overflow-x-hidden z-10" style='font-family: "Miriam Libre", sans-serif;'>
+    <div id="myNavbar" class="bg-[#588157] hidden lg:hidden fixed bottom-0 w-full overflow-hidden flex flex-wrap items-center justify-start text-white text-base z-999" >
+  <a onclick='allUrl("{% url 'index'%}", mainbody)' class="block px-4 py-3 hover:bg-gray-200 hover:text-black text-black mr-[1%] ml-[2%] lg:mr-[15%]">{% heroicon_outline "home" size=20 %}Home</a>
+  <a   onclick='allUrl("{% url 'upload'%}", mainbody)' class="block px-4 py-3 hover:bg-gray-200 hover:text-black text-black mr-[0%] lg:mr-[15%]">{% heroicon_outline "currency-dollar" size=20 %}Sell</a>
+  <a onclick="purchase2()" href="#mainbody" class="block px-4 py-3 hover:bg-gray-200 hover:text-black text-black mr-[0%] lg:mr-[15%]">{% heroicon_outline "arrow-path" size=20 %}Bids</a>
+  <a  onclick='allUrl("{% url 'profile'%}", mainbody)' class="block px-4 py-3 hover:bg-gray-200 hover:text-black text-black ">{% heroicon_outline "user-circle" size=20 %}Profile</a>
+
+</div>
 
   <div id="mySidenav" class="sidenav" style="z-index: 70;">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
+  <a href="#">Terms</a>
   <a href="{% url 'help' %}">Contact</a>
       {% if request.user.username %}
     <form action="{% url 'logout' %}" method="post">
@@ -64,55 +147,99 @@
  <button style=" color:white;  border:none; margin-right:20px; padding:5px;   margin-top: 0rem;  padding: 0rem;   background-color: inherit;  font-weight: 0; border-radius: 0rem;  box-shadow: 0; transition:0; background-color:0, box-shadow :0; font-size:24px; text-align:center; margin-left:20%; " type="submit">logout</button>
 
 </form>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+<a href="{% url 'register' %}">Register</a>
       {% endif %}
+
 
 </div>
 
     <!-- Top Bar -->
-    <div class="h-9 w-full bg-green-300 text-xs text-black font-sans fixed flex items-center px-4 hidden" >
-      <span>Welcome to Pharmadeals.ng</span>
-      <div class="ml-auto flex items-center space-x-4 text-[10px] sm:text-sm">
-        <span class="flex items-center gap-1">
-          Track your Orders {% heroicon_outline "map-pin" size=20 %}
-        </span>
-        <span class="flex items-center gap-1">
-          Global pharmacy {% heroicon_outline "globe-alt" size=20 %}
-        </span>
-      </div>
-    </div>
+
 
     <!-- Header Section -->
     <header class="flex flex-wrap items-center justify-between p-4 md:px-8 fixed bg-white w-full z-10 mb-24 top:0 " id="header5" style="top:0;">
       <!-- Left Section -->
       <div class="flex items-center space-x-3">
         <span onclick="openNav()" id="nav-2">{% heroicon_outline "bars-3-bottom-left" size=24 %}</span>
-       <a href="{% url 'index' %}"><img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12" alt="Pharmadeals Logo">
+       <a href="{% url 'index' %}"><img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class=" h-8 lg:h-12 sm:h-12" alt="Pharmadeals Logo">
       </a>
       </div>
 
       <!-- Search Bar -->
        <form action="{% url 'search' %}" method="post" style="display: none;"  id="post_search_item">
-      <div class="flex items-center bg-blue-100 border border-gray-800 rounded-full px-0 py-0 mt-4 md:mt-0 w-full md:w-[442px] max-w-full md:ml-10">
+      <div class="flex items-center bg-blue-100 border border-gray-800 rounded px-0 py-0 mt-4 md:mt-0 w-full md:w-[442px] max-w-full md:ml-10">
         <span onclick="document.getElementById('post_search_item').style.display='none';
          document.getElementById('post_search_item565').style.display='block';
         " class="cursor-pointer text-red-500">&times;</span>
         <input type="text" name="search" placeholder="Search for Pharmaceuticals"
           class="ml-2 flex-grow bg-transparent border-none focus:outline-none text-sm md:text-base text-black " />
-        <span class="ml-2 text-gray-600 cursor-pointer "> <button class="bg-green-300 ml-14 lg:ml-0 text-black px-4 py-1 rounded-r-full h-[100%] cursor-pointer" type="submit">{% heroicon_outline "magnifying-glass" size=30 %}</button></span>
+        <span class="ml-2 text-gray-600 cursor-pointer "> <button class="bg-[#588157] ml-8 lg:ml-0 text-black lg:px-4 py-1 rounded rounded-r-full h-[24%] lg:h-[100%] cursor-pointer" type="submit">{% heroicon_outline "magnifying-glass" size=30 %}</button></span>
 
       </div>
       </form>
         <button onclick="document.getElementById('post_search_item').style.display='block';
          document.getElementById('post_search_item565').style.display='none';
-        " class="bg-green-300 ml-14 lg:ml-0 text-black px-4 py-1 rounded-full h-[100%] cursor-pointer lg:ml-[50%]" id="post_search_item565" type="submit">{% heroicon_outline "magnifying-glass" size=30 %}</button>
+        " class="bg-[#588157] ml-14 lg:ml-0 text-black px-4 py-1 rounded rounded-full h-[100%] cursor-pointer lg:ml-[50%]" id="post_search_item565" aria-label="Search" type="submit">{% heroicon_outline "magnifying-glass" size=30 %}</button>
 
 
       <!-- Cart & Auth Buttons -->
-       <a href="{% url 'see_cart' %}" class="flex items">
+       <a href="{% url 'see_cart' %}" class="flex items" aria-label="cart">
       <div class="flex items-center mt-4 md:mt-0 space-x-3 md:ml-auto">
         <span>{% heroicon_outline "shopping-cart" size=20 %}</span>
         <span id="notification-badge" class="rounded-full py-8 px-8"></span>
       </a>
+
+
+<script>
+
+  function allUrl(app, id){
+    const url = app;
+    console.log(app); // Log the URL to the console for debugging
+    document.getElementById('mainbody').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 mt-44 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation // Generate the URL dynamically
+
+    fetch(url, {
+    method: 'GET',
+
+   headers: {
+       'X-Requested-With': 'XMLHttpRequest' // Indicate that this is an AJAX request
+   }
+})
+
+.then(response => {
+   if (!response.ok) {
+       throw new Error('Network response was not ok');
+   }
+   return response.text();
+})
+
+.then(data => {
+   document.getElementById('mainbody').innerHTML = data;
+   history.pushState({}, '', `${app}`);
+   document.getElementById('footer2').style.display = 'none';
+   document.getElementById('header5').style.display = 'none'; // Show the footer after loading new content
+  // Log the data to the console for debugging
+
+
+})
+.catch(error => {
+   console.error('There was a problem with the fetch operation:', error);
+});
+
+
+
+  }
+
+  window.addEventListener('popstate', function() {
+            fetch(location.href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('mainbody').innerHTML = html;
+                });
+        });
+
+</script>
 
 
         <script>
@@ -146,42 +273,128 @@
          {% if request.user.username %}
 
         <a href="{% url 'profile' %}" class="avatar cursor-pointer">
-          <button class="w-24 rounded-full">
+          <button class="w-24 rounded-full rounded">
              {% heroicon_outline "user-circle" size=40 %}
           </button>
         </a>
         {% else %}
 
 
-        <a href="{% url 'login' %}">
+        <a href="{% url 'login' %}"  onclick='allUrl("{% url 'login' %}", mainbody)' class="no-redirect">
           <button class="btn btn-active btn-success">
             Login
           </button>
         </a>
-        <a href="{% url 'register' %}">
-          <button class="btn btn-active btn-success">
-            Sign up
-          </button>
-        </a>
+        <!--<a href="{% url 'register' %}" id="signupbtn">-->
+        <!--  <button class="btn btn-active btn-success">-->
+        <!--    Sign up-->
+        <!--  </button>-->
+        <!--</a>-->
         {% endif %}
       </div>
     </header>
+<a  href="{% url 'help' %}"  onclick='allUrl("{% url 'help' %}", mainbody)' class="no-redirect" aria-label="Help"><img src="{% static 'images/8380012-removebg-preview.png' %}" class="sm:w-24 lg:w-24 lg:w-24 sm:h-34  h-18 w-18 fixed ml-80% sm:ml-[80%] lg:ml-[90%] mb-18 z-999 bottom-0 cursor-pointer" alt="whatapp image"></a>
 
 
-<div class="mb-[50px] font-sans mt-30 sm:mt-30 lg:mt-12">
+<div class="mb-[154px] lg:mb-[84px]  mt-40 sm:mt-30 lg:mt-16" id="mainbody"   onclick="closeNav()">
 
- <a href="#"><img src="{% static 'images/8380012-removebg-preview.png' %}" class="sm:w-34 lg:w-34 lg:w-34 sm:h-34  h-24 w-24 fixed ml-80% sm:ml-[80%] lg:ml-[90%] z-999 bottom-0 cursor-pointer"></a>
 
      {% block content %} {% endblock %}
 
+
+
+
 </div>
 
+<script>
+  function myFunction5() {
+    const x = document.getElementById("myNavbar");
+    x.classList.toggle("responsive");
+  }
+</script>
+
+
+
+
+<script>
+
+  function opensales2() {
+    // Get all elements with class="tabcontent
+  const url = `{% url 'get_sales'  %}`;
+   // Generate the URL dynamically
+   document.getElementById('mainbody').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 mt-44 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation
+fetch(url, {
+    method: 'GET',
+   headers: {
+       'X-Requested-With': 'XMLHttpRequest' // Indicate that this is an AJAX request
+   }
+})
+.then(response => {
+   if (!response.ok) {
+       throw new Error('Network response was not ok');
+   }
+   return response.text();
+})
+.then(data => {
+   document.getElementById('mainbody').innerHTML = data;
+  // Log the data to the console for debugging
+
+
+})
+.catch(error => {
+   console.error('There was a problem with the fetch operation:', error);
+});
+
+  }
+</script>
 
 
 
 
 
-  <section class="bg-black text-white mt-16 py-12  bottom-0 left-0 w-full p-4 font-serif" id="footer2">
+<script>
+  function purchase2() {
+    // Get all elements with class="tabcontent
+  const url = `{% url 'purchase'  %}`;
+   document.getElementById('mainbody').innerHTML = `<span class="loading loading-spinner text-primary lg:ml-96 lg:mt-24 mt-44 w-24 h-24 lg:w-56 lg:h-56"></span>`; //add loading animation // Generate the URL dynamically
+fetch(url, {
+    method: 'GET',
+   headers: {
+       'X-Requested-With': 'XMLHttpRequest' // Indicate that this is an AJAX request
+   }
+})
+.then(response => {
+   if (!response.ok) {
+       throw new Error('Network response was not ok');
+   }
+   return response.text();
+})
+.then(data => {
+   document.getElementById('mainbody').innerHTML = data;
+  // Log the data to the console for debugging
+
+
+})
+.catch(error => {
+   console.error('There was a problem with the fetch operation:', error);
+});
+
+  }
+
+
+</script>
+
+<style>
+@media screen and (max-width: 600px) {
+  .navbar a:not(:first-child) {display: none;}
+}
+</style>
+
+
+
+
+
+  <section class="bg-black text-white mt-16 py-12  bottom-0 left-0 w-full p-4 " id="footer2">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 px-6 md:px-16">
 
     <!-- Newsletter -->
@@ -202,48 +415,54 @@
       </form>
     </div>
 
-    <!-- About Pharmabids -->
+    <!-- About pharmadeals -->
     <div>
-      <h2 class="text-xl font-semibold mb-2">Pharmabids</h2>
+      <h2 class="text-xl font-semibold mb-2">Pharmadeals</h2>
       <p class="text-sm leading-relaxed">
         Your favourite online pharmacy store. We offer onsite delivery and your health is our priority.
       </p>
     </div>
 
-    <!-- Footer Links -->
-    <div >
-      <table class="text-sm ">
-        <tbody>
-          <tr class="space-x-2">
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Quick Links</a></td>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Services</a></td>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Social Media</a></td>
-          </tr>
-          <tr>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Contact us</a></td>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Delivery</a></td>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Facebook</a></td>
-          </tr>
-          <tr>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">About us</a></td>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Purchase</a></td>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Twitter</a></td>
-          </tr>
-          <tr>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Careers</a></td>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">Consult Specialist</a></td>
-            <td><a href="#" class="text-white hover:text-green-400 block py-1">LinkedIn</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
 
-    <p class="text-sm leading-relaxed">
+    <div >
+     <table class="text-sm  ">
+       <tbody>
+         <tr class="space-x-2">
+
+           <td><a href="#" class="text-white hover:text-green-400 block py-4 ">Facebook</a></td>
+
+           <td><a href="#" class="text-white hover:text-green-400 block py-4 ml-4">instagram</a></td>
+
+           <td><a href="#" class="text-white hover:text-green-400 block py-4 ml-4">LinkedIn</a></td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+
+    <p class="text-sm  mb-24">
      <a href="mailto:daropaleb@gmail.com?subject=Hello&body=I wanted to reach out about...">designed by bolaji </a>
     </p>
 
   </div>
 </section>
+
+<script>
+
+  function isInApp() {
+    return window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true
+        || document.referrer.startsWith("android-app://");
+  }
+
+  if (isInApp()) {
+    document.addEventListener("DOMContentLoaded", function () {
+      // Hide things only in the app
+      document.getElementById("footer2").style.display = "none";
+      document.getElementById("signupbtn").style.display = "none";
+    });
+  }
+</script>
+
 
 
 <script>
@@ -257,5 +476,19 @@ function closeNav() {
    document.getElementById("sidenav2").style.display = "fixed";
 }
 </script>
+
+<script>
+  document.querySelectorAll("a.no-redirect").forEach(link => {
+    link.addEventListener("click", function(e) {
+      e.preventDefault();
+      // do something else
+    });
+  });
+</script>
+
+
+
+
+
 </body>
 </html>

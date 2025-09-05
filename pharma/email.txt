@@ -1,0 +1,99 @@
+Conversation opened. 1 unread message.
+
+
+Skip to content
+Using Gmail with screen readers
+1 of 1,723
+(no subject)
+Inbox
+
+Daropale Bolaji <daropaleb@gmail.com>
+Tomorrow, 9:30 AM (0 minutes ago)
+to me
+
+[
+  { "name": "Alice", "role": "Admin" },
+  { "name": "Bob", "role": "Editor" }
+]
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Load JSON from File</title>
+</head>
+<body>
+
+<h2>User List</h2>
+<div id="userList"></div>
+
+<script>
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById("userList");
+
+      data.forEach(user => {
+        const p = document.createElement("p");
+        p.innerHTML = `<strong>${user.name}</strong> - ${user.role}`;
+        container.appendChild(p);
+      });
+    })
+    .catch(error => {
+      console.error("Error loading JSON:", error);
+    });
+</script>
+
+</body>
+</html>
+
+
+
+Conversation opened. 2 messages. 1 message unread.
+
+
+Skip to content
+Using Gmail with screen readers
+1 of 1,723
+(no subject)
+Inbox
+
+Daropale Bolaji
+[ { "name": "Alice", "role": "Admin" }, { "name": "Bob", "role": "Editor" }]<!DOCTYPE html><html><head> <title>Load JSON from File</title></head><body> <h2>User
+Tomorrow, 9:30 AM (0 minutes ago)
+
+Daropale Bolaji <daropaleb@gmail.com>
+Tomorrow, 9:52 AM (0 minutes ago)
+to me
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON to HTML</title>
+</head>
+<body>
+
+<div id="output"></div>
+
+<script>
+  // Example JSON data as a string
+  const jsonData = `[
+    {"name": "John", "age": 30},
+    {"name": "Jane", "age": 25},
+    {"name": "Doe", "age": 22}
+  ]`;
+
+  // Parse the JSON
+  const people = JSON.parse(jsonData);
+
+  // Get the output container
+  const outputDiv = document.getElementById("output");
+
+  // Create HTML from JSON
+  people.forEach(person => {
+    const div = document.createElement("div");
+    div.innerHTML = `<strong>Name:</strong> ${person.name} <br> <strong>Age:</strong> ${person.age}<hr>`;
+    outputDiv.appendChild(div);
+  });
+</script>
+
+</body>
+</html>

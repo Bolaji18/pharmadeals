@@ -2,7 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 {% load heroicons %}
-
+ {% load humanize %}
 
 
 {% block title %}
@@ -207,36 +207,36 @@ Admin Dashboard
       <img src="{% static 'images/Chat_Image_Apr_15__2025__12_24_59_PM-removebg-preview.png' %}" class="h-10 sm:h-12 mx-auto md:mx-0" alt="Pharmadeals Logo">
     </a>
     <button
-      class="btn btn-primary lg:min-w-[100%] opacity-75"
+      class="btn btn-light  border border-primary lg:min-w-[100%] opacity-75"
       onclick="getuser()"
       id="defaultOpen">
-      User Profile
+     Profile
     </button>
     <button
-      class="btn btn-primary lg:min-w-[100%] opacity-75"
+      class="btn btn-light border border-primary lg:min-w-[100%] opacity-75"
       onclick="opensales()" id="sales">
-      Sales
+      My Sales
     </button>
     <button
-      class="btn btn-primary lg:min-w-[100%] opacity-75"
+      class="btn btn-light border border-primary lg:min-w-[100%] opacity-75"
       onclick="purchase()" id="purchase">
-      Purchases/Bids
+      My Purchases
     </button>
     <button
-      class="btn btn-primary lg:min-w-[100%] opacity-75"
+      class="btn btn-light border border-primary lg:min-w-[100%] opacity-75"
       onclick="openCity()" id="product">
-      Products
+      My Adverts
     </button>
     <a href="{% url 'help' %}">
       <button id="help"
-        class="btn btn-primary  lg:min-w-[100%] opacity-75">
-        Help
+        class="btn btn-light border border-primary  lg:min-w-[100%] opacity-75">
+        Help Me
       </button>
     </a>
     {% if user.is_superuser %}
       <button id="admin"
       onclick="admintable()"
-        class="btn btn-primary  lg:min-w-[100%] opacity-75">
+        class="btn btn-light border border-primary  lg:min-w-[100%] opacity-75">
         Admin
       </button>
 

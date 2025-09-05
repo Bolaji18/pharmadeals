@@ -49,6 +49,19 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from .forms import UsernamePasswordResetForm
 import threading
+from .models import approved
+
+def home2(request):
+    cate = Categories.objects.all()[:4]
+    #cate = Categories.objects.all().order_by('id')[:4]
+    # popular_items = popular.objects.filter(name__Approval=True).order_by('-views')[:8] #order by views
+    popular_items = popular.objects.filter(name__Approval=True).order_by('-id')[:8]
+
+    return render(request, 'pharma/home2.html', context = {
+    "categories": cate,
+    "popular_items": popular_items,
+}
+)
 
 # from django.db.models import Case, When, Value, IntegerField
 
@@ -193,29 +206,30 @@ def product_list_api(request, page):
 # function to place a bid and send email
 def bids_app(request, id):
     if request.method == 'POST':
-     if request.user.is_authenticated:
+    #  if request.user.is_authenticated:
         form = bid_form(request.POST)
         if form.is_valid():
             name = form.save(commit=False)
-            name.user = request.user
-            email = request.user.email
+            # name.user = request.user
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
             name.name = Pharma.objects.get(id=id)
             email2 = Pharma.objects.get(id=id).user.email
             username = Pharma.objects.get(id=id).user.username
             bid_price = request.POST.get('bid_price')
             name.bid_time = datetime.now()
             name.status = "pending"
-            subject = f"PharmaDeals Bid Request by {name.user}"
+            subject = f"PharmaDeals Bid Request by {phone}"
             name.save()
-            send_email(request, messages='', subjects=subject, emails=email2, html='email/bid.html', context={'username':username, 'bid_amount': bid_price, 'product_name': name.name.name, 'bidder_username':name.user, 'bid_time': name.bid_time})
-            send_email(request, messages='', subjects=subject, emails=email, html='email/bidplaced.html', context={'username':name.user, 'bid_amount': bid_price, 'product_name': name.name.name, 'bid_time': name.bid_time})
+            send_email(request, messages='', subjects=subject, emails=email2, html='email/bid.html', context={'username':username, 'bid_amount': bid_price, 'product_name': name.name.name, 'bidder_username':phone, 'bid_time': name.bid_time})
+            send_email(request, messages='', subjects=subject, emails=email, html='email/bidplaced.html', context={'username':phone, 'bid_amount': bid_price, 'product_name': name.name.name, 'bid_time': name.bid_time})
             return render(request, 'pharma/register.html', context={ 'none': 'none',  'success': "Your bid has been sent successfully"})
-     else:
-        option = Pharma.objects.filter(id=id).first()
-        form = cart_form()
-        format = bid_form()
-        message ="pls login to place a bid"
-        return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'block', 'message': message, 'format':format})
+    #  else:
+    #     option = Pharma.objects.filter(id=id).first()
+    #     form = cart_form()
+    #     format = bid_form()
+    #     message ="pls login to place a bid"
+    #     return render(request, 'pharma/item.html', context={"item": option, "form": form, 'display': 'block', 'message': message, 'format':format})
     else:
 
       return HttpResponse("Bid not placed")
@@ -390,7 +404,7 @@ def login(request):
 def register(request):
     if request.method == "POST":
 
-       form = NewUserForm(request.POST)
+       form = NewUserForm(request.POST, request.FILES)
        if form.is_valid():
 
            # seller = request.POST.get('user_type')
@@ -401,10 +415,17 @@ def register(request):
            #     name.groups.add(group)
            #     return redirect('login')
 
+
+
            email = request.POST.get("email")
-           name = request.POST.get("first_name")
+           name = request.POST.get("username")
            send_email(request, messages='', subjects="Welcome to PharmaDeals", emails=email, html='email/welcome.html',  context={'name': name} )
            user = form.save()
+           phone = request.POST.get('id_phone')
+           if phone:
+               approval = approved.objects.create(name=name, phone=phone,  email=email)
+               approval.save()
+
            return redirect('login')
        else:
             # Form is not valid, errors will be passed to the template

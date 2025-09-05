@@ -6,32 +6,164 @@
 
 
 {% block title %}
-Pharmaceuticals Marketplace, Buy and Sell Drugs Online.
+Pharmaceuticals Marketplace, Buy and Sell Medicines Online.
 {% endblock %}
 
 
 {% block content %}
 
+<style>
+#homebase1{
 
- <div class="carousel bg-green-300 mt-24">
+  background-color: #e5e7eb;
+
+}
+
+
+.slider-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    font-family: "Miriam Libre", sans-serif;
+    scroll-snap-type: x mandatory; /* Enables snapping */
+}
+
+.slider {
+    display: flex;
+    scroll-snap-align: start;
+    scroll-behavior: smooth;
+}
+.slider-container::-webkit-scrollbar{
+  height:7px;
+}
+.slider-container::-webkit-scrollbar-track{
+  background:none;
+  border-radius: 10px;
+  border:#333;
+}
+.slider-container::-webkit-scrollbar-thumb{
+  background-color: #fffff;
+
+}
+.slider-container::-webkit-scrollbar-thumb:hover{
+  background:#fff;
+}
+.slide-item {
+    width: 250px;
+    height: auto;
+    background: #ffffff;
+
+    font-family: "Roboto", serif;
+
+    box-shadow: 0 4px 8px 0 #999, 0 6px 20px 0 #f0f0f0;
+    color: rgb(12, 12, 12);
+    display: flex;
+    padding-top:0px;
+    align-items: left;
+    justify-content: center;
+
+    margin: 10px;
+    scroll-snap-align: start; /* Snaps each item into view */
+}
+
+.slider-bar {
+    margin: 20px auto;
+    text-align: center;
+    width: 90%;
+    height:50px;
+}
+
+.slider-input {
+    width: 100%;
+    -webkit-appearance: none; /* Removes default styling */
+    appearance: none;
+    background: #ff0000;
+    height: 20px;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.slider-input::-webkit-slider-thumb {
+
+    width: 30px;
+    height: 30px;
+    background: #3366FF;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider-input::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    background: #3366FF;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.slide2 {
+        flex: 0 0 auto; /* Ensure each slide occupies its own space */
+        width: 100%;
+        height:auto;
+        margin-left:5%;
+        overflow: hidden;
+        position: relative;
+        margin-right:10px;
+        padding:2px;
+        border-radius: 5px;
+        padding:10px;
+    }
+
+    .slide2 img {
+        width: 90%;
+        border-radius:10px;
+        height: auto;
+        height: 250px; /* Adjust the max-height to make images bigger */
+    }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+ <div class="carousel bg-green-300 mt-24 rounded"  >
    <div id="slide1" class="carousel-item active bg-green-300">
   <div class="bg-green-300 rounded-lg grid grid-cols-1 md:grid-cols-2 items-center lg:min-h-[350px] sm:min-h-[350px] min-h-[300px] lg:p-6 sm:p-6 p-2 md:p-10">
     <div class="flex flex-col justify-center">
-      <div class="text-black text-2xl md:text-4xl font-bold mb-6">
+      <div class="text-black text-2xl md:text-4xl  mb-6" style='font-family: "Miriam Libre", sans-serif;'>
         <!-- Online Marketplace <br /> to BUY and SELL<br />Medications -->
          Sign Up as an Importer <br>Distributor <br>Sales rep or Buyer
       </div>
-      <div class="flex flex-col sm:flex-row items-center gap-4 mt-6 lg:ml-10">
-        <a href="{% url 'register' %}">
-          <button class=" cursor-pointer bg-blue-300 text-black rounded-full px-6 py-2 text-base md:text-lg font-semibold hover:bg-blue-100 transition ml-0 sm:ml-10">
+      <div class="flex flex-col sm:flex-row items-center gap-4 mt-6 lg:ml-10" style='font-family: "Miriam Libre", sans-serif;'>
+          {% if request.user.username %}
+          <a href="{% url 'upload' %}">
+          <button class=" cursor-pointer bg-blue-300 text-black rounded rounded-full px-6 py-2 text-base md:text-lg font-semibold hover:bg-blue-100 transition ml-0 sm:ml-10">
+            Upload Product
+          </button>
+        </a>
+        {% else %}
+
+
+        <a href="{% url 'register' %}" onclick='allUrl("{% url 'register'%}", mainbody)' class="no-redirect">
+          <button class=" cursor-pointer bg-blue-300 text-black rounded rounded-full px-6 py-2 text-base md:text-lg font-semibold hover:bg-blue-100 transition ml-0 sm:ml-10">
             Sign Up as a Seller
           </button>
         </a>
-        <a href="{% url 'register' %}">
-          <button class="cursor-pointer bg-blue-300 text-black rounded-full px-6 py-2 text-base md:text-lg font-semibold hover:bg-blue-100 transition ml-0 sm:ml-2">
+        <a href="{% url 'register' %}" onclick='allUrl("{% url 'register'%}", mainbody)' class="no-redirect">
+          <button class="cursor-pointer bg-blue-300 text-black rounded rounded-full px-6 py-2 text-base md:text-lg font-semibold hover:bg-blue-100 transition ml-0 sm:ml-2">
             Sign Up as a Buyer
           </button>
         </a>
+        {% endif %}
       </div>
     </div>
     <div class="flex justify-center mt-6 md:mt-0">
@@ -54,8 +186,8 @@ Pharmaceuticals Marketplace, Buy and Sell Drugs Online.
            <!-- <span class="head-hope">
 
 
-             <input type="text" class="hero-in" placeholder="Search  for  drugs in our store " />
-             <button class="hero-btn">Find drugs</button>
+             <input type="text" class="hero-in" placeholder="Search  for  medicines in our store " />
+             <button class="hero-btn">Find medicines</button>
            </span> -->
          </div>
        </div>
@@ -66,44 +198,77 @@ Pharmaceuticals Marketplace, Buy and Sell Drugs Online.
         </div>
      </div>
      <div class="nav-buttons">
+
        <a href="#slide3"  class="nav-buttons1">{% heroicon_outline "arrow-left-circle" size=90 class="mt-10"%}</a>
        <a href="#slide1"  class="nav-buttons2">{% heroicon_outline "arrow-right-circle" size=90 class="mt-10" %}</a>
      </div>
    </div>
- </div>
 
-  <!-- <script>
-    // Simple hash-based navigation and active slide toggle
-    const slides = document.querySelectorAll('.carousel-item');
-    window.addEventListener('hashchange', () => {
-      const target = window.location.hash.substring(1);
-      slides.forEach(slide => slide.classList.remove('active'));
-      const targetSlide = document.getElementById(target);
-      if (targetSlide) targetSlide.classList.add('active');
-    });
-  </script> -->
+
+
 
   <!-- Categories Section -->
-  <section class="px-6 md:px-16 mt-10 font-serif text-white">
-    <div class="flex justify-between items-center mb-6">
-      <h2 class="text-3xl font-semibold text-blue-900 border-b-4 border-green-400">Categories</h2>
-      <span class="text-blue-900 flex items-center space-x-2">
-        <span><a href="{% url 'category' %}">View all</a></span> {% heroicon_outline "arrow-right-circle" size=20 %}
-      </span>
-    </div>
+  <!--<section class="px-6 md:px-16 mt-10 font-serif text-white">-->
+  <!--  <div class="flex justify-between items-center mb-6">-->
+  <!--    <h2 class="text-3xl font-semibold text-blue-900 border-b-4 border-green-400" style="color:black;">Categories</h2>-->
+  <!--    <span class="text-blue-900 flex items-center space-x-2">-->
+  <!--      <span><a href="{% url 'category' %}">View all</a></span> {% heroicon_outline "arrow-right-circle" size=20 %}-->
+  <!--    </span>-->
+  <!--  </div>-->
 
-    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {% for index in categories %}
-      <a href="categories/{{index.category}}/">
-      <div class="relative bg-green-300 rounded-2xl overflow-hidden p-4 lg:h-[316px] sm:h-[316px] h-[216px] card bg-base-100 shadow-sm">
-        <img src="{{ index.image.url }}" class="w-full h-[284px] object-contain mx-auto" alt="{{ index.category}}">
-        <h6 class="absolute bottom-3 left-4 text-xl text-black">{{ index.category }}</h6>
-        <span class="absolute top-3 right-3 text-black">{% heroicon_outline "arrow-right-circle" size=40 %}</span>
+  <!--  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">-->
+  <!--    {% for index in categories %}-->
+  <!--    <a href="categories/{{index.category}}/">-->
+  <!--    <div class="relative bg-green-300 rounded-2xl overflow-hidden p-4 lg:h-[316px] sm:h-[316px] h-[216px] card bg-base-100 shadow-sm">-->
+  <!--      <img src="{{ index.image.url }}" class="w-full h-[284px] object-contain mx-auto" alt="{{ index.category}}">-->
+  <!--      <h6 class="absolute bottom-3 left-4 text-xl text-black">{{ index.category }}</h6>-->
+  <!--      <span class="absolute top-3 right-3 text-black">{% heroicon_outline "arrow-right-circle" size=40 %}</span>-->
+  <!--    </div>-->
+  <!--  </a>-->
+  <!--    {% endfor %}-->
+  <!--  </div>-->
+  <!--</section>-->
+
+
+
+
+<h2  class="text-1xl font-bold text-left mb-8" style="background:white; margin-bottom: 50px;"><span><a href="{% url 'category' %}" class=" text-1xl ml-4" style='font-family: "Miriam Libre", sans-serif;'>Categories </a></span>
+      </span></h2>
+<div class="slider-container"  style="background:white;">
+    <div class="slider">
+        {% for index in categories reversed %}
+        <div class="slide-item rounded" style="padding: 20px;" >
+
+          <div class="slide2" >
+
+
+              <img src="{{ index.image.url }}" alt=""style="width:200px; height:150px;" alt="{{ index.category}}"  loading="lazy">
+
+
+
+            <div ="text">
+              <a href="categories/{{index.category}}/"   onclick='allUrl("categories/{{index.category}}/#", mainbody)' class="no-redirect" style="" aria-label="{{index.category}}">
+              <h9 style="color:#000000;   font-family: 'Miriam Libre', sans-serif; " class=" text-base text-center mb-8">{{ index.category }}</h9>
+
+
+              </a>
+
+                   <a href="categories/{{index.category}}/"   onclick='allUrl("categories/{{index.category}}/#", mainbody)' class="no-redirect" aria-label="{{index.category}}"> <button class="btn btn-primary btn-lg" style="float: right; justify-content:center; border-radius:20px;  background: none; color: black; border: none;"  aria-label="{{ index.category }}" >
+                         {% heroicon_outline "arrow-right-circle" size=40 %}
+
+                    </button> </a>
+                </p>
+            </form>
+              </div>
+
+          </div>
       </div>
-    </a>
-      {% endfor %}
+        {% endfor %}
+
+
     </div>
-  </section>
+</div>
+
 
 
 
@@ -113,37 +278,240 @@ Pharmaceuticals Marketplace, Buy and Sell Drugs Online.
 
 
   <!-- Most Popular Section -->
-  <section class="px-6 md:px-16 mt-14 font-serif">
-    <div class="flex justify-between items-center mb-6">
+  <!--<section class="px-6 md:px-16 mt-14 font-serif">-->
+  <!--  <div class="flex justify-between items-center mb-6">-->
 
-      <h2 class="text-3xl font-semibold text-blue-900 border-b-4 border-green-400">Latest Products</h2>
-      <span class="text-blue-900 flex items-center space-x-2">
-        <a href="{% url 'popular_all' %}">
-        <span>View all</span> {% heroicon_outline "arrow-right-circle" size=20 %}
-        </a>
-      </span>
+  <!--    <h2 class="text-3xl font-semibold text-blue-900 border-b-4 border-green-400">Latest Products</h2>-->
+  <!--    <span class="text-blue-900 flex items-center space-x-2">-->
+  <!--      <a href="{% url 'popular_all' %}">-->
+  <!--      <span>View all</span> {% heroicon_outline "arrow-right-circle" size=20 %}-->
+  <!--      </a>-->
+  <!--    </span>-->
 
-    </div>
+  <!--  </div>-->
 
-    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-      {% for item in popular_items %}
+  <!--  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 apps5">-->
+  <!--    {% for item in popular_items %}-->
 
 
-      <div class="card bg-base-100 lg:w-96 w-44  sm:h-[316px] h-[256px] shadow-sm">
-         <a href="{% url 'item' name=item.name.name  id=item.name.id %}"></a>
-          <img src="{{ item.name.image.url }}" class="w-full h-[274px] lg:h-[200px] object-contain" alt="Popular Product">
-          <a class="card-body" href="{% url 'item' name=item.name.name  id=item.name.id %}" > <h6 class="card-title">{{ item.name.name }}</h6> </a>
-            </a>
+  <!--    <div class="card bg-base-100 lg:w-96 w-44  sm:h-[316px] h-[256px] shadow-sm">-->
+  <!--       <a href="{% url 'item' name=item.name.name  id=item.name.id %}"></a>-->
+  <!--        <img src="{{ item.name.image.url }}" class="w-full h-[120px] lg:h-[200px] object-contain" alt="Popular Product">-->
+  <!--        <a class="card-body" href="{% url 'item' name=item.name.name  id=item.name.id %}" > <h6 class="card-title text-base">{{ item.name.name }}</h6> </a>-->
+  <!--          </a>-->
+  <!--    </div>-->
+
+  <!--    {% endfor %}-->
+  <!--  </div>-->
+
+
+  <!--</section>-->
+
+
+
+
+
+
+<h2  class="text-1xl font-bold text-left mb-8 mt-14" style="background:white;"><span><a href="{% url 'popular_all' %}" class=" text-1xl ml-4 mt-12" style='font-family: "Miriam Libre", sans-serif;'>Latest Products </a></span>
+      </span></h2>
+<div class="slider-container mt-8"  style="background:white;">
+    <div class="slider">
+        {% for item in popular_items %}
+        <div class="slide-item rounded" style="padding: 20px;">
+
+          <div class="slide2" >
+
+
+              <img src="{{ item.name.image.url }}" alt="{{ item.name.name }}"  style="width:200px; height:150px; "   loading="lazy">
+
+
+
+            <div ="text">
+              <a href="{% url 'item' name=item.name.name  id=item.name.id %}"  onclick='allUrl("{% url 'item' name=item.name.name  id=item.name.id %}", mainbody)' class="no-redirect" style="">
+              <h9 style='color:#000000;  font-family: "Miriam Libre", sans-serif; ' class="text-base text-center mb-8">{{ item.name.name }}</h9>
+
+
+              </a>
+
+
+
+            </form>
+              </div>
+
+          </div>
       </div>
+        {% endfor %}
 
-      {% endfor %}
+
     </div>
+</div>
 
-    <div class="mt-8 text-center">
-      <a href="{% url 'category'%}">
-      <button class="btn btn-accent">Start Buying</button>
+ <div class="mt-8 mb-8 text-center">
+      <a href="{% url 'popular_all'%}"   onclick='allUrl("{% url 'popular_all'%}", mainbody)' class="no-redirect">
+      <button class="btn btn-success" id="start-buying-btn">Start Buying</button>
     </a>
     </div>
-  </section>
+    <div class="apps5  grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-12 apps5">
+
+    </div>
+
+
+
+
+  <div id="idoo" class="fixed inset-0 z-50 flex items-center  justify-center bg-gray-200 bg-opacity-2 overscroll-contain z-99999999999 " style="display:none;">
+  <div class="bg-white rounded-2xl shadow-lg w-full lg:ml-54 max-w-md p-6 animate-zoom relative   " >
+
+
+    <div class="space-y-4">
+
+
+ <style>
+    #name4 {
+       font-family: "Miriam Libre", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .main-heading, .section-heading {
+        color: #1a73e8;
+    }
+  </style>
+
+   <div class="flex flex-col items-center mb-4">
+      <button type="button"
+        onclick="document.getElementById('idoo').style.display='none'"
+        class="absolute top-2 right-4 text-lg text-gray-700 hover:text-red-500 font-bold focus:outline-none"
+        title="Close Modal">&times;</button>
+      <img src="{% static 'pharma.png' %}" alt="Avatar" class="w-44 h-24 ">
+    </div>
+
+  <div id="name4" class="text-base text-gray-700" class="h-94 overflow-y-auto" style="max-height: 500px; overflow-y: auto;">
+    <h1 class="main-heading">Disclaimer</h1>
+
+    <p>Pharmadeals.ng is a business-to-business (B2B) online platform that facilitates the listing, bidding, and exchange of pharmaceutical products between verified sellers and buyers. By using this website, you acknowledge and agree to the terms set forth in this disclaimer.</p>
+
+    <h2 class="section-heading">1. No Medical Advice</h2>
+    <p>Pharmadeals.ng does not provide medical, diagnostic, or therapeutic advice. All information and content on the platform, including product descriptions, is intended for business and informational purposes only. Always consult a licensed medical professional or pharmacist for medical guidance.</p>
+
+    <h2 class="section-heading">2. Product Legitimacy & Compliance</h2>
+    <p>All users are solely responsible for ensuring that any pharmaceutical product listed, sold, or purchased complies with all relevant local, national, and international laws, including but not limited to those of NAFDAC, PCN, and the Nigerian Ministry of Health. Pharmadeals.ng does not guarantee the legality, safety, quality, or authenticity of any product or transaction on the platform.</p>
+
+    <h2 class="section-heading">3. Prohibited Substances</h2>
+    <p>Pharmadeals.ng strictly prohibits the listing, sale, or purchase of narcotic, psychotropic, or addictive substances, including but not limited to controlled drugs as defined by applicable Nigerian laws and international conventions. Any attempt to list such products will result in immediate account suspension and may be reported to regulatory authorities. Users are fully responsible for ensuring that all products listed are lawful and non-restricted.</p>
+
+    <h2 class="section-heading">4. User Verification & Due Diligence</h2>
+    <p>While we take steps to verify business accounts, Pharmadeals.ng does not guarantee the accuracy or reliability of any user’s credentials, licenses, or representations. Buyers and sellers are responsible for conducting their own due diligence before engaging in any transaction.</p>
+
+    <h2 class="section-heading">5. Third-Party Content & Listings</h2>
+    <p>All listings, images, product information, pricing, and other content are provided by third parties. Pharmadeals.ng is not liable for errors, omissions, or misrepresentations made by users. We do not endorse or guarantee any third-party products, companies, or services listed on the site.</p>
+
+    <h2 class="section-heading">6. Transaction Risk</h2>
+    <p>All transactions are conducted at the users' own risk. Pharmadeals.ng does not act as a mediator, guarantor, or insurer of any transaction or shipment. We are not responsible for any loss, delay, damage, or dispute arising from the use of this platform.</p>
+
+    <h2 class="section-heading">7. Platform Availability & Changes</h2>
+    <p>We make reasonable efforts to ensure the platform is available and secure but do not guarantee uninterrupted access. Pharmadeals.ng reserves the right to modify or discontinue the platform, its features, or terms of use at any time without prior notice.</p>
+
+    <h2 class="section-heading">8. Limitation of Liability</h2>
+    <p>Pharmadeals.ng, its owners, affiliates, or employees shall not be held liable for any direct, indirect, incidental, or consequential damages arising out of the use or inability to use this platform or reliance on any information provided herein.</p>
+    <div class="mt-6 flex justify-end space-x-4">
+            <button onclick="document.getElementById('idoo').style.display='none'"  class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Close</button>
+
+          </div>
+  </div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<span class="loading loading-spinner text-primary mt-[10px] lg:ml-156 lg:mt-[10px] w-8 h-8 ml-16 lg:w-12 lg:h-12 " id="spin" style="display: none;"></span>
+
+<script>
+
+
+ function isInApp() {
+    return window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true
+        || document.referrer.startsWith("android-app://");
+  }
+
+  if (isInApp()) {
+    document.addEventListener("DOMContentLoaded", function () {
+      // Hide things only in the app
+
+
+
+    });
+  }
+
+
+
+
+
+
+
+let loading = false;
+let hasNext = true;
+let page = 1;
+let scrollLoadCount = 0;
+
+function renderProduct(item) {
+   return `
+    <div class="shadow-lg bg-base-100 py-4 p-4 h-full lg:h-[316px] ml-2 mr-2 rounded ">
+      <a href="/categories/${item.name}/${item.id}/" onclick='allUrl("/categories/${item.name}/${item.id}/", mainbody)' class="no-redirect"  class="block space-y-2">
+        <img src="${item.image_url}" class="w-full h-[154px] lg:h-[204px] object-contain" alt="Popular Product"/>
+        <h6 class="text-black text-base" style='font-family: "Miriam Libre", sans-serif;'>${item.name}</h6>
+        <span class="text-green-500   text-base font-sans">₦ ${Number(item.price).toLocaleString()}</span><br>
+        ${item.shipping == 0
+          ? `<span class="text-gray-500   text-sm font-sans">Free Shipping</span>`
+          : `<span class="text-gray-500   text-sm font-sans">Shipping: ₦ ${item.shipping}</span>`
+        }
+      </a>
+    </div>
+  `;
+}
+
+async function loadMoreProducts() {
+  if (loading || !hasNext) return;
+  loading = true;
+  page += 1;
+  document.getElementById('spin').style.display = 'block';
+  const res = await fetch(`/api/products/${page}`);
+  const data = await res.json();
+  hasNext = data.has_next;
+  const grid = document.querySelector('.apps5');
+  data.items.forEach(item => {
+    grid.insertAdjacentHTML('beforeend', renderProduct(item));
+  });  
+  loading = false;
+  setTimeout(() => { document.getElementById('spin').style.display = 'none'; }, 2000);
+}
+
+const target = document.getElementById('start-buying-btn');
+if (target) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && scrollLoadCount < 3) {
+        scrollLoadCount += 1;
+        loadMoreProducts();
+      }
+    });
+  }, {
+    root: null, // viewport
+    threshold: 0.5 // 50% of the button is visible
+  });
+  observer.observe(target);
+}
+
+</script>
 
 {% endblock %}

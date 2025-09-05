@@ -40,6 +40,14 @@ class Categories(models.Model):
     image = models.ImageField(upload_to='pharma/images/', validators=[FileExtensionValidator(['jpg', 'png'])])
     def __str__(self):
         return f"{self.category}"
+class approved(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    Id_card = models.ImageField(upload_to='approved/images/', validators=[FileExtensionValidator(['jpg', 'png'])], verbose_name="Id card")
+
+    def __str__(self):
+        return f"{self.name}: {self.name} approved"
 
 class Pharma(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -50,11 +58,15 @@ class Pharma(models.Model):
     price = models.IntegerField()
     stock = models.IntegerField()
     Approval = models.BooleanField(default=False)
+    expiration_date = models.DateField(null=True, blank=True)
     shipping = models.IntegerField(default=0)
+    location = models.CharField(max_length=100, default='Ondo State')
+    # expiration_date = models.DateField(null=True, blank=True)
+    expiration_date = models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return f"{self.user}: {self.name} product,\a Approval  status:  {self.Approval}"
 class bid(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    # user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.ForeignKey(Pharma, on_delete=models.CASCADE)
     bid_price = models.IntegerField()
     phone = models.IntegerField(default=0)
