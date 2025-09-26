@@ -190,9 +190,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = '/'
 
 
-EMAIL_PORT = 465
-EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-EMAIL_USE_SSL = True
-EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST_USER = 'admin@pharmadeals.ng'
-EMAIL_HOST_PASSWORD = 'VXBsXKUKHAy3'
